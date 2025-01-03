@@ -1,4 +1,8 @@
 package org.ernisernis.ratemoviescmp.movie.presentation.movie_list
 
-class MovieListState {
-}
+import org.ernisernis.ratemoviescmp.movie.presentation.models.MovieUi
+
+data class MovieListState(
+    val isLoading: Boolean = false,
+    val nowPlayingMoviesUi: List<MovieUi> = emptyList()
+)

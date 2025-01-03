@@ -5,11 +5,14 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.ernisernis.ratemoviescmp.core.presentation.RateMoviesTheme
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.MovieListScreen
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.MovieListState
 
 @Composable
 fun App(
@@ -20,25 +23,12 @@ fun App(
         darkTheme = darkTheme,
         dynamicColor = dynamicColor,
     ) {
-        Column(
+        MovieListScreen(
+            state = MovieListState(),
             modifier = Modifier
-                .fillMaxSize()
-        ) {
-
-            Box(
-                modifier = Modifier
-                    .background(MaterialTheme.colorScheme.background)
-                    .size(100.dp)
-            ) {
-
-            }
-            Box(
-                modifier = Modifier
-                    .background(MaterialTheme.colorScheme.surface)
-                    .size(100.dp)
-            ) {
-
-            }
-        }
+                .background(MaterialTheme.colorScheme.background)
+                .fillMaxSize(),
+            onAction = {}
+        )
     }
 }

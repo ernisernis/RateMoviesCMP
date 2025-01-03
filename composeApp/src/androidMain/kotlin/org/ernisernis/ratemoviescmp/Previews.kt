@@ -1,9 +1,11 @@
 package org.ernisernis.ratemoviescmp
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -13,8 +15,29 @@ import org.ernisernis.ratemoviescmp.core.presentation.Dimens
 import org.ernisernis.ratemoviescmp.core.presentation.RateMoviesTheme
 import org.ernisernis.ratemoviescmp.movie.domain.Movie
 import org.ernisernis.ratemoviescmp.movie.presentation.models.toMovieUi
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.MovieListScreen
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.MovieListState
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.components.MovieListItem
 
+
+@Preview
+@Composable
+fun MovieListScreenPreview() {
+    RateMoviesTheme(darkTheme = true, dynamicColor = false) {
+        val state = MovieListState(
+            nowPlayingMoviesUi = movieList.map { movie ->
+               movie.toMovieUi()
+            }
+        )
+        MovieListScreen(
+            state = state,
+            modifier = Modifier
+                .background(MaterialTheme.colorScheme.background)
+                .fillMaxSize(),
+            onAction = {}
+        )
+    }
+}
 
 @Preview
 @Composable
@@ -49,3 +72,7 @@ val movie = Movie(
     voteAverage = 123.3,
     voteCount = 12345
 )
+
+val movieList: List<Movie> = (1..20).map {
+    movie
+}
