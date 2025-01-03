@@ -1,8 +1,16 @@
 package org.ernisernis.ratemoviescmp
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import org.ernisernis.ratemoviescmp.core.presentation.Dimens
+import org.ernisernis.ratemoviescmp.core.presentation.RateMoviesTheme
 import org.ernisernis.ratemoviescmp.movie.domain.Movie
 import org.ernisernis.ratemoviescmp.movie.presentation.models.toMovieUi
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.components.MovieListItem
@@ -11,11 +19,18 @@ import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.components.Mov
 @Preview
 @Composable
 fun MovieListItemPreview() {
-    MovieListItem(
-        movieUi = movie.toMovieUi(),
-        modifier = Modifier,
-        onClick = {}
-    )
+    RateMoviesTheme(darkTheme = true, dynamicColor = false) {
+        MovieListItem(
+            movieUi = movie.toMovieUi(),
+            modifier = Modifier
+                .background(Color.White)
+                .padding(24.dp)
+                .height(Dimens.MovieListItemHeight)
+                .width(Dimens.MovieListItemWidth)
+            ,
+            onClick = {}
+        )
+    }
 }
 
 val movie = Movie(

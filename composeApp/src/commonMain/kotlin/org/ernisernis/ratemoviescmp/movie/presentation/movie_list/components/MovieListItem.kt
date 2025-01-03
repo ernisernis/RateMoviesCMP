@@ -1,12 +1,38 @@
 package org.ernisernis.ratemoviescmp.movie.presentation.movie_list.components
 
 import androidx.compose.foundation.clickable
-import androidx.compose.material.Card
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.ThumbUp
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImage
+import org.ernisernis.ratemoviescmp.core.presentation.Dimens
 import org.ernisernis.ratemoviescmp.movie.presentation.models.MovieUi
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
+import ratemoviescmp.composeapp.generated.resources.Res
+import ratemoviescmp.composeapp.generated.resources.description_movie_item
+import ratemoviescmp.composeapp.generated.resources.description_movie_star
+import ratemoviescmp.composeapp.generated.resources.description_movie_thumb_up
+import ratemoviescmp.composeapp.generated.resources.poster780w1170hpreview
 
 
 @Composable
@@ -16,114 +42,95 @@ fun MovieListItem(
     onClick: () -> Unit,
 ) {
 
-    Card(
-        elevation = 12.dp,
-        backgroundColor = MaterialTheme.colorScheme.surface,
+    Surface(
+        shadowElevation = 12.dp,
+        color = MaterialTheme.colorScheme.surface,
+        shape = RoundedCornerShape(5),
         modifier = modifier
             .clickable(onClick = onClick)
     ) {
 
-    }
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            // Image
+            AsyncImage(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(2f / 3f),
+                model = movieUi.imageUrl,
+                contentDescription = stringResource(Res.string.description_movie_item),
+                error = painterResource(Res.drawable.poster780w1170hpreview),
+                placeholder = painterResource(Res.drawable.poster780w1170hpreview),
+                contentScale = ContentScale.Fit
+            )
 
-//    ElevatedCard(
-//        elevation =
-//        CardDefaults.cardElevation(
-//            defaultElevation = 12.dp,
-//        ),
-//        colors =
-//        CardDefaults.cardColors(
-//            containerColor = MaterialTheme.colorScheme.secondaryContainer,
-//        ),
-//        modifier = modifier.clickable(onClick = onClick),
-//    ) {
-//        AsyncImage(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .aspectRatio(2f / 3f),
-//            model = movieUi.imageUrl,
-//            contentDescription = null,
-//            placeholder = painterResource(R.drawable.poster780w1170hpreview),
-//            error = painterResource(R.drawable.poster780w1170hpreview),
-//            contentScale = _root_ide_package_.androidx.compose.ui.layout.ContentScale.Fit,
-//        )
-//
-//        // Rating
-//        _root_ide_package_.androidx.compose.foundation.layout.Row(
-//            horizontalArrangement = _root_ide_package_.androidx.compose.foundation.layout.Arrangement.spacedBy(
-//                Dimens.MovieListItemContainerPadding / 2
-//            ),
-//            verticalAlignment = _root_ide_package_.androidx.compose.ui.Alignment.CenterVertically,
-//            modifier =
-//            _root_ide_package_.androidx.compose.ui.Modifier
-//                .padding(Dimens.MovieListItemContainerPadding),
-//        ) {
-//            Icon(
-//                imageVector = _root_ide_package_.androidx.compose.material.icons.Icons.Default.Star,
-//                modifier =
-//                _root_ide_package_.androidx.compose.ui.Modifier
-//                    .size(Dimens.MovieListItemIconSize),
-//                tint = gold,
-//                contentDescription = null,
-//            )
-//            Text(
-//                text = movieUi.voteAverage,
-//                color = MaterialTheme.colorScheme.onSecondaryContainer,
-//                style = MaterialTheme.typography.labelMedium,
-//            )
-//        }
-//
-//        // Title
-//        Text(
-//            text = movieUi.title,
-//            modifier =
-//            _root_ide_package_.androidx.compose.ui.Modifier
-//                .padding(horizontal = Dimens.MovieListItemContainerPadding)
-//                .weight(1f),
-//            maxLines = 2,
-//            overflow = _root_ide_package_.androidx.compose.ui.text.style.TextOverflow.Ellipsis,
-//            color = MaterialTheme.colorScheme.onSecondaryContainer,
-//            style = MaterialTheme.typography.labelMedium,
-//        )
-//
-//        // Subtitle
-//        _root_ide_package_.androidx.compose.foundation.layout.Row(
-//            horizontalArrangement = _root_ide_package_.androidx.compose.foundation.layout.Arrangement.spacedBy(
-//                Dimens.MovieListItemContainerPadding / 2
-//            ),
-//            verticalAlignment = _root_ide_package_.androidx.compose.ui.Alignment.CenterVertically,
-//            modifier =
-//            _root_ide_package_.androidx.compose.ui.Modifier
-//                .padding(Dimens.MovieListItemContainerPadding),
-//        ) {
-//            // Date
-//            Text(
-//                text = movieUi.releaseDate,
-//                color = MaterialTheme.colorScheme.onSurfaceVariant,
-//                style = MaterialTheme.typography.labelSmall,
-//            )
-//
-//            _root_ide_package_.androidx.compose.foundation.layout.Spacer(
-//                modifier = _root_ide_package_.androidx.compose.ui.Modifier.weight(
-//                    1f
-//                )
-//            )
-//
-//            // Like icon
-//            Icon(
-//                imageVector = _root_ide_package_.androidx.compose.material.icons.Icons.Default.ThumbUp,
-//                modifier =
-//                _root_ide_package_.androidx.compose.ui.Modifier
-//                    .size(Dimens.MovieListItemIconSize),
-//                tint = MaterialTheme.colorScheme.onSecondaryContainer,
-//                contentDescription = null,
-//            )
-//
-//            // Like count
-//            Text(
-//                text = movieUi.popularity,
-//                color = MaterialTheme.colorScheme.onSurfaceVariant,
-//                style = MaterialTheme.typography.labelSmall,
-//            )
-//        }
-//    }
+            // Rating row (Icon + Vote text)
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(Dimens.MovieListItemPaddingSmall),
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .padding(Dimens.MovieListItemPaddingNormal)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Star,
+                    modifier = Modifier
+                        .size(Dimens.MovieListItemIconSize),
+                    contentDescription = stringResource(Res.string.description_movie_star),
+                    tint = MaterialTheme.colorScheme.primary
+                )
+                Text(
+                    text = movieUi.voteAverage,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    style = MaterialTheme.typography.labelMedium,
+                )
+            }
+
+            // Title
+            Text(
+                text = movieUi.title,
+                modifier = Modifier
+                    .padding(horizontal = Dimens.MovieListItemPaddingNormal)
+                    .weight(1f),
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                color = MaterialTheme.colorScheme.onSurface,
+                style = MaterialTheme.typography.labelMedium,
+            )
+
+            // Subtitle row
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(Dimens.MovieListItemPaddingSmall),
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .padding(Dimens.MovieListItemPaddingNormal)
+            ) {
+                // Date
+                Text(
+                    text = movieUi.releaseDate,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    style = MaterialTheme.typography.labelSmall,
+                )
+
+                Spacer(modifier = Modifier.weight(1f))
+
+                // Like icon
+                Icon(
+                    imageVector = Icons.Default.ThumbUp,
+                    modifier = Modifier
+                        .size(Dimens.MovieListItemIconSize),
+                    tint = MaterialTheme.colorScheme.onSurface,
+                    contentDescription = stringResource(Res.string.description_movie_thumb_up),
+                )
+
+                // Like count
+                Text(
+                    text = movieUi.popularity,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    style = MaterialTheme.typography.labelSmall,
+                )
+            }
+        }
+    }
 }
