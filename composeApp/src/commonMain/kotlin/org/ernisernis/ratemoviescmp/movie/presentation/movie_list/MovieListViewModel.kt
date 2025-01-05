@@ -6,12 +6,13 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.ernisernis.ratemoviescmp.BuildKonfig.BASE_URL
+import org.ernisernis.ratemoviescmp.core.data.networking.constructUrl
 import org.ernisernis.ratemoviescmp.core.domain.util.onError
 import org.ernisernis.ratemoviescmp.core.domain.util.onSuccess
 import org.ernisernis.ratemoviescmp.core.presentation.toUiText
 import org.ernisernis.ratemoviescmp.movie.domain.MovieRepository
 import org.ernisernis.ratemoviescmp.movie.presentation.models.toMovieUi
-import kotlin.coroutines.coroutineContext
 
 class MovieListViewModel(
     private val bookRepository: MovieRepository
@@ -31,7 +32,10 @@ class MovieListViewModel(
                     ) }
                 }
                 .onError { error ->
-                    println(error.toUiText())
+                    _state.update { it.copy(
+                        isLoading = false,
+                        errorMessage = error.toUiText(),
+                    ) }
                 }
         }
     }

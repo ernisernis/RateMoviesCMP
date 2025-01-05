@@ -10,8 +10,6 @@ import org.ernisernis.ratemoviescmp.core.domain.util.DataError
 import org.ernisernis.ratemoviescmp.core.domain.util.Result
 import org.ernisernis.ratemoviescmp.core.domain.util.map
 import org.ernisernis.ratemoviescmp.movie.data.dto.MovieResponseDto
-import org.ernisernis.ratemoviescmp.movie.data.mappers.toMovie
-import org.ernisernis.ratemoviescmp.movie.domain.Movie
 
 class KtorRemoteMovieDataSource(
     private val httpClient: HttpClient

@@ -9,7 +9,7 @@ data class MovieDto(
     @SerialName("id") val id: Int,
     @SerialName("title") val title: String,
     @SerialName("adult") val adult: Boolean,
-    @SerialName("backdrop_path") val backdropPath: String,
+    @SerialName("backdrop_path") val backdropPath: String?,
     @SerialName("genre_ids") val genreIds: List<Int>,
     @SerialName("original_language") val originalLanguage: String,
     @SerialName("original_title") val originalTitle: String,

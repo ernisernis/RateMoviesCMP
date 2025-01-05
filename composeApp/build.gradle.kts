@@ -108,7 +108,7 @@ dependencies {
 buildkonfig {
     packageName = "org.ernisernis.ratemoviescmp"
     defaultConfigs {
-        buildConfigField(STRING, "BASE_URL", "\"https://api.themoviedb.org/3/\"")
+        buildConfigField(STRING, "BASE_URL", "https://api.themoviedb.org/3/")
         val apiKey = project.findProperty("API_KEY") ?: ""
         buildConfigField(STRING, "API_KEY", "$apiKey")
     }

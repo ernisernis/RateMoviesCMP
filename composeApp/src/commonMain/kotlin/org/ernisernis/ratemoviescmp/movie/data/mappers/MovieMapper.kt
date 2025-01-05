@@ -8,7 +8,7 @@ fun MovieDto.toMovie(): Movie {
         id = id,
         title = title,
         adult = adult,
-        backdropPath = backdropPath,
+        backdropPath = backdropPath ?: "",
         genreIds = genreIds,
         originalLanguage = originalLanguage,
         originalTitle = originalTitle,
