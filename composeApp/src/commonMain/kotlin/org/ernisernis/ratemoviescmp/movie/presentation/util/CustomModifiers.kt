@@ -4,12 +4,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import org.ernisernis.ratemoviescmp.core.presentation.Dimens
 
 
 // Custom modifier for bottom inner shadow
 fun Modifier.bottomInnerShadow(
     shadowColor: Color = Color.Black,
-    shadowAlpha: Float = 0.8f,
+    shadowAlpha: Float = Dimens.MovieDetailAlpha,
     shadowHeightFraction: Float = 0.6f,
 ) = this.then(
     Modifier.drawWithContent {

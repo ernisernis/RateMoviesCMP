@@ -14,7 +14,12 @@ import androidx.compose.ui.unit.dp
 import org.ernisernis.ratemoviescmp.core.presentation.components.PosterImage
 import org.ernisernis.ratemoviescmp.core.presentation.Dimens
 import org.ernisernis.ratemoviescmp.core.presentation.RateMoviesTheme
+import org.ernisernis.ratemoviescmp.movie.domain.Cast
+import org.ernisernis.ratemoviescmp.movie.domain.Crew
 import org.ernisernis.ratemoviescmp.movie.domain.Movie
+import org.ernisernis.ratemoviescmp.movie.domain.MovieDetail
+import org.ernisernis.ratemoviescmp.movie.domain.MovieGenre
+import org.ernisernis.ratemoviescmp.movie.presentation.models.toMovieDetailsUi
 import org.ernisernis.ratemoviescmp.movie.presentation.models.toMovieUi
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailScreen
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailState
@@ -67,6 +72,7 @@ fun MovieDetailScreenPreview() {
         bannerUrl = movieUi.banner,
         title = movieUi.title,
         imageUrl = movieUi.imageUrl,
+        movieDetailUi = defaultMovieDetails.toMovieDetailsUi()
     )
 
     RateMoviesTheme(darkTheme = true, dynamicColor = false) {
@@ -92,7 +98,7 @@ fun PosterImagePreview() {
     }
 }
 
-val movie = Movie(
+internal val movie = Movie(
     id = 0,
     title = "Terrifier 3",
     adult = false,
@@ -109,6 +115,63 @@ val movie = Movie(
     voteCount = 12345
 )
 
-val movieList: List<Movie> = (1..20).map {
+internal val movieList: List<Movie> = (1..20).map {
     movie
 }
+
+internal val defaultMovieDetails =
+    MovieDetail(
+        id = 912649,
+        releaseDate = "2024-10-22",
+        runtime = 109,
+        voteAverage = 6.387,
+        voteCount = 800,
+        genres =
+        listOf(
+            MovieGenre(
+                id = 878,
+                name = "Science Fiction",
+            ),
+            MovieGenre(
+                id = 28,
+                name = "Action",
+            ),
+            MovieGenre(
+                id = 12,
+                name = "Adventure",
+            ),
+        ),
+        overview =
+        "Eddie and Venom are on the run. Hunted by both of their worlds and with the net closing in, " +
+                "the duo are forced into a devastating decision that will bring the curtains down on Venom and Eddie's last dance",
+        cast =
+        listOf(
+            Cast(
+                id = 2524,
+                name = "Tom Hardy",
+                profilePath = "/d81K0RH8UX7tZj49tZaQhZ9ewH.jpg",
+                character = "Eddie Brock / Venom",
+            ),
+            Cast(
+                id = 2524,
+                name = "Tom Hardy",
+                profilePath = "/d81K0RH8UX7tZj49tZaQhZ9ewH.jpg",
+                character = "Eddie Brock / Venom",
+            ),
+        ),
+        crew =
+        listOf(
+            Crew(
+                id = 1195200,
+                name = "David Michelinie",
+                job = "Characters",
+                profilePath = "/bSpGO1dKFfwb9mUc4KdUpBpRfYH.jpg",
+            ),
+            Crew(
+                id = 1195200,
+                name = "David Michelinie",
+                job = "Director",
+                profilePath = "/bSpGO1dKFfwb9mUc4KdUpBpRfYH.jpg",
+            ),
+        ),
+    )
