@@ -11,5 +11,10 @@ sealed interface Route {
     data object MovieList: Route
 
     @Serializable
-    data class MovieDetail(val id: Int): Route
+    data class MovieDetail(
+        val id: Int,
+        val bannerUrl: String,
+        val title: String,
+        val imageUrl: String,
+    ): Route
 }

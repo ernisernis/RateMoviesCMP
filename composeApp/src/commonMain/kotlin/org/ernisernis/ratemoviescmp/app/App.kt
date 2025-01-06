@@ -1,6 +1,7 @@
 package org.ernisernis.ratemoviescmp.app
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -34,7 +35,12 @@ fun App(
                     MovieListScreenRoot(
                         onMovieClick = { movieUi ->
                             navController.navigate(
-                                Route.MovieDetail(movieUi.id)
+                                Route.MovieDetail(
+                                    id = movieUi.id,
+                                    bannerUrl = movieUi.banner,
+                                    title = movieUi.title,
+                                    imageUrl = movieUi.imageUrl,
+                                )
                             )
                         }
                     )
@@ -42,8 +48,11 @@ fun App(
                 composable<Route.MovieDetail> { entry ->
                     val args = entry.toRoute<Route.MovieDetail>()
 
-                    Box(Modifier.fillMaxSize()) {
+                    Column(Modifier.fillMaxSize()) {
                         Text("Movie Detail screen ${args.id}")
+                        Text("Movie Detail screen ${args.bannerUrl}")
+                        Text("Movie Detail screen ${args.title}")
+                        Text("Movie Detail screen ${args.imageUrl}")
                     }
                 }
             }
