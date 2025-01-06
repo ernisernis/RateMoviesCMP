@@ -18,12 +18,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.ernisernis.ratemoviescmp.core.presentation.Dimens
+import org.ernisernis.ratemoviescmp.movie.presentation.models.MovieUi
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.components.MovieListItem
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun MovieListScreenRoot(
     viewModel: MovieListViewModel = koinViewModel(),
+    onMovieClick: (MovieUi) -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     MovieListScreen(
@@ -33,6 +35,7 @@ fun MovieListScreenRoot(
             .fillMaxSize(),
         onAction = { action ->
             when (action)  {
+                is MovieListAction.OnMovieClick -> { onMovieClick(action.movieUi) }
                 else -> Unit
             }
             viewModel.onAction(action)
@@ -81,7 +84,9 @@ fun MovieListScreen(
                     modifier = Modifier
                         .height(Dimens.MovieListItemHeight)
                         .width(Dimens.MovieListItemWidth),
-                    onClick = {}
+                    onClick = {
+                        onAction(MovieListAction.OnMovieClick(movieUi))
+                    }
                 )
             }
         }

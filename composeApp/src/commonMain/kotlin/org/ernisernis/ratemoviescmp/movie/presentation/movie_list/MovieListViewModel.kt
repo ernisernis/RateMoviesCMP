@@ -6,8 +6,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.ernisernis.ratemoviescmp.BuildKonfig.BASE_URL
-import org.ernisernis.ratemoviescmp.core.data.networking.constructUrl
 import org.ernisernis.ratemoviescmp.core.domain.util.onError
 import org.ernisernis.ratemoviescmp.core.domain.util.onSuccess
 import org.ernisernis.ratemoviescmp.core.presentation.toUiText
