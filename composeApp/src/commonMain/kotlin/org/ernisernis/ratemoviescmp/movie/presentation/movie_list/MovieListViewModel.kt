@@ -13,7 +13,7 @@ import org.ernisernis.ratemoviescmp.movie.domain.MovieRepository
 import org.ernisernis.ratemoviescmp.movie.presentation.models.toMovieUi
 
 class MovieListViewModel(
-    private val bookRepository: MovieRepository
+    private val movieRepository: MovieRepository
 ): ViewModel() {
 
     private val _state = MutableStateFlow(MovieListState())
@@ -21,7 +21,7 @@ class MovieListViewModel(
 
     init {
         viewModelScope.launch {
-            bookRepository
+            movieRepository
                 .getNowPlayingMovies()
                 .onSuccess { nowPlayingMovies ->
                     _state.update { it.copy(
