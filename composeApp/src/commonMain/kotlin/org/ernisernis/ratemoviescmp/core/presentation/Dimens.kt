@@ -28,4 +28,8 @@ object Dimens {
     val MovieListContainerPadding: Dp
         @Composable get() = 16.dp
 
+    // movie_detail
+    val MovieDetailContainerPadding: Dp
+        @Composable get() = 16.dp
+
 }

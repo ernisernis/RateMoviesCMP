@@ -4,8 +4,10 @@ import org.ernisernis.ratemoviescmp.core.domain.util.DataError
 import org.ernisernis.ratemoviescmp.core.domain.util.Result
 import org.ernisernis.ratemoviescmp.core.domain.util.map
 import org.ernisernis.ratemoviescmp.movie.data.mappers.toMovie
+import org.ernisernis.ratemoviescmp.movie.data.mappers.toMovieDetails
 import org.ernisernis.ratemoviescmp.movie.data.network.RemoteMovieDataSource
 import org.ernisernis.ratemoviescmp.movie.domain.Movie
+import org.ernisernis.ratemoviescmp.movie.domain.MovieDetail
 import org.ernisernis.ratemoviescmp.movie.domain.MovieRepository
 
 class DefaultMovieRepository(
@@ -16,6 +18,13 @@ class DefaultMovieRepository(
             .getNowPlayingMovies()
             .map { dto ->
                 dto.results.map { it.toMovie() }
+            }
+    }
+    override suspend fun getMovieDetail(id: Int): Result<MovieDetail, DataError.Remote> {
+        return remoteMovieDataSource
+            .getMovieDetail(id)
+            .map { dto ->
+                dto.toMovieDetails()
             }
     }
 }

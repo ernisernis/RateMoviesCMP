@@ -11,10 +11,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import org.ernisernis.ratemoviescmp.core.presentation.components.PosterImage
 import org.ernisernis.ratemoviescmp.core.presentation.Dimens
 import org.ernisernis.ratemoviescmp.core.presentation.RateMoviesTheme
 import org.ernisernis.ratemoviescmp.movie.domain.Movie
 import org.ernisernis.ratemoviescmp.movie.presentation.models.toMovieUi
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailScreen
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailState
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.MovieListScreen
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.MovieListState
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.components.MovieListItem
@@ -52,6 +55,39 @@ fun MovieListItemPreview() {
                 .width(Dimens.MovieListItemWidth)
             ,
             onClick = {}
+        )
+    }
+}
+
+@Preview
+@Composable
+fun MovieDetailScreenPreview() {
+    val movieUi = movie.toMovieUi()
+    val state = MovieDetailState(
+        bannerUrl = movieUi.banner,
+        title = movieUi.title,
+        imageUrl = movieUi.imageUrl,
+    )
+
+    RateMoviesTheme(darkTheme = true, dynamicColor = false) {
+        MovieDetailScreen(
+            state = state,
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background),
+            onAction = {}
+        )
+    }
+}
+
+@Preview
+@Composable
+fun PosterImagePreview() {
+    RateMoviesTheme(darkTheme = true, dynamicColor = false) {
+        PosterImage(
+            modifier = Modifier
+                .width(160.dp),
+            url = movie.toMovieUi().imageUrl,
         )
     }
 }

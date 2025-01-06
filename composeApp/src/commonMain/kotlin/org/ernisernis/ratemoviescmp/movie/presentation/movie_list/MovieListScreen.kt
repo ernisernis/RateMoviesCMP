@@ -35,7 +35,7 @@ fun MovieListScreenRoot(
             .fillMaxSize(),
         onAction = { action ->
             when (action)  {
-                is MovieListAction.OnMovieClick -> { onMovieClick(action.movieUi) }
+                is MovieListAction.OnMovieClick -> onMovieClick(action.movieUi)
                 else -> Unit
             }
             viewModel.onAction(action)

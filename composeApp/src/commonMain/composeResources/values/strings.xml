@@ -20,4 +20,6 @@
     <string name="description_movie_item">Movie image</string>
     <string name="description_movie_star">Rating star icon</string>
     <string name="description_movie_thumb_up">Thumb up icon</string>
+    <string name="description_movie_banner">Movie banner</string>
+    <string name="description_poster">Poster image</string>
 </resources>

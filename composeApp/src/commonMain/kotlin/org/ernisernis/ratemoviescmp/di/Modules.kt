@@ -5,6 +5,7 @@ import org.ernisernis.ratemoviescmp.movie.data.network.KtorRemoteMovieDataSource
 import org.ernisernis.ratemoviescmp.movie.data.network.RemoteMovieDataSource
 import org.ernisernis.ratemoviescmp.movie.data.repository.DefaultMovieRepository
 import org.ernisernis.ratemoviescmp.movie.domain.MovieRepository
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailViewModel
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.MovieListViewModel
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
@@ -20,4 +21,5 @@ val sharedModule = module {
     singleOf(::DefaultMovieRepository).bind<MovieRepository>()
 
     viewModelOf(::MovieListViewModel)
+    viewModelOf(::MovieDetailViewModel)
 }
