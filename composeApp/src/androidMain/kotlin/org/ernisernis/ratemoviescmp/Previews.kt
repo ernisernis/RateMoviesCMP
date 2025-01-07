@@ -71,9 +71,7 @@ fun MovieListItemPreview() {
 fun MovieDetailScreenPreview() {
     val movieUi = movie.toMovieUi()
     val state = MovieDetailState(
-        bannerUrl = movieUi.banner,
-        title = movieUi.title,
-        imageUrl = movieUi.imageUrl,
+        movieUi = movieUi,
         movieDetailUi = defaultMovieDetails.toMovieDetailsUi()
     )
 

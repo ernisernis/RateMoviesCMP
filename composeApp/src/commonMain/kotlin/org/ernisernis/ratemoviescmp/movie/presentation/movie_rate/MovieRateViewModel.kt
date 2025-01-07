@@ -10,20 +10,6 @@ class MovieRateViewModel(): ViewModel() {
     private val _state = MutableStateFlow(MovieRateState())
     val state = _state.asStateFlow()
 
-    fun initData(
-        id: Int,
-        title: String,
-        bannerUrl: String,
-        imageUrl: String,
-    ) {
-        _state.update { it.copy(
-            id = id,
-            bannerUrl = bannerUrl,
-            imageUrl = imageUrl,
-            title = title,
-        ) }
-    }
-
     fun onAction(action: MovieRateAction) {
        when (action) {
            is MovieRateAction.OnMovieRateClick -> {
@@ -33,8 +19,11 @@ class MovieRateViewModel(): ViewModel() {
                    )
                }
            }
-           MovieRateAction.OnMovieRateSubmit -> {
-
+           MovieRateAction.OnMovieRateSubmit -> {}
+           is MovieRateAction.OnSelectedMovieChange -> {
+               _state.update { it.copy(
+                   movieUi = action.movieUi
+               ) }
            }
        }
     }

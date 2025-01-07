@@ -70,7 +70,7 @@ fun RateDetailScreen(
     ) {
         // Banner
         AsyncImage(
-            model = state.bannerUrl,
+            model = state.movieUi?.banner,
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.6f)
@@ -94,17 +94,19 @@ fun RateDetailScreen(
             verticalArrangement = Arrangement.spacedBy(Dimens.RateDetailItemPaddingBig),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            PosterImage(
-                url = state.imageUrl,
-                modifier = Modifier
-                    .width(152.dp)
-            )
+            state.movieUi?.imageUrl?.let {
+                PosterImage(
+                    url = it,
+                    modifier = Modifier
+                        .width(152.dp)
+                )
+            }
             // Title
             Text(
                 text = if (state.selectedIndex != 0) {
                     state.selectedIndex.toString()
                 } else {
-                    stringResource(Res.string.rate_title, state.title)
+                    stringResource(Res.string.rate_title, state.movieUi?.title.toString())
                 },
                 modifier = Modifier
                     .padding(Dimens.RateDetailComponentPadding),

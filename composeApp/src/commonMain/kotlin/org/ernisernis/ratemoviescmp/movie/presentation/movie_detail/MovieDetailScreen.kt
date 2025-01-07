@@ -46,7 +46,7 @@ import ratemoviescmp.composeapp.generated.resources.movie_detail_starring
 @Composable
 fun MovieDetailScreenRoot(
     viewModel: MovieDetailViewModel = koinViewModel(),
-    onRateClick: (Int, String, String, String) -> Unit,
+    onRateClick: () -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     MovieDetailScreen(
@@ -56,7 +56,7 @@ fun MovieDetailScreenRoot(
             .fillMaxSize(),
         onAction = { action ->
             when (action) {
-                is MovieDetailAction.OnRateClick -> onRateClick(action.id, action.bannerUrl, action.title, action.imageUrl)
+                is MovieDetailAction.OnRateClick -> onRateClick()
                 else -> Unit
             }
             viewModel.onAction(action)
@@ -76,7 +76,7 @@ fun MovieDetailScreen(
     ) {
         // Banner
         AsyncImage(
-            model = state.bannerUrl,
+            model = state.movieUi?.banner,
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(16 / 9f)
@@ -94,20 +94,25 @@ fun MovieDetailScreen(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             // Title
-            Text(
-                text = state.title,
-                modifier = Modifier
-                    .weight(1f),
-                style = MaterialTheme.typography.headlineSmall,
-                color = MaterialTheme.colorScheme.onBackground,
-                fontWeight = FontWeight.Bold
-            )
+            state.movieUi?.title?.let {
+                Text(
+                    text = it,
+                    modifier = Modifier
+                        .weight(1f),
+                    style = MaterialTheme.typography.headlineSmall,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+
             // Image
-            PosterImage(
-                modifier = Modifier
-                    .width(60.dp),
-                url = state.imageUrl,
-            )
+            state.movieUi?.imageUrl?.let {
+                PosterImage(
+                    modifier = Modifier
+                        .width(60.dp),
+                    url = it,
+                )
+            }
         }
 
         AnimatedVisibility(
@@ -132,12 +137,7 @@ fun MovieDetailScreen(
                    voteAverage = state.movieDetailUi?.voteAverage,
                    voteCount = state.movieDetailUi?.voteCount,
                    onRatingClick = {
-                       onAction(MovieDetailAction.OnRateClick(
-                           id = state.id,
-                           bannerUrl = state.bannerUrl,
-                           title = state.title,
-                           imageUrl = state.imageUrl
-                       ))
+                       onAction(MovieDetailAction.OnRateClick)
                    }
                )
                // Genre list
