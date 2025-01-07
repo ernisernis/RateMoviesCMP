@@ -71,7 +71,12 @@ fun App(
 
                     MovieDetailScreenRoot(
                         viewModel = viewModel,
-                        onRateClick = { navController.navigate(Route.MovieRate) }
+                        onRateClick = {
+                            navController.navigate(Route.MovieRate)
+                        },
+                        onBackClick = {
+                            navController.navigateUp()
+                        },
                     )
                 }
 

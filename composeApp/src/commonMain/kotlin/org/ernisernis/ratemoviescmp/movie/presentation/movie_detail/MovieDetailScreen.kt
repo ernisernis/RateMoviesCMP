@@ -3,6 +3,7 @@ package org.ernisernis.ratemoviescmp.movie.presentation.movie_detail
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -16,6 +17,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -28,6 +31,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
 import org.ernisernis.ratemoviescmp.core.presentation.components.PosterImage
 import org.ernisernis.ratemoviescmp.core.presentation.Dimens
+import org.ernisernis.ratemoviescmp.core.presentation.components.DefaultIconContainer
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.components.CastLazyHorizontalRow
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.components.DetailRatings
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.components.DirectorRow
@@ -47,6 +51,7 @@ import ratemoviescmp.composeapp.generated.resources.movie_detail_starring
 fun MovieDetailScreenRoot(
     viewModel: MovieDetailViewModel = koinViewModel(),
     onRateClick: () -> Unit,
+    onBackClick: () -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     MovieDetailScreen(
@@ -57,6 +62,7 @@ fun MovieDetailScreenRoot(
         onAction = { action ->
             when (action) {
                 is MovieDetailAction.OnRateClick -> onRateClick()
+                is MovieDetailAction.OnBackClick -> onBackClick()
                 else -> Unit
             }
             viewModel.onAction(action)
@@ -74,18 +80,30 @@ fun MovieDetailScreen(
         modifier = modifier
             .verticalScroll(rememberScrollState())
     ) {
-        // Banner
-        AsyncImage(
-            model = state.movieUi?.banner,
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(16 / 9f)
-                .bottomInnerShadow(),
-            contentDescription = stringResource(Res.string.description_banner),
-            error = painterResource(Res.drawable.banner1280wpreview),
-            placeholder = painterResource(Res.drawable.banner1280wpreview),
-            fallback = painterResource(Res.drawable.banner1280wpreview),
-        )
+        Box {
+            // Banner
+            AsyncImage(
+                model = state.movieUi?.banner,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(16 / 9f)
+                    .bottomInnerShadow(),
+                contentDescription = stringResource(Res.string.description_banner),
+                error = painterResource(Res.drawable.banner1280wpreview),
+                placeholder = painterResource(Res.drawable.banner1280wpreview),
+                fallback = painterResource(Res.drawable.banner1280wpreview),
+            )
+
+            // Close icon
+            DefaultIconContainer(
+                icon = Icons.Default.ArrowBackIosNew,
+                modifier = Modifier
+                    .padding(Dimens.MovieDetailItemPaddingBig),
+                onClick = {
+                    onAction(MovieDetailAction.OnBackClick)
+                }
+            )
+        }
 
         Row(
             modifier = Modifier
