@@ -87,7 +87,10 @@ fun App(
                     }
 
                     RateDetailScreenRoot(
-                        viewModel = viewModel
+                        viewModel = viewModel,
+                        onBackClick = {
+                            navController.navigateUp()
+                        }
                     )
                 }
             }

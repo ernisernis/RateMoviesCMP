@@ -16,6 +16,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material.icons.filled.StarOutline
 import androidx.compose.material.icons.filled.StarRate
 import androidx.compose.material3.MaterialTheme
@@ -32,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
 import org.ernisernis.ratemoviescmp.core.presentation.Dimens
+import org.ernisernis.ratemoviescmp.core.presentation.components.DefaultIconContainer
 import org.ernisernis.ratemoviescmp.core.presentation.components.PosterImage
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_rate.components.IconRate
 import org.jetbrains.compose.resources.painterResource
@@ -47,6 +49,7 @@ import ratemoviescmp.composeapp.generated.resources.rate_title
 @Composable
 fun RateDetailScreenRoot(
     viewModel: MovieRateViewModel = koinViewModel(),
+    onBackClick: () -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     RateDetailScreen(
@@ -54,7 +57,13 @@ fun RateDetailScreenRoot(
         modifier = Modifier
             .background(MaterialTheme.colorScheme.background)
             .fillMaxSize(),
-        onAction = viewModel::onAction
+        onAction = { action ->
+            when (action) {
+                MovieRateAction.OnBackClick -> onBackClick()
+                else -> Unit
+            }
+            viewModel.onAction(action)
+        }
     )
 }
 
@@ -84,6 +93,16 @@ fun RateDetailScreen(
             placeholder = painterResource(Res.drawable.banner1280wpreview),
             fallback = painterResource(Res.drawable.banner1280wpreview),
             contentScale = ContentScale.Crop,
+        )
+
+        // Close icon
+        DefaultIconContainer(
+            icon = Icons.Default.ArrowBackIosNew,
+            modifier = Modifier
+                .padding(Dimens.RateDetailItemPaddingBig),
+            onClick = {
+                onAction(MovieRateAction.OnBackClick)
+            }
         )
 
         Column(

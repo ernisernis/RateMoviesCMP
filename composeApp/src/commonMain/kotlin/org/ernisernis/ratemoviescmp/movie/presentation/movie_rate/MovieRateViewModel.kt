@@ -25,6 +25,7 @@ class MovieRateViewModel(): ViewModel() {
                    movieUi = action.movieUi
                ) }
            }
+           else -> Unit
        }
     }
 }
