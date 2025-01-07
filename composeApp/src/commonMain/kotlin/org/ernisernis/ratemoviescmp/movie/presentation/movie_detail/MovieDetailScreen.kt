@@ -39,14 +39,14 @@ import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import ratemoviescmp.composeapp.generated.resources.Res
 import ratemoviescmp.composeapp.generated.resources.banner1280wpreview
-import ratemoviescmp.composeapp.generated.resources.description_movie_banner
+import ratemoviescmp.composeapp.generated.resources.description_banner
 import ratemoviescmp.composeapp.generated.resources.movie_detail_starring
 
 
 @Composable
 fun MovieDetailScreenRoot(
     viewModel: MovieDetailViewModel = koinViewModel(),
-    onRateClick: (Int, String) -> Unit,
+    onRateClick: (Int, String, String, String) -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     MovieDetailScreen(
@@ -56,14 +56,12 @@ fun MovieDetailScreenRoot(
             .fillMaxSize(),
         onAction = { action ->
             when (action) {
-                is MovieDetailAction.OnRateClick -> onRateClick(action.id, action.firebaseId)
+                is MovieDetailAction.OnRateClick -> onRateClick(action.id, action.bannerUrl, action.title, action.imageUrl)
                 else -> Unit
             }
             viewModel.onAction(action)
         }
     )
-
-
 }
 
 @Composable
@@ -83,7 +81,7 @@ fun MovieDetailScreen(
                 .fillMaxWidth()
                 .aspectRatio(16 / 9f)
                 .bottomInnerShadow(),
-            contentDescription = stringResource(Res.string.description_movie_banner),
+            contentDescription = stringResource(Res.string.description_banner),
             error = painterResource(Res.drawable.banner1280wpreview),
             placeholder = painterResource(Res.drawable.banner1280wpreview),
             fallback = painterResource(Res.drawable.banner1280wpreview),
@@ -134,6 +132,12 @@ fun MovieDetailScreen(
                    voteAverage = state.movieDetailUi?.voteAverage,
                    voteCount = state.movieDetailUi?.voteCount,
                    onRatingClick = {
+                       onAction(MovieDetailAction.OnRateClick(
+                           id = state.id,
+                           bannerUrl = state.bannerUrl,
+                           title = state.title,
+                           imageUrl = state.imageUrl
+                       ))
                    }
                )
                // Genre list

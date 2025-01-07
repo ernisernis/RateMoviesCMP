@@ -20,10 +20,12 @@
     <string name="description_movie_item">Movie image</string>
     <string name="description_movie_star">Rating star icon</string>
     <string name="description_movie_thumb_up">Thumb up icon</string>
-    <string name="description_movie_banner">Movie banner</string>
+    <string name="description_banner">Banner Image</string>
     <string name="description_poster">Poster image</string>
     <string name="movie_detail_starring">Starring</string>
     <string name="movie_detail_director">Director: </string>
     <string name="movie_detail_writer">Writer: </string>
     <string name="movie_detail_rate">Rate this</string>
+    <string name="rate_title">How would you rate %1$s</string>
+    <string name="rate">Rate</string>
 </resources>

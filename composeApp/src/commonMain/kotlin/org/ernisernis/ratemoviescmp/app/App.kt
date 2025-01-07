@@ -1,22 +1,20 @@
 package org.ernisernis.ratemoviescmp.app
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import kotlinx.serialization.Serializable
 import org.ernisernis.ratemoviescmp.core.presentation.RateMoviesTheme
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailScreenRoot
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailViewModel
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.MovieListScreenRoot
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.MovieListViewModel
+import org.ernisernis.ratemoviescmp.rate.domain.RateType
+import org.ernisernis.ratemoviescmp.rate.presentation.rate_detail.RateDetailScreenRoot
+import org.ernisernis.ratemoviescmp.rate.presentation.rate_detail.RateDetailViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -68,10 +66,36 @@ fun App(
 
                     MovieDetailScreenRoot(
                         viewModel = viewModel,
-                        onRateClick = { id, firebaseId ->
-                            println(id)
-                            println(firebaseId)
+                        onRateClick = { id, bannerUrl, title, imageUrl ->
+                            navController.navigate(
+                                Route.RateDetail(
+                                    id = id,
+                                    bannerUrl = bannerUrl,
+                                    title = title,
+                                    imageUrl = imageUrl,
+                                    rateType = RateType.MOVIE,
+                                )
+                            )
                         }
+                    )
+                }
+
+                composable<Route.RateDetail> { entry ->
+                    val args = entry.toRoute<Route.RateDetail>()
+                    val viewModel = koinViewModel<RateDetailViewModel>()
+
+                    LaunchedEffect(args) {
+                        viewModel.initData(
+                            id = args.id,
+                            title = args.title,
+                            bannerUrl = args.bannerUrl,
+                            imageUrl = args.imageUrl,
+                            rateType = args.rateType
+                        )
+                    }
+
+                    RateDetailScreenRoot(
+                        viewModel = viewModel
                     )
                 }
             }

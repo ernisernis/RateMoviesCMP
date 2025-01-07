@@ -26,6 +26,8 @@ import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailS
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.MovieListScreen
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.MovieListState
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.components.MovieListItem
+import org.ernisernis.ratemoviescmp.rate.presentation.rate_detail.RateDetailScreen
+import org.ernisernis.ratemoviescmp.rate.presentation.rate_detail.RateDetailState
 
 
 @Preview
@@ -94,6 +96,20 @@ fun PosterImagePreview() {
             modifier = Modifier
                 .width(160.dp),
             url = movie.toMovieUi().imageUrl,
+        )
+    }
+}
+
+@Preview
+@Composable
+fun RateDetailPreview() {
+    RateMoviesTheme(darkTheme = true, dynamicColor = false) {
+        RateDetailScreen(
+            state = RateDetailState(),
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background),
+            onAction = {}
         )
     }
 }

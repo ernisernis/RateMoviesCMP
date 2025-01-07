@@ -7,6 +7,7 @@ import org.ernisernis.ratemoviescmp.movie.data.repository.DefaultMovieRepository
 import org.ernisernis.ratemoviescmp.movie.domain.MovieRepository
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailViewModel
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.MovieListViewModel
+import org.ernisernis.ratemoviescmp.rate.presentation.rate_detail.RateDetailViewModel
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModelOf
@@ -22,4 +23,5 @@ val sharedModule = module {
 
     viewModelOf(::MovieListViewModel)
     viewModelOf(::MovieDetailViewModel)
+    viewModelOf(::RateDetailViewModel)
 }
