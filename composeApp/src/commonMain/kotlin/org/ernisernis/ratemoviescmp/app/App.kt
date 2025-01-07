@@ -12,9 +12,8 @@ import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailS
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailViewModel
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.MovieListScreenRoot
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.MovieListViewModel
-import org.ernisernis.ratemoviescmp.rate.domain.RateType
-import org.ernisernis.ratemoviescmp.rate.presentation.rate_detail.RateDetailScreenRoot
-import org.ernisernis.ratemoviescmp.rate.presentation.rate_detail.RateDetailViewModel
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_rate.RateDetailScreenRoot
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_rate.MovieRateViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -73,7 +72,6 @@ fun App(
                                     bannerUrl = bannerUrl,
                                     title = title,
                                     imageUrl = imageUrl,
-                                    rateType = RateType.MOVIE,
                                 )
                             )
                         }
@@ -82,7 +80,7 @@ fun App(
 
                 composable<Route.RateDetail> { entry ->
                     val args = entry.toRoute<Route.RateDetail>()
-                    val viewModel = koinViewModel<RateDetailViewModel>()
+                    val viewModel = koinViewModel<MovieRateViewModel>()
 
                     LaunchedEffect(args) {
                         viewModel.initData(
@@ -90,7 +88,6 @@ fun App(
                             title = args.title,
                             bannerUrl = args.bannerUrl,
                             imageUrl = args.imageUrl,
-                            rateType = args.rateType
                         )
                     }
 

@@ -1,7 +1,6 @@
 package org.ernisernis.ratemoviescmp.app
 
 import kotlinx.serialization.Serializable
-import org.ernisernis.ratemoviescmp.rate.domain.RateType
 
 sealed interface Route {
 
@@ -25,6 +24,5 @@ sealed interface Route {
         val bannerUrl: String,
         val title: String,
         val imageUrl: String,
-        val rateType: RateType,
     ): Route
 }

@@ -1,4 +1,4 @@
-package org.ernisernis.ratemoviescmp.rate.presentation.rate_detail
+package org.ernisernis.ratemoviescmp.movie.presentation.movie_rate
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -33,7 +33,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
 import org.ernisernis.ratemoviescmp.core.presentation.Dimens
 import org.ernisernis.ratemoviescmp.core.presentation.components.PosterImage
-import org.ernisernis.ratemoviescmp.rate.presentation.rate_detail.components.IconRate
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_rate.components.IconRate
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -46,7 +46,7 @@ import ratemoviescmp.composeapp.generated.resources.rate_title
 
 @Composable
 fun RateDetailScreenRoot(
-    viewModel: RateDetailViewModel = koinViewModel(),
+    viewModel: MovieRateViewModel = koinViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     RateDetailScreen(
@@ -61,8 +61,8 @@ fun RateDetailScreenRoot(
 @Composable
 fun RateDetailScreen(
     modifier: Modifier = Modifier,
-    state: RateDetailState,
-    onAction: (RateDetailAction) -> Unit,
+    state: MovieRateState,
+    onAction: (MovieRateAction) -> Unit,
 ) {
     Box(
         modifier = modifier
@@ -119,7 +119,7 @@ fun RateDetailScreen(
                        icon = if (i <= state.selectedIndex) Icons.Default.StarRate else Icons.Default.StarOutline,
                        modifier = Modifier.size(32.dp),
                        onClick = {
-                          onAction(RateDetailAction.OnRateClick(i))
+                          onAction(MovieRateAction.OnMovieRateClick(i))
                        }
                    )
                 }
@@ -129,7 +129,7 @@ fun RateDetailScreen(
                 modifier = Modifier
                     .fillMaxWidth(0.8f)
                     .clickable {
-                        onAction(RateDetailAction.OnRateSubmit)
+                        onAction(MovieRateAction.OnMovieRateSubmit)
                     }
                     .padding(Dimens.RateDetailComponentPadding)
                     .background(MaterialTheme.colorScheme.secondary, RoundedCornerShape(20)),

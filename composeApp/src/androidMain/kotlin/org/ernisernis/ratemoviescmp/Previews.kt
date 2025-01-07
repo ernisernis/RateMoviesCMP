@@ -26,8 +26,8 @@ import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailS
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.MovieListScreen
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.MovieListState
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.components.MovieListItem
-import org.ernisernis.ratemoviescmp.rate.presentation.rate_detail.RateDetailScreen
-import org.ernisernis.ratemoviescmp.rate.presentation.rate_detail.RateDetailState
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_rate.RateDetailScreen
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_rate.MovieRateState
 
 
 @Preview
@@ -105,7 +105,7 @@ fun PosterImagePreview() {
 fun RateDetailPreview() {
     RateMoviesTheme(darkTheme = true, dynamicColor = false) {
         RateDetailScreen(
-            state = RateDetailState(),
+            state = MovieRateState(),
             modifier = Modifier
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.background),

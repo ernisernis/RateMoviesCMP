@@ -1,4 +1,4 @@
-package org.ernisernis.ratemoviescmp.rate.presentation.rate_detail.components
+package org.ernisernis.ratemoviescmp.movie.presentation.movie_rate.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.material3.Icon
