@@ -193,26 +193,30 @@ fun MovieDetailScreen(
                    director = state.movieDetailUi?.director,
                    writer = state.movieDetailUi?.writer,
                )
-               // Light Divider
-               HorizontalDivider(
-                   modifier = Modifier.padding(Dimens.MovieDetailComponentPadding),
-                   thickness = 0.5.dp,
-                   color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f)
-               )
-               // Cast title
-               Text(
-                   text = stringResource(Res.string.movie_detail_starring),
-                   modifier = Modifier
-                       .padding(Dimens.MovieDetailComponentPadding),
-                   style = MaterialTheme.typography.titleLarge,
-                   color = MaterialTheme.colorScheme.onBackground,
-               )
-               // Cast tiles
-               CastLazyHorizontalRow(
-                   modifier = Modifier
-                       .height(200.dp),
-                   list = state.movieDetailUi?.cast,
-               )
+
+               state.movieDetailUi?.cast?.let { cast ->
+                   // Light Divider
+                   HorizontalDivider(
+                       modifier = Modifier.padding(Dimens.MovieDetailComponentPadding),
+                       thickness = 0.5.dp,
+                       color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f)
+                   )
+                   // Cast title
+                   Text(
+                       text = stringResource(Res.string.movie_detail_starring),
+                       modifier = Modifier
+                           .padding(Dimens.MovieDetailComponentPadding),
+                       style = MaterialTheme.typography.titleLarge,
+                       color = MaterialTheme.colorScheme.onBackground,
+                   )
+                   // Cast tiles
+                   CastLazyHorizontalRow(
+                       modifier = Modifier
+                           .height(200.dp),
+                       list = cast,
+                   )
+
+               }
 
                Spacer(modifier = Modifier.height(100.dp))
            }
