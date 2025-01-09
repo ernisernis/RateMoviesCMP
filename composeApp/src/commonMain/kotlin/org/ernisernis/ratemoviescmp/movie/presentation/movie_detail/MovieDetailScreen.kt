@@ -2,6 +2,7 @@ package org.ernisernis.ratemoviescmp.movie.presentation.movie_detail
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -91,15 +92,28 @@ fun MovieDetailScreen(
                 fallback = painterResource(Res.drawable.banner1280wpreview),
             )
 
-            // Close icon
-            DefaultIconContainer(
-                icon = RmIcons.Back,
+            // Close, Bookmark buttons
+            Row(
                 modifier = Modifier
+                    .fillMaxWidth()
                     .padding(Dimens.MovieDetailItemPaddingBig),
-                onClick = {
-                    onAction(MovieDetailAction.OnBackClick)
-                }
-            )
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                DefaultIconContainer(
+                    icon = RmIcons.Back,
+                    modifier = Modifier,
+                    onClick = {
+                        onAction(MovieDetailAction.OnBackClick)
+                    }
+                )
+                DefaultIconContainer(
+                    icon = RmIcons.BookmarkBorder,
+                    modifier = Modifier,
+                    onClick = {
+                        onAction(MovieDetailAction.OnBookmarkClick)
+                    }
+                )
+            }
         }
 
         Row(

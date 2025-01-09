@@ -2,6 +2,7 @@ package org.ernisernis.ratemoviescmp.core.presentation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIosNew
+import androidx.compose.material.icons.filled.BookmarkBorder
 import androidx.compose.material.icons.filled.Bookmarks
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Star
@@ -17,4 +18,5 @@ object RmIcons {
     val ThumbUp = Icons.Default.ThumbUp
     val Home = Icons.Default.Home
     val Bookmarks = Icons.Default.Bookmarks
+    val BookmarkBorder = Icons.Default.BookmarkBorder
 }
