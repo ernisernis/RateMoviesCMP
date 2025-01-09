@@ -19,7 +19,10 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.ernisernis.ratemoviescmp.core.presentation.Dimens
 import org.ernisernis.ratemoviescmp.movie.presentation.models.MovieUi
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.components.MovieListItem
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
+import ratemoviescmp.composeapp.generated.resources.Res
+import ratemoviescmp.composeapp.generated.resources.movie_title_now_playing
 
 @Composable
 fun MovieListScreenRoot(
@@ -63,7 +66,7 @@ fun MovieListScreen(
 
         // Title
         Text(
-            text = "Now Playing",
+            text = stringResource(Res.string.movie_title_now_playing),
             modifier = Modifier
                 .padding(Dimens.MovieListContainerPadding),
             color = MaterialTheme.colorScheme.onBackground,
