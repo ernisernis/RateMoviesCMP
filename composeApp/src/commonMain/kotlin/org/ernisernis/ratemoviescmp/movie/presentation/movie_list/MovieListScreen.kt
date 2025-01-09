@@ -1,6 +1,5 @@
 package org.ernisernis.ratemoviescmp.movie.presentation.movie_list
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -31,7 +30,6 @@ fun MovieListScreenRoot(
     MovieListScreen(
         state = state,
         modifier = Modifier
-            .background(MaterialTheme.colorScheme.background)
             .fillMaxSize(),
         onAction = { action ->
             when (action)  {

@@ -1,7 +1,6 @@
 package org.ernisernis.ratemoviescmp.movie.presentation.movie_detail
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,8 +16,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -31,6 +28,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
 import org.ernisernis.ratemoviescmp.core.presentation.components.PosterImage
 import org.ernisernis.ratemoviescmp.core.presentation.Dimens
+import org.ernisernis.ratemoviescmp.core.presentation.RmIcons
 import org.ernisernis.ratemoviescmp.core.presentation.components.DefaultIconContainer
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.components.CastLazyHorizontalRow
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.components.DetailRatings
@@ -57,7 +55,6 @@ fun MovieDetailScreenRoot(
     MovieDetailScreen(
         state = state,
         modifier = Modifier
-            .background(MaterialTheme.colorScheme.background)
             .fillMaxSize(),
         onAction = { action ->
             when (action) {
@@ -96,7 +93,7 @@ fun MovieDetailScreen(
 
             // Close icon
             DefaultIconContainer(
-                icon = Icons.Default.ArrowBackIosNew,
+                icon = RmIcons.Back,
                 modifier = Modifier
                     .padding(Dimens.MovieDetailItemPaddingBig),
                 onClick = {

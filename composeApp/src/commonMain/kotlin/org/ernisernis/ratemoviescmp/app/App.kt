@@ -1,13 +1,31 @@
 package org.ernisernis.ratemoviescmp.app
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
@@ -34,71 +52,130 @@ fun App(
         dynamicColor = dynamicColor,
     ) {
         val navController = rememberNavController()
-        NavHost(
-            navController = navController,
-            startDestination = Route.MovieGraph
-        ) {
-            navigation<Route.MovieGraph>(
-                startDestination = Route.MovieList
+        var selectedIndex by remember { mutableIntStateOf(0) }
+
+        Scaffold(
+            bottomBar = {
+                BottomNavigation(
+                    backgroundColor = MaterialTheme.colorScheme.surface,
+                ) {
+                    topLevelRoutes.forEachIndexed { index, topLevelRoute ->
+                        NavigationBarItem(
+                            icon = { Icon(topLevelRoute.icon, contentDescription = topLevelRoute.name) } ,
+                            selected = index == selectedIndex,
+                            onClick = {
+                                selectedIndex = index
+                                navController.navigate(topLevelRoute.route) {
+                                    // Pop up to the start destination of the graph to
+                                    // avoid building up a large stack of destinations
+                                    // on the back stack as users select items
+                                    popUpTo(navController.graph.findStartDestination().id) {
+                                        saveState = true
+                                    }
+                                    // Avoid multiple copies of the same destination when
+                                    // reselecting the same item
+                                    launchSingleTop = true
+                                    // Restore state when reselecting a previously selected item
+                                    restoreState = true
+                                }
+                            },
+                            colors = NavigationBarItemDefaults.colors(
+                                selectedIconColor = Color.White,
+                                unselectedIconColor = Color.DarkGray,
+                                indicatorColor = Color.Transparent
+                            )
+                        )
+                    }
+                }
+            }
+        ) { innerPadding ->
+            NavHost(
+                navController = navController,
+                modifier = Modifier
+                    .padding(innerPadding)
+                    .background(MaterialTheme.colorScheme.background),
+                startDestination = Route.MovieGraph
             ) {
-                composable<Route.MovieList> {
-                    val viewModel = koinViewModel<MovieListViewModel>()
-                    val selectedMovieViewModel = it.sharedKoinViewModel<SelectedMovieViewModel>(navController)
-
-                    LaunchedEffect(true) {
-                        selectedMovieViewModel.onSelectMovie(null)
-                    }
-
-                    MovieListScreenRoot(
-                        viewModel = viewModel,
-                        onMovieClick = { movieUi ->
-                            selectedMovieViewModel.onSelectMovie(movieUi)
-                            navController.navigate(Route.MovieDetail)
-                        }
-                    )
-                }
-
-                composable<Route.MovieDetail> {
-                    val viewModel = koinViewModel<MovieDetailViewModel>()
-                    val selectedMovieViewModel = it.sharedKoinViewModel<SelectedMovieViewModel>(navController)
-                    val selectedMovie by selectedMovieViewModel.selectedMovie.collectAsStateWithLifecycle()
-
-                    LaunchedEffect(selectedMovie) {
-                        selectedMovie?.let { movieUi ->
-                            viewModel.onAction(MovieDetailAction.OnSelectedMovieChange(movieUi))
-                        }
-                    }
-
-                    MovieDetailScreenRoot(
-                        viewModel = viewModel,
-                        onRateClick = {
-                            navController.navigate(Route.MovieRate)
-                        },
-                        onBackClick = {
-                            navController.navigateUp()
-                        },
-                    )
-                }
-
-                composable<Route.MovieRate> {
-                    val viewModel = koinViewModel<MovieRateViewModel>()
-                    val selectedMovieViewModel = it.sharedKoinViewModel<SelectedMovieViewModel>(navController)
-                    val selectedMovie by selectedMovieViewModel.selectedMovie.collectAsStateWithLifecycle()
-
-                    LaunchedEffect(selectedMovie) {
-                        selectedMovie?.let { movieUi ->
-                            viewModel.onAction(MovieRateAction.OnSelectedMovieChange(movieUi))
-                        }
-                    }
-
-                    RateDetailScreenRoot(
-                        viewModel = viewModel,
-                        onBackClick = {
-                            navController.navigateUp()
-                        }
+                navigation<Route.MovieGraph>(
+                    startDestination = Route.MovieList
+                ) {
+                    MovieApp(
+                        navController = navController
                     )
                 }
             }
+        }
+
+    }
+}
+
+fun NavGraphBuilder.MovieApp(
+    navController: NavController,
+) {
+    composable<Route.MovieList> {
+        val viewModel = koinViewModel<MovieListViewModel>()
+        val selectedMovieViewModel = it.sharedKoinViewModel<SelectedMovieViewModel>(navController)
+
+        LaunchedEffect(true) {
+            selectedMovieViewModel.onSelectMovie(null)
+        }
+
+        MovieListScreenRoot(
+            viewModel = viewModel,
+            onMovieClick = { movieUi ->
+                selectedMovieViewModel.onSelectMovie(movieUi)
+                navController.navigate(Route.MovieDetail)
+            }
+        )
+    }
+
+    composable<Route.MovieDetail> {
+        val viewModel = koinViewModel<MovieDetailViewModel>()
+        val selectedMovieViewModel = it.sharedKoinViewModel<SelectedMovieViewModel>(navController)
+        val selectedMovie by selectedMovieViewModel.selectedMovie.collectAsStateWithLifecycle()
+
+        LaunchedEffect(selectedMovie) {
+            selectedMovie?.let { movieUi ->
+                viewModel.onAction(MovieDetailAction.OnSelectedMovieChange(movieUi))
+            }
+        }
+
+        MovieDetailScreenRoot(
+            viewModel = viewModel,
+            onRateClick = {
+                navController.navigate(Route.MovieRate)
+            },
+            onBackClick = {
+                navController.navigateUp()
+            },
+        )
+    }
+
+    composable<Route.MovieRate> {
+        val viewModel = koinViewModel<MovieRateViewModel>()
+        val selectedMovieViewModel = it.sharedKoinViewModel<SelectedMovieViewModel>(navController)
+        val selectedMovie by selectedMovieViewModel.selectedMovie.collectAsStateWithLifecycle()
+
+        LaunchedEffect(selectedMovie) {
+            selectedMovie?.let { movieUi ->
+                viewModel.onAction(MovieRateAction.OnSelectedMovieChange(movieUi))
+            }
+        }
+
+        RateDetailScreenRoot(
+            viewModel = viewModel,
+            onBackClick = {
+                navController.navigateUp()
+            }
+        )
+    }
+
+    composable<Route.MovieBookmark> {
+        Box(
+            modifier = Modifier.background(Color.Red).fillMaxSize(),
+            contentAlignment = Alignment.BottomCenter
+        ) {
+            Text("abc")
         }
     }
 }

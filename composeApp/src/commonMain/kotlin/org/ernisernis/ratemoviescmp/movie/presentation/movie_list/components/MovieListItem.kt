@@ -10,9 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -25,6 +22,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import org.ernisernis.ratemoviescmp.core.presentation.Dimens
+import org.ernisernis.ratemoviescmp.core.presentation.RmIcons
 import org.ernisernis.ratemoviescmp.movie.presentation.models.MovieUi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -74,7 +72,7 @@ fun MovieListItem(
                     .padding(Dimens.MovieListItemPaddingNormal)
             ) {
                 Icon(
-                    imageVector = Icons.Default.Star,
+                    imageVector = RmIcons.Star,
                     modifier = Modifier
                         .size(Dimens.MovieListItemIconSize),
                     contentDescription = stringResource(Res.string.description_movie_star),
@@ -117,7 +115,7 @@ fun MovieListItem(
 
                 // Like icon
                 Icon(
-                    imageVector = Icons.Default.ThumbUp,
+                    imageVector = RmIcons.ThumbUp,
                     modifier = Modifier
                         .size(Dimens.MovieListItemIconSize),
                     tint = MaterialTheme.colorScheme.onSurface,

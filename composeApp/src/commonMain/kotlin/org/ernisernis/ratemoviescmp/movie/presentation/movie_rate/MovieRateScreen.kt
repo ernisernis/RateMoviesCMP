@@ -15,10 +15,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBackIosNew
-import androidx.compose.material.icons.filled.StarOutline
-import androidx.compose.material.icons.filled.StarRate
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -33,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
 import org.ernisernis.ratemoviescmp.core.presentation.Dimens
+import org.ernisernis.ratemoviescmp.core.presentation.RmIcons
 import org.ernisernis.ratemoviescmp.core.presentation.components.DefaultIconContainer
 import org.ernisernis.ratemoviescmp.core.presentation.components.PosterImage
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_rate.components.IconRate
@@ -55,7 +52,6 @@ fun RateDetailScreenRoot(
     RateDetailScreen(
         state = state,
         modifier = Modifier
-            .background(MaterialTheme.colorScheme.background)
             .fillMaxSize(),
         onAction = { action ->
             when (action) {
@@ -75,7 +71,6 @@ fun RateDetailScreen(
 ) {
     Box(
         modifier = modifier
-            .background(MaterialTheme.colorScheme.background),
     ) {
         // Banner
         AsyncImage(
@@ -97,7 +92,7 @@ fun RateDetailScreen(
 
         // Close icon
         DefaultIconContainer(
-            icon = Icons.Default.ArrowBackIosNew,
+            icon = RmIcons.Back,
             modifier = Modifier
                 .padding(Dimens.RateDetailItemPaddingBig),
             onClick = {
@@ -137,7 +132,7 @@ fun RateDetailScreen(
             Row {
                 (1..10).map { i ->
                    IconRate(
-                       icon = if (i <= state.selectedIndex) Icons.Default.StarRate else Icons.Default.StarOutline,
+                       icon = if (i <= state.selectedIndex) RmIcons.StarRate else RmIcons.StarOutline,
                        modifier = Modifier.size(32.dp),
                        onClick = {
                           onAction(MovieRateAction.OnMovieRateClick(i))
