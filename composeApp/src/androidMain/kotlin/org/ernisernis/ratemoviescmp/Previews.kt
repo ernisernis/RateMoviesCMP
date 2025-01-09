@@ -1,26 +1,18 @@
 package org.ernisernis.ratemoviescmp
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIosNew
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImagePainter.State.Empty.painter
 import org.ernisernis.ratemoviescmp.core.presentation.components.PosterImage
 import org.ernisernis.ratemoviescmp.core.presentation.Dimens
 import org.ernisernis.ratemoviescmp.core.presentation.RateMoviesTheme
@@ -37,10 +29,8 @@ import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailS
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.MovieListScreen
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.MovieListState
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.components.MovieListItem
-import org.ernisernis.ratemoviescmp.movie.presentation.movie_rate.RateDetailScreen
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_rate.MovieRateScreen
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_rate.MovieRateState
-import org.jetbrains.compose.resources.imageResource
-import org.jetbrains.compose.resources.painterResource
 
 
 @Preview
@@ -113,9 +103,9 @@ fun PosterImagePreview() {
 
 @Preview
 @Composable
-fun RateDetailPreview() {
+fun MovieRateScreenPreview() {
     RateMoviesTheme(darkTheme = true, dynamicColor = false) {
-        RateDetailScreen(
+        MovieRateScreen(
             state = MovieRateState(),
             modifier = Modifier
                 .fillMaxSize()

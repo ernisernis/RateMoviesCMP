@@ -44,12 +44,12 @@ import ratemoviescmp.composeapp.generated.resources.rate_title
 
 
 @Composable
-fun RateDetailScreenRoot(
+fun MovieRateScreenRoot(
     viewModel: MovieRateViewModel = koinViewModel(),
     onBackClick: () -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    RateDetailScreen(
+    MovieRateScreen(
         state = state,
         modifier = Modifier
             .fillMaxSize(),
@@ -64,7 +64,7 @@ fun RateDetailScreenRoot(
 }
 
 @Composable
-fun RateDetailScreen(
+fun MovieRateScreen(
     modifier: Modifier = Modifier,
     state: MovieRateState,
     onAction: (MovieRateAction) -> Unit,

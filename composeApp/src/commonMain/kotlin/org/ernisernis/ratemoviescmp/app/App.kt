@@ -38,7 +38,7 @@ import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailV
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.MovieListScreenRoot
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.MovieListViewModel
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_rate.MovieRateAction
-import org.ernisernis.ratemoviescmp.movie.presentation.movie_rate.RateDetailScreenRoot
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_rate.MovieRateScreenRoot
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_rate.MovieRateViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -162,7 +162,7 @@ fun NavGraphBuilder.MovieApp(
             }
         }
 
-        RateDetailScreenRoot(
+        MovieRateScreenRoot(
             viewModel = viewModel,
             onBackClick = {
                 navController.navigateUp()
