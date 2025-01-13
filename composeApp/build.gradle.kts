@@ -53,6 +53,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
 
+            implementation("co.touchlab:kermit:2.0.4")
             implementation(libs.compose.material.icons.extended)
             implementation(compose.material3)
             implementation(libs.jetbrains.compose.navigation)
