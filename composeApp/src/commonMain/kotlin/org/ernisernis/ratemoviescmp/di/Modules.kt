@@ -6,6 +6,7 @@ import org.ernisernis.ratemoviescmp.movie.data.network.RemoteMovieDataSource
 import org.ernisernis.ratemoviescmp.movie.data.repository.DefaultMovieRepository
 import org.ernisernis.ratemoviescmp.movie.domain.MovieRepository
 import org.ernisernis.ratemoviescmp.movie.presentation.SelectedMovieViewModel
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_bookmark.MovieBookmarkViewModel
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailViewModel
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.MovieListViewModel
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_rate.MovieRateViewModel
@@ -26,4 +27,5 @@ val sharedModule = module {
     viewModelOf(::MovieDetailViewModel)
     viewModelOf(::MovieRateViewModel)
     viewModelOf(::SelectedMovieViewModel)
+    viewModelOf(::MovieBookmarkViewModel)
 }

@@ -29,4 +29,5 @@
     <string name="rate_title">How would you rate %1$s</string>
     <string name="rate">Rate</string>
     <string name="movie_title_now_playing">Now Playing</string>
+    <string name="bookmarks">Bookmarks</string>
 </resources>

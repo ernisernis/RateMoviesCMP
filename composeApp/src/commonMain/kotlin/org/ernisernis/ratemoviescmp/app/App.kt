@@ -1,12 +1,9 @@
 package org.ernisernis.ratemoviescmp.app
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItem
@@ -16,8 +13,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
@@ -30,8 +27,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.serialization.generateHashCode
 import org.ernisernis.ratemoviescmp.core.presentation.RateMoviesTheme
 import org.ernisernis.ratemoviescmp.movie.presentation.SelectedMovieViewModel
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_bookmark.MovieBookmarkScreenRoot
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_bookmark.MovieBookmarkViewModel
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailAction
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailScreenRoot
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailViewModel
@@ -52,7 +52,18 @@ fun App(
         dynamicColor = dynamicColor,
     ) {
         val navController = rememberNavController()
-        var selectedIndex by remember { mutableIntStateOf(0) }
+        var selectedIndex by rememberSaveable { mutableIntStateOf(0) }
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                Route.MovieList.serializer().generateHashCode() -> {
+                    selectedIndex = 0
+                }
+                Route.MovieBookmark.serializer().generateHashCode() -> {
+                    selectedIndex = 1
+                }
+            }
+        }
 
         Scaffold(
             bottomBar = {
@@ -171,12 +182,11 @@ fun NavGraphBuilder.MovieApp(
     }
 
     composable<Route.MovieBookmark> {
-        Box(
-            modifier = Modifier.background(Color.Red).fillMaxSize(),
-            contentAlignment = Alignment.BottomCenter
-        ) {
-            Text("abc")
-        }
+        val viewModel = koinViewModel<MovieBookmarkViewModel>()
+
+        MovieBookmarkScreenRoot(
+            viewModel = viewModel
+        )
     }
 }
 
