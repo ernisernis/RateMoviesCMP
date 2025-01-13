@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.buildkonfig)
+    alias(libs.plugins.room)
 }
 
 kotlin {
@@ -31,6 +32,10 @@ kotlin {
     }
     
     jvm("desktop")
+
+    room {
+        schemaDirectory("$projectDir/schemas")
+    }
     
     sourceSets {
         val desktopMain by getting
@@ -53,6 +58,8 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
 
+            implementation(libs.androidx.room.runtime)
+            implementation(libs.sqlite.bundled)
             implementation("co.touchlab:kermit:2.0.4")
             implementation(libs.compose.material.icons.extended)
             implementation(compose.material3)
@@ -72,6 +79,9 @@ kotlin {
         }
         nativeMain.dependencies {
             implementation(libs.ktor.client.darwin)
+        }
+        dependencies {
+            ksp(libs.androidx.room.compiler)
         }
     }
 }
