@@ -133,9 +133,9 @@ fun NavGraphBuilder.MovieApp(
 
         MovieListScreenRoot(
             viewModel = viewModel,
-            onMovieClick = { movieUi ->
-                selectedMovieViewModel.onSelectMovie(movieUi)
-                navController.navigate(Route.MovieDetail)
+            onMovieClick = { movie ->
+                selectedMovieViewModel.onSelectMovie(movie)
+                navController.navigate(Route.MovieDetail(movie.id))
             }
         )
     }
@@ -146,8 +146,8 @@ fun NavGraphBuilder.MovieApp(
         val selectedMovie by selectedMovieViewModel.selectedMovie.collectAsStateWithLifecycle()
 
         LaunchedEffect(selectedMovie) {
-            selectedMovie?.let { movieUi ->
-                viewModel.onAction(MovieDetailAction.OnSelectedMovieChange(movieUi))
+            selectedMovie?.let { movie ->
+                viewModel.onAction(MovieDetailAction.OnSelectedMovieChange(movie))
             }
         }
 
@@ -168,8 +168,8 @@ fun NavGraphBuilder.MovieApp(
         val selectedMovie by selectedMovieViewModel.selectedMovie.collectAsStateWithLifecycle()
 
         LaunchedEffect(selectedMovie) {
-            selectedMovie?.let { movieUi ->
-                viewModel.onAction(MovieRateAction.OnSelectedMovieChange(movieUi))
+            selectedMovie?.let { movie ->
+                viewModel.onAction(MovieRateAction.OnSelectedMovieChange(movie))
             }
         }
 

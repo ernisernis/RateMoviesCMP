@@ -1,5 +1,6 @@
 package org.ernisernis.ratemoviescmp.movie.data.mappers
 
+import org.ernisernis.ratemoviescmp.movie.data.database.MovieDetailEntity
 import org.ernisernis.ratemoviescmp.movie.data.dto.CastDto
 import org.ernisernis.ratemoviescmp.movie.data.dto.CrewDto
 import org.ernisernis.ratemoviescmp.movie.data.dto.MovieDetailDto
@@ -46,5 +47,58 @@ fun CrewDto.toCrew(): Crew {
         name = name,
         job = job,
         profilePath = profilePath ?: "",
+    )
+}
+
+fun MovieGenre.toMovieGenreDto(): MovieGenreDto {
+    return MovieGenreDto(
+        id = id,
+        name = name
+    )
+}
+
+fun Cast.toCastDto(): CastDto {
+    return CastDto(
+        id = id,
+        name = name,
+        profilePath = profilePath,
+        character = character,
+    )
+}
+
+fun Crew.toCrewDto(): CrewDto {
+    return CrewDto(
+        id = id,
+        name = name,
+        job = job,
+        profilePath = profilePath
+    )
+}
+
+fun MovieDetail.toMovieDetailEntity(): MovieDetailEntity {
+    return MovieDetailEntity(
+        id = id,
+        releaseDate = releaseDate,
+        runtime = runtime,
+        voteAverage = voteAverage,
+        voteCount = voteCount,
+        genres = genres.map { it.toMovieGenreDto() },
+        overview = overview,
+        cast = cast.map { it.toCastDto() },
+        crew = crew.map { it.toCrewDto() },
+    )
+}
+
+fun MovieDetailEntity.toMovieDetail(): MovieDetail {
+    return MovieDetail(
+        id = id,
+        releaseDate = releaseDate,
+        runtime = runtime,
+        voteAverage = voteAverage,
+        voteCount = voteCount,
+        genres = genres.map { it.toMovieGenre() },
+        overview = overview,
+        cast = cast.map { it.toCast() },
+        crew = crew.map { it.toCrew() },
     )
 }

@@ -22,7 +22,7 @@ import org.ernisernis.ratemoviescmp.movie.domain.Crew
 import org.ernisernis.ratemoviescmp.movie.domain.Movie
 import org.ernisernis.ratemoviescmp.movie.domain.MovieDetail
 import org.ernisernis.ratemoviescmp.movie.domain.MovieGenre
-import org.ernisernis.ratemoviescmp.movie.presentation.models.toMovieDetailsUi
+import org.ernisernis.ratemoviescmp.movie.presentation.models.toMovieDetailUi
 import org.ernisernis.ratemoviescmp.movie.presentation.models.toMovieUi
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailScreen
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailState
@@ -38,9 +38,7 @@ import org.ernisernis.ratemoviescmp.movie.presentation.movie_rate.MovieRateState
 fun MovieListScreenPreview() {
     RateMoviesTheme(darkTheme = true, dynamicColor = false) {
         val state = MovieListState(
-            nowPlayingMoviesUi = movieList.map { movie ->
-               movie.toMovieUi()
-            }
+            nowPlayingMovies = movieList,
         )
         MovieListScreen(
             state = state,
@@ -72,10 +70,10 @@ fun MovieListItemPreview() {
 @Preview
 @Composable
 fun MovieDetailScreenPreview() {
-    val movieUi = movie.toMovieUi()
+    val movie = movie
     val state = MovieDetailState(
-        movieUi = movieUi,
-        movieDetailUi = defaultMovieDetails.toMovieDetailsUi()
+        movie = movie,
+        movieDetailUi = defaultMovieDetails.toMovieDetailUi()
     )
 
     RateMoviesTheme(darkTheme = true, dynamicColor = false) {

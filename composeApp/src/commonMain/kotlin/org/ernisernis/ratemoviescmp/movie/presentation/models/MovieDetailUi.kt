@@ -22,7 +22,7 @@ data class DisplayableValue(
     val formatted: String,
 )
 
-fun MovieDetail.toMovieDetailsUi(): MovieDetailUi {
+fun MovieDetail.toMovieDetailUi(): MovieDetailUi {
     return MovieDetailUi(
         id = id,
         releaseDate = releaseDate,

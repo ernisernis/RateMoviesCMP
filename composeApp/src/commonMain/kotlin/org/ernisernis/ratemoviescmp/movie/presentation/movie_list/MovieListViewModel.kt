@@ -26,7 +26,7 @@ class MovieListViewModel(
                 .onSuccess { nowPlayingMovies ->
                     _state.update { it.copy(
                         isLoading = false,
-                        nowPlayingMoviesUi = nowPlayingMovies.map { movie -> movie.toMovieUi() }
+                        nowPlayingMovies = nowPlayingMovies
                     ) }
                 }
                 .onError { error ->

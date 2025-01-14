@@ -107,7 +107,11 @@ fun MovieDetailScreen(
                     }
                 )
                 DefaultIconContainer(
-                    icon = RmIcons.BookmarkBorder,
+                    icon = if (state.isBookmarked) {
+                        RmIcons.BookmarkSelected
+                    } else {
+                        RmIcons.BookmarkUnselected
+                    },
                     modifier = Modifier,
                     onClick = {
                         onAction(MovieDetailAction.OnBookmarkClick)
