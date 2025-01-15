@@ -8,11 +8,9 @@ import org.ernisernis.ratemoviescmp.core.domain.util.EmptyResult
 import org.ernisernis.ratemoviescmp.core.domain.util.Result
 import org.ernisernis.ratemoviescmp.core.domain.util.map
 import org.ernisernis.ratemoviescmp.movie.data.database.BookmarkMovieDao
-import org.ernisernis.ratemoviescmp.movie.data.mappers.toBookEntity
 import org.ernisernis.ratemoviescmp.movie.data.mappers.toMovie
 import org.ernisernis.ratemoviescmp.movie.data.mappers.toMovieDetail
-import org.ernisernis.ratemoviescmp.movie.data.mappers.toMovieDetailEntity
-import org.ernisernis.ratemoviescmp.movie.data.mappers.toMovieDetails
+import org.ernisernis.ratemoviescmp.movie.data.mappers.toMovieEntity
 import org.ernisernis.ratemoviescmp.movie.data.network.RemoteMovieDataSource
 import org.ernisernis.ratemoviescmp.movie.domain.Movie
 import org.ernisernis.ratemoviescmp.movie.domain.MovieDetail
@@ -30,16 +28,16 @@ class DefaultMovieRepository(
             }
     }
     override suspend fun getMovieDetail(id: Int): Result<MovieDetail, DataError.Remote> {
-        val localResult = bookmarkMovieDao.getBookmarkMovieDetail(id)
+        val localResult = bookmarkMovieDao.getBookmarkMovie(id)
 
         return if (localResult == null) {
             remoteMovieDataSource
                 .getMovieDetail(id)
                 .map { dto ->
-                    dto.toMovieDetails()
+                    dto.toMovieDetail()
                 }
         } else {
-            Result.Success(localResult.toMovieDetail())
+            Result.Success(localResult.movieDetailDto?.toMovieDetail()!!)
         }
     }
 
@@ -59,9 +57,9 @@ class DefaultMovieRepository(
             }
     }
 
-    override suspend fun markAsBookmarked(movie: Movie, movieDetail: MovieDetail): EmptyResult<DataError.Local> {
+    override suspend fun markAsBookmarked(movie: Movie): EmptyResult<DataError.Local> {
         return try {
-            bookmarkMovieDao.upsertBookmarkMovie(movie.toBookEntity(), movieDetail.toMovieDetailEntity())
+            bookmarkMovieDao.upsertMovieEntity(movie.toMovieEntity())
             Result.Success(Unit)
         } catch (e: SQLiteException) {
             Result.Error(DataError.Local.DISK_FULL)
@@ -69,6 +67,6 @@ class DefaultMovieRepository(
     }
 
     override suspend fun deleteFromBookmark(id: Int) {
-        bookmarkMovieDao.deleteMovieAndDetail(id)
+        bookmarkMovieDao.deleteBookmarkMovie(id)
     }
 }

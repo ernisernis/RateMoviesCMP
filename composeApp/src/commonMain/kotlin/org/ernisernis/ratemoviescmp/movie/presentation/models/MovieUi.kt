@@ -13,6 +13,8 @@ data class MovieUi(
     val voteAverage: String,
     val popularity: String,
     val banner: String,
+    val releaseYear: String,
+    val movieDetailUi: MovieDetailUi?,
 )
 
 fun Movie.toMovieUi(): MovieUi {
@@ -27,5 +29,7 @@ fun Movie.toMovieUi(): MovieUi {
         voteAverage = voteAverage.toString(),
         popularity = popularity.toInt().toString(),
         banner = "https://image.tmdb.org/t/p/w1280$backdropPath",
+        releaseYear = releaseDate.substringBefore("-"),
+        movieDetailUi = movieDetail?.toMovieDetailUi(),
     )
 }

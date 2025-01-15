@@ -18,11 +18,11 @@ import org.ernisernis.ratemoviescmp.core.presentation.Dimens
 import org.ernisernis.ratemoviescmp.core.presentation.RateMoviesTheme
 import org.ernisernis.ratemoviescmp.core.presentation.components.DefaultIconContainer
 import org.ernisernis.ratemoviescmp.movie.domain.Cast
+import org.ernisernis.ratemoviescmp.movie.domain.CreditsResponse
 import org.ernisernis.ratemoviescmp.movie.domain.Crew
 import org.ernisernis.ratemoviescmp.movie.domain.Movie
 import org.ernisernis.ratemoviescmp.movie.domain.MovieDetail
 import org.ernisernis.ratemoviescmp.movie.domain.MovieGenre
-import org.ernisernis.ratemoviescmp.movie.presentation.models.toMovieDetailUi
 import org.ernisernis.ratemoviescmp.movie.presentation.models.toMovieUi
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailScreen
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailState
@@ -73,7 +73,6 @@ fun MovieDetailScreenPreview() {
     val movie = movie
     val state = MovieDetailState(
         movie = movie,
-        movieDetailUi = defaultMovieDetails.toMovieDetailUi()
     )
 
     RateMoviesTheme(darkTheme = true, dynamicColor = false) {
@@ -139,7 +138,8 @@ internal val movie = Movie(
     releaseDate = "2024.12.12",
     video = false,
     voteAverage = 123.3,
-    voteCount = 12345
+    voteCount = 12345,
+    movieDetail = null
 )
 
 internal val movieList: List<Movie> = (1..20).map {
@@ -171,34 +171,36 @@ internal val defaultMovieDetails =
         overview =
         "Eddie and Venom are on the run. Hunted by both of their worlds and with the net closing in, " +
                 "the duo are forced into a devastating decision that will bring the curtains down on Venom and Eddie's last dance",
-        cast =
-        listOf(
-            Cast(
-                id = 2524,
-                name = "Tom Hardy",
-                profilePath = "/d81K0RH8UX7tZj49tZaQhZ9ewH.jpg",
-                character = "Eddie Brock / Venom",
+        credits = CreditsResponse(
+            cast =
+            listOf(
+                Cast(
+                    id = 2524,
+                    name = "Tom Hardy",
+                    profilePath = "/d81K0RH8UX7tZj49tZaQhZ9ewH.jpg",
+                    character = "Eddie Brock / Venom",
+                ),
+                Cast(
+                    id = 2524,
+                    name = "Tom Hardy",
+                    profilePath = "/d81K0RH8UX7tZj49tZaQhZ9ewH.jpg",
+                    character = "Eddie Brock / Venom",
+                ),
             ),
-            Cast(
-                id = 2524,
-                name = "Tom Hardy",
-                profilePath = "/d81K0RH8UX7tZj49tZaQhZ9ewH.jpg",
-                character = "Eddie Brock / Venom",
-            ),
-        ),
-        crew =
-        listOf(
-            Crew(
-                id = 1195200,
-                name = "David Michelinie",
-                job = "Characters",
-                profilePath = "/bSpGO1dKFfwb9mUc4KdUpBpRfYH.jpg",
-            ),
-            Crew(
-                id = 1195200,
-                name = "David Michelinie",
-                job = "Director",
-                profilePath = "/bSpGO1dKFfwb9mUc4KdUpBpRfYH.jpg",
+            crew =
+            listOf(
+                Crew(
+                    id = 1195200,
+                    name = "David Michelinie",
+                    job = "Characters",
+                    profilePath = "/bSpGO1dKFfwb9mUc4KdUpBpRfYH.jpg",
+                ),
+                Crew(
+                    id = 1195200,
+                    name = "David Michelinie",
+                    job = "Director",
+                    profilePath = "/bSpGO1dKFfwb9mUc4KdUpBpRfYH.jpg",
+                ),
             ),
         ),
     )

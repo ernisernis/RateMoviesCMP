@@ -1,5 +1,6 @@
 package org.ernisernis.ratemoviescmp.movie.data.mappers
 
+import androidx.compose.ui.input.key.Key.Companion.D
 import org.ernisernis.ratemoviescmp.movie.data.database.MovieEntity
 import org.ernisernis.ratemoviescmp.movie.data.dto.MovieDto
 import org.ernisernis.ratemoviescmp.movie.domain.Movie
@@ -20,10 +21,11 @@ fun MovieDto.toMovie(): Movie {
         video = video,
         voteAverage = voteAverage,
         voteCount = voteCount,
+        movieDetail = null,
     )
 }
 
-fun Movie.toBookEntity(): MovieEntity {
+fun Movie.toMovieEntity(): MovieEntity {
     return MovieEntity(
         id = id,
         title = title,
@@ -39,6 +41,7 @@ fun Movie.toBookEntity(): MovieEntity {
         video = video,
         voteAverage = voteAverage,
         voteCount = voteCount,
+        movieDetailDto = movieDetail?.toMovieDetailDto(),
     )
 }
 
@@ -58,5 +61,6 @@ fun MovieEntity.toMovie(): Movie{
         video = video,
         voteAverage = voteAverage,
         voteCount = voteCount,
+        movieDetail = movieDetailDto?.toMovieDetail(),
     )
 }

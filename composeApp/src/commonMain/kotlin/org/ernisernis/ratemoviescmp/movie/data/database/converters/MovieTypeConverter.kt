@@ -4,6 +4,7 @@ import androidx.room.TypeConverter
 import kotlinx.serialization.json.Json
 import org.ernisernis.ratemoviescmp.movie.data.dto.CastDto
 import org.ernisernis.ratemoviescmp.movie.data.dto.CrewDto
+import org.ernisernis.ratemoviescmp.movie.data.dto.MovieDetailDto
 import org.ernisernis.ratemoviescmp.movie.data.dto.MovieGenreDto
 
 object MovieTypeConverter {
@@ -36,6 +37,17 @@ object MovieTypeConverter {
 
     @TypeConverter
     fun movieCrewFromList(value: List<CrewDto>): String {
+        return Json.encodeToString(value)
+    }
+
+
+    @TypeConverter
+    fun movieDetailFromString(value: String): MovieDetailDto {
+        return Json.decodeFromString<MovieDetailDto>(value)
+    }
+
+    @TypeConverter
+    fun movieDetailFromObject(value: MovieDetailDto): String {
         return Json.encodeToString(value)
     }
 }

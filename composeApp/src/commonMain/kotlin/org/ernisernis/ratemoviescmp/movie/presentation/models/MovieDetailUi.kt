@@ -31,10 +31,10 @@ fun MovieDetail.toMovieDetailUi(): MovieDetailUi {
         voteCount = voteCount.toString(),
         genres = genres.map { it.toMovieGenreUi() },
         overview = overview,
-        cast = cast.map { it.toCastUi() }.ifEmpty { null },
-        crew = crew.map { it.toCrewUi() },
-        director = crew.find { it.job == "Director" }?.name,
-        writer = crew.find { it.job == "Screenplay" }?.name,
+        cast = credits.cast.map { it.toCastUi() }.filter { it.profilePath != null }.ifEmpty { null },
+        crew = credits.crew.map { it.toCrewUi() },
+        director = credits.crew.find { it.job == "Director" }?.name,
+        writer = credits.crew.find { it.job == "Screenplay" }?.name,
     )
 }
 

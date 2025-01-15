@@ -2,6 +2,7 @@ package org.ernisernis.ratemoviescmp.movie.data.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import org.ernisernis.ratemoviescmp.movie.data.dto.MovieDetailDto
 
 @Entity
 data class MovieEntity(
@@ -19,4 +20,5 @@ data class MovieEntity(
     val video: Boolean,
     val voteAverage: Double,
     val voteCount: Int,
+    val movieDetailDto: MovieDetailDto?,
 )

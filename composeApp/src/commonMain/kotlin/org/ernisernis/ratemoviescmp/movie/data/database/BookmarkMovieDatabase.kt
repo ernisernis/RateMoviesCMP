@@ -10,9 +10,8 @@ import org.ernisernis.ratemoviescmp.movie.data.database.converters.MovieTypeConv
 @Database(
     entities = [
         MovieEntity::class,
-        MovieDetailEntity::class,
     ],
-    version = 1
+    version = 2
 )
 @TypeConverters(
     IntListTypeConverter::class,

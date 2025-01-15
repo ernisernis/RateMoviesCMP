@@ -5,7 +5,7 @@ import org.ernisernis.ratemoviescmp.movie.domain.Cast
 data class CastUi(
     val id: Int,
     val name: String,
-    val profilePath: String,
+    val profilePath: String?,
     val character: String,
 )
 

@@ -8,7 +8,5 @@ import org.ernisernis.ratemoviescmp.movie.presentation.models.MovieUi
 data class MovieDetailState(
     val movie: Movie? = null,
     val movieUi: MovieUi? = null,
-    val movieDetail: MovieDetail? = null,
-    val movieDetailUi: MovieDetailUi? = null,
     val isBookmarked: Boolean = false,
 )

@@ -39,11 +39,15 @@ class MovieDetailViewModel(
                 ) }
                 viewModelScope.launch {
                     movieRepository
-                        .getMovieDetail(id = action.movie.id)
+                        .getMovieDetail(id = movieId)
                         .onSuccess { movieDetail ->
                             _state.update { it.copy(
-                                movieDetailUi = movieDetail.toMovieDetailUi(),
-                                movieDetail = movieDetail,
+                                movie = state.value.movie?.copy(
+                                    movieDetail = movieDetail
+                                ),
+                                movieUi = state.value.movieUi?.copy(
+                                    movieDetailUi = movieDetail.toMovieDetailUi()
+                                )
                             ) }
                         }
                 }
@@ -53,8 +57,8 @@ class MovieDetailViewModel(
                     if (state.value.isBookmarked) {
                         movieRepository.deleteFromBookmark(movieId)
                     } else {
-                        if (state.value.movie != null && state.value.movieDetail != null) {
-                            movieRepository.markAsBookmarked(state.value.movie!!, state.value.movieDetail!!)
+                        state.value.movie?.let { movie ->
+                            movieRepository.markAsBookmarked(movie)
                         }
                     }
                 }

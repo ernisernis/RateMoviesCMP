@@ -69,4 +69,23 @@ object Dimens {
             horizontal = MovieRateItemPaddingBig,
             vertical = MovieRateItemPaddingNormal
         )
+
+    // movie_bookmark
+    val MovieBookmarkContainerPadding: Dp
+        @Composable get() = 16.dp
+
+    val MovieBookmarkItemPaddingBig: Dp
+        @Composable get() = 16.dp
+
+    val MovieBookmarkItemPaddingNormal: Dp
+        @Composable get() = 8.dp
+
+    val MovieBookmarkItemPaddingSmall: Dp
+        @Composable get() = 4.dp
+
+    val MovieBookmarkComponentPadding: PaddingValues
+        @Composable get() = PaddingValues(
+            horizontal = MovieBookmarkItemPaddingBig,
+            vertical = MovieBookmarkItemPaddingNormal
+        )
 }

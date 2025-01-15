@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import org.ernisernis.ratemoviescmp.movie.domain.Movie
-import org.ernisernis.ratemoviescmp.movie.presentation.models.MovieUi
 
 // Shared ViewModel to Route.MovieGraph graph
 class SelectedMovieViewModel: ViewModel() {

@@ -8,6 +8,5 @@ data class MovieDetail(
     val voteCount: Int,
     val genres: List<MovieGenre>,
     val overview: String,
-    val cast: List<Cast>,
-    val crew: List<Crew>,
+    val credits: CreditsResponse
 )

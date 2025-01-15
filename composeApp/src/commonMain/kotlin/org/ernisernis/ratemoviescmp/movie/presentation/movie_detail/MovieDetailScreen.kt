@@ -149,7 +149,7 @@ fun MovieDetailScreen(
         }
 
         AnimatedVisibility(
-            visible = state.movieDetailUi != null
+            visible = state.movieUi?.movieDetailUi != null
         ) {
            Column {
                // Subtitle
@@ -159,16 +159,16 @@ fun MovieDetailScreen(
                            start = Dimens.MovieDetailItemPaddingBig,
                            bottom = Dimens.MovieDetailItemPaddingNormal,
                        ),
-                   releaseDate = state.movieDetailUi?.releaseDate,
-                   runtime = state.movieDetailUi?.runtime?.formatted,
+                   releaseDate = state.movieUi?.movieDetailUi?.releaseDate,
+                   runtime = state.movieUi?.movieDetailUi?.runtime?.formatted,
                )
                // Ratings
                DetailRatings(
                    modifier = Modifier
                        .fillMaxWidth()
                        .padding(Dimens.MovieDetailComponentPadding),
-                   voteAverage = state.movieDetailUi?.voteAverage,
-                   voteCount = state.movieDetailUi?.voteCount,
+                   voteAverage = state.movieUi?.movieDetailUi?.voteAverage,
+                   voteCount = state.movieUi?.movieDetailUi?.voteCount,
                    onRatingClick = {
                        onAction(MovieDetailAction.OnRateClick)
                    }
@@ -178,10 +178,10 @@ fun MovieDetailScreen(
                    modifier = Modifier
                        .horizontalScroll(rememberScrollState())
                        .padding(Dimens.MovieDetailComponentPadding),
-                   genres = state.movieDetailUi?.genres,
+                   genres = state.movieUi?.movieDetailUi?.genres,
                )
                // Overview (movie description)
-               state.movieDetailUi?.overview?.let { overview ->
+               state.movieUi?.movieDetailUi?.overview?.let { overview ->
                    Text(
                        text = overview,
                        modifier = Modifier
@@ -194,11 +194,11 @@ fun MovieDetailScreen(
                DirectorRow(
                    modifier = Modifier
                        .padding(Dimens.MovieDetailComponentPadding),
-                   director = state.movieDetailUi?.director,
-                   writer = state.movieDetailUi?.writer,
+                   director = state.movieUi?.movieDetailUi?.director,
+                   writer = state.movieUi?.movieDetailUi?.writer,
                )
 
-               state.movieDetailUi?.cast?.let { cast ->
+               state.movieUi?.movieDetailUi?.cast?.let { cast ->
                    // Light Divider
                    HorizontalDivider(
                        modifier = Modifier.padding(Dimens.MovieDetailComponentPadding),
