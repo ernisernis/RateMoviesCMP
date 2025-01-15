@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.ernisernis.ratemoviescmp.core.presentation.Dimens
+import org.ernisernis.ratemoviescmp.movie.domain.Movie
 import org.ernisernis.ratemoviescmp.movie.presentation.models.toMovieUi
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.components.MovieListItem
 import org.jetbrains.compose.resources.stringResource
@@ -28,13 +29,21 @@ import ratemoviescmp.composeapp.generated.resources.bookmarks
 @Composable
 fun MovieBookmarkScreenRoot(
     viewModel: MovieBookmarkViewModel = koinViewModel(),
+    onMovieClick: (Movie) -> Unit,
 ) {
    val state by viewModel.state.collectAsStateWithLifecycle()
 
     MovieBookmarkScreen(
         state = state,
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxSize(),
+        onAction = { action ->
+            when (action)   {
+                is MovieBookmarkAction.OnMovieClick -> onMovieClick(action.movie)
+                else -> Unit
+            }
+            viewModel.onAction(action)
+        }
     )
 }
 
@@ -42,6 +51,7 @@ fun MovieBookmarkScreenRoot(
 fun MovieBookmarkScreen(
     state: MovieBookmarkState,
     modifier: Modifier = Modifier,
+    onAction: (MovieBookmarkAction) -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -67,7 +77,9 @@ fun MovieBookmarkScreen(
                     modifier = Modifier
                         .height(Dimens.MovieListItemHeight)
                         .width(Dimens.MovieListItemWidth),
-                    onClick = {}
+                    onClick = {
+                        onAction(MovieBookmarkAction.OnMovieClick(movie))
+                    }
                 )
             }
         }

@@ -19,6 +19,12 @@ class MovieBookmarkViewModel(
         observeBookmarks()
     }
 
+    fun onAction(action: MovieBookmarkAction) {
+        when (action) {
+            else -> Unit
+        }
+    }
+
     private fun observeBookmarks() {
         movieRepository
             .getBookmarkMovies()
@@ -29,5 +35,4 @@ class MovieBookmarkViewModel(
             }
             .launchIn(viewModelScope)
     }
-
 }

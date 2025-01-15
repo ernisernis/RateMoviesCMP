@@ -183,9 +183,14 @@ fun NavGraphBuilder.MovieApp(
 
     composable<Route.MovieBookmark> {
         val viewModel = koinViewModel<MovieBookmarkViewModel>()
+        val selectedMovieViewModel = it.sharedKoinViewModel<SelectedMovieViewModel>(navController)
 
         MovieBookmarkScreenRoot(
-            viewModel = viewModel
+            viewModel = viewModel,
+            onMovieClick = { movie ->
+                selectedMovieViewModel.onSelectMovie(movie)
+                navController.navigate(Route.MovieDetail(movie.id))
+            }
         )
     }
 }
