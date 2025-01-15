@@ -51,22 +51,22 @@ object Dimens {
     val MovieDetailAlpha: Float
         get() = 0.8f
 
-    // rate_detail
-    val RateDetailContainerPadding: Dp
+    // movie_rate
+    val MovieRateContainerPadding: Dp
         @Composable get() = 16.dp
 
-    val RateDetailItemPaddingBig: Dp
+    val MovieRateItemPaddingBig: Dp
         @Composable get() = 16.dp
 
-    val RateDetailItemPaddingNormal: Dp
+    val MovieRateItemPaddingNormal: Dp
         @Composable get() = 8.dp
 
-    val RateDetailItemPaddingSmall: Dp
+    val MovieRateItemPaddingSmall: Dp
         @Composable get() = 4.dp
 
-    val RateDetailComponentPadding: PaddingValues
+    val MovieRateComponentPadding: PaddingValues
         @Composable get() = PaddingValues(
-            horizontal = RateDetailItemPaddingBig,
-            vertical = RateDetailItemPaddingNormal
+            horizontal = MovieRateItemPaddingBig,
+            vertical = MovieRateItemPaddingNormal
         )
 }

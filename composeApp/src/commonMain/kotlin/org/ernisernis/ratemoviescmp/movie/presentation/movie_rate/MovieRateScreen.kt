@@ -94,7 +94,7 @@ fun MovieRateScreen(
         DefaultIconContainer(
             icon = RmIcons.Back,
             modifier = Modifier
-                .padding(Dimens.RateDetailItemPaddingBig),
+                .padding(Dimens.MovieRateItemPaddingBig),
             onClick = {
                 onAction(MovieRateAction.OnBackClick)
             }
@@ -103,9 +103,9 @@ fun MovieRateScreen(
         Column(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
-                .padding(Dimens.RateDetailComponentPadding)
+                .padding(Dimens.MovieRateComponentPadding)
                 .align(Alignment.Center),
-            verticalArrangement = Arrangement.spacedBy(Dimens.RateDetailItemPaddingBig),
+            verticalArrangement = Arrangement.spacedBy(Dimens.MovieRateItemPaddingBig),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             state.movieUi?.imageUrl?.let {
@@ -123,7 +123,7 @@ fun MovieRateScreen(
                     stringResource(Res.string.rate_title, state.movieUi?.title.toString())
                 },
                 modifier = Modifier
-                    .padding(Dimens.RateDetailComponentPadding),
+                    .padding(Dimens.MovieRateComponentPadding),
                 style = MaterialTheme.typography.headlineSmall,
                 color = MaterialTheme.colorScheme.onBackground,
                 textAlign = TextAlign.Center,
@@ -147,7 +147,7 @@ fun MovieRateScreen(
                     .clickable {
                         onAction(MovieRateAction.OnMovieRateSubmit)
                     }
-                    .padding(Dimens.RateDetailComponentPadding)
+                    .padding(Dimens.MovieRateComponentPadding)
                     .background(MaterialTheme.colorScheme.secondary, RoundedCornerShape(20)),
                 contentAlignment = Alignment.Center,
             ) {
