@@ -15,11 +15,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.ernisernis.ratemoviescmp.core.presentation.Dimens
 import org.ernisernis.ratemoviescmp.core.presentation.RmIcons
-import org.ernisernis.ratemoviescmp.core.presentation.components.PosterImage
+import org.ernisernis.ratemoviescmp.movie.presentation.components.DefaultIconContainer
+import org.ernisernis.ratemoviescmp.movie.presentation.components.PosterImage
 import org.ernisernis.ratemoviescmp.movie.presentation.models.MovieUi
 import org.jetbrains.compose.resources.stringResource
 import ratemoviescmp.composeapp.generated.resources.Res
@@ -41,11 +43,13 @@ fun MovieBookmarkListItem(
         horizontalArrangement = Arrangement.spacedBy(Dimens.MovieBookmarkItemPaddingNormal),
         verticalAlignment = Alignment.CenterVertically
     ) {
+
         PosterImage(
             modifier = Modifier
                 .width(Dimens.MovieBookmarkImageWidth),
             url = movieUi.imageUrl,
         )
+
         Column(
             modifier = Modifier
                 .weight(1f),
@@ -56,6 +60,8 @@ fun MovieBookmarkListItem(
                 text = movieUi.title,
                 color = MaterialTheme.colorScheme.onSurface,
                 style = MaterialTheme.typography.bodyLarge,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
                 lineHeight = 18.sp,
             )
 
@@ -97,5 +103,12 @@ fun MovieBookmarkListItem(
                 )
             }
         }
+
+        DefaultIconContainer(
+            icon = RmIcons.BookmarkSelected,
+            modifier = Modifier
+                .align(Alignment.Top),
+            onClick = {}
+        )
     }
 }

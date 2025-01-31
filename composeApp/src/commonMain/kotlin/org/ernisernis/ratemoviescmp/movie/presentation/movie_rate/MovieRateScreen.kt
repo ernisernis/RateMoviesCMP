@@ -30,8 +30,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
 import org.ernisernis.ratemoviescmp.core.presentation.Dimens
 import org.ernisernis.ratemoviescmp.core.presentation.RmIcons
-import org.ernisernis.ratemoviescmp.core.presentation.components.DefaultIconContainer
-import org.ernisernis.ratemoviescmp.core.presentation.components.PosterImage
+import org.ernisernis.ratemoviescmp.movie.presentation.components.DefaultIconContainer
+import org.ernisernis.ratemoviescmp.movie.presentation.components.PosterImage
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_rate.components.IconRate
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource

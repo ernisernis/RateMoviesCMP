@@ -1,4 +1,4 @@
-package org.ernisernis.ratemoviescmp.core.presentation.components
+package org.ernisernis.ratemoviescmp.movie.presentation.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

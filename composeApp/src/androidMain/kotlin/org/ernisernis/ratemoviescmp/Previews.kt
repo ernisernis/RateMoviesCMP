@@ -13,10 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import org.ernisernis.ratemoviescmp.core.presentation.components.PosterImage
+import org.ernisernis.ratemoviescmp.movie.presentation.components.PosterImage
 import org.ernisernis.ratemoviescmp.core.presentation.Dimens
 import org.ernisernis.ratemoviescmp.core.presentation.RateMoviesTheme
-import org.ernisernis.ratemoviescmp.core.presentation.components.DefaultIconContainer
+import org.ernisernis.ratemoviescmp.movie.presentation.components.DefaultIconContainer
 import org.ernisernis.ratemoviescmp.movie.domain.Cast
 import org.ernisernis.ratemoviescmp.movie.domain.CreditsResponse
 import org.ernisernis.ratemoviescmp.movie.domain.Crew

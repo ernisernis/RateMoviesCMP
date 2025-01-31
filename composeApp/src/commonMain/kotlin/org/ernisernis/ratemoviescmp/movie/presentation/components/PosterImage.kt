@@ -1,4 +1,4 @@
-package org.ernisernis.ratemoviescmp.core.presentation.components
+package org.ernisernis.ratemoviescmp.movie.presentation.components
 
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.material3.Card

@@ -27,10 +27,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
-import org.ernisernis.ratemoviescmp.core.presentation.components.PosterImage
+import org.ernisernis.ratemoviescmp.movie.presentation.components.PosterImage
 import org.ernisernis.ratemoviescmp.core.presentation.Dimens
 import org.ernisernis.ratemoviescmp.core.presentation.RmIcons
-import org.ernisernis.ratemoviescmp.core.presentation.components.DefaultIconContainer
+import org.ernisernis.ratemoviescmp.movie.presentation.components.DefaultIconContainer
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.components.CastLazyHorizontalRow
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.components.DetailRatings
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.components.DirectorRow
