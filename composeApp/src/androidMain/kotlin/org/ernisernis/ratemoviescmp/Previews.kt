@@ -24,6 +24,9 @@ import org.ernisernis.ratemoviescmp.movie.domain.Movie
 import org.ernisernis.ratemoviescmp.movie.domain.MovieDetail
 import org.ernisernis.ratemoviescmp.movie.domain.MovieGenre
 import org.ernisernis.ratemoviescmp.movie.presentation.models.toMovieUi
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_bookmark.MovieBookmarkScreen
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_bookmark.MovieBookmarkState
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_bookmark.components.MovieBookmarkListItem
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailScreen
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailState
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.MovieListScreen
@@ -120,6 +123,34 @@ fun DefaultIconContainerPreview() {
         DefaultIconContainer(
             icon = Icons.Default.ArrowBackIosNew,
             onClick = {}
+        )
+    }
+}
+
+@Preview
+@Composable
+fun MovieBookmarkListItemPreview() {
+    RateMoviesTheme(darkTheme = true, dynamicColor = false) {
+        MovieBookmarkListItem(
+            modifier = Modifier,
+            movieUi = movie.toMovieUi(),
+            onClick = {}
+        )
+    }
+}
+
+@Preview(widthDp = 3000)
+@Composable
+fun MovieBookmarkScreenPreview() {
+    RateMoviesTheme(darkTheme = true, dynamicColor = false) {
+        val state = MovieBookmarkState(
+            movies = (1..100).map { movie }
+        )
+        MovieBookmarkScreen(
+            state = state,
+            modifier = Modifier
+                .fillMaxSize(),
+            onAction = {}
         )
     }
 }
