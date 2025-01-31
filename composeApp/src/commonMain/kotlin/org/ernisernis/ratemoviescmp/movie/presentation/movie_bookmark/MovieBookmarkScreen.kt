@@ -66,7 +66,7 @@ fun MovieBookmarkScreen(
 
         // Bookmark items
         LazyVerticalStaggeredGrid(
-            columns = StaggeredGridCells.Adaptive(600.dp),
+            columns = StaggeredGridCells.Adaptive(400.dp),
             verticalItemSpacing = Dimens.MovieBookmarkItemPaddingSmall,
             horizontalArrangement = Arrangement.spacedBy(Dimens.MovieBookmarkItemPaddingSmall),
             modifier = modifier,
