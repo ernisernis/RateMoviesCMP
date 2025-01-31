@@ -134,12 +134,13 @@ fun MovieBookmarkListItemPreview() {
         MovieBookmarkListItem(
             modifier = Modifier,
             movieUi = movie.toMovieUi(),
-            onClick = {}
+            onClick = {},
+            onBookmarkClick = {}
         )
     }
 }
 
-@Preview(widthDp = 3000)
+@Preview(widthDp = 2_000)
 @Composable
 fun MovieBookmarkScreenPreview() {
     RateMoviesTheme(darkTheme = true, dynamicColor = false) {

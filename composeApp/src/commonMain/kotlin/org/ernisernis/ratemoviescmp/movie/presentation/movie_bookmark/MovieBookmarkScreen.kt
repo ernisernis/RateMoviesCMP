@@ -30,7 +30,7 @@ fun MovieBookmarkScreenRoot(
     viewModel: MovieBookmarkViewModel = koinViewModel(),
     onMovieClick: (Movie) -> Unit,
 ) {
-   val state by viewModel.state.collectAsStateWithLifecycle()
+    val state by viewModel.state.collectAsStateWithLifecycle()
 
     MovieBookmarkScreen(
         state = state,
@@ -71,12 +71,21 @@ fun MovieBookmarkScreen(
             horizontalArrangement = Arrangement.spacedBy(Dimens.MovieBookmarkItemPaddingSmall),
             modifier = modifier,
         ) {
-            items(state.movies) { movie ->
+            items(
+                items = state.movies,
+                key = { it.id }
+            ) { movie ->
                MovieBookmarkListItem(
                    modifier = Modifier
+                       .animateItem()
                        .height(Dimens.MovieBookmarkItemHeight),
                    movieUi = movie.toMovieUi(),
-                   onClick = {}
+                   onClick = {
+                       onAction(MovieBookmarkAction.OnMovieClick(movie))
+                   },
+                   onBookmarkClick = {
+                       onAction(MovieBookmarkAction.OnBookmarkClick(movie.id))
+                   }
                )
             }
         }

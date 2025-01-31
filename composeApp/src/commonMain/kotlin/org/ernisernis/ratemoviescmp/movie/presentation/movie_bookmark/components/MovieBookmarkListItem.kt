@@ -33,6 +33,7 @@ fun MovieBookmarkListItem(
     modifier: Modifier = Modifier,
     movieUi: MovieUi,
     onClick: () -> Unit,
+    onBookmarkClick: () -> Unit,
 ) {
     Row(
         modifier = modifier
@@ -108,7 +109,9 @@ fun MovieBookmarkListItem(
             icon = RmIcons.BookmarkSelected,
             modifier = Modifier
                 .align(Alignment.Top),
-            onClick = {}
+            onClick = {
+                onBookmarkClick()
+            }
         )
     }
 }

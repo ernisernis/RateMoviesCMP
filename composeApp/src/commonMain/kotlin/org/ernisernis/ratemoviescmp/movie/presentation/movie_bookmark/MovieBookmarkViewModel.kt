@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import org.ernisernis.ratemoviescmp.movie.domain.MovieRepository
 
 class MovieBookmarkViewModel(
@@ -21,7 +22,13 @@ class MovieBookmarkViewModel(
 
     fun onAction(action: MovieBookmarkAction) {
         when (action) {
-            else -> Unit
+            is MovieBookmarkAction.OnBookmarkClick -> {
+                viewModelScope.launch {
+                    movieRepository
+                        .deleteFromBookmark(action.id)
+                }
+            }
+            is MovieBookmarkAction.OnMovieClick -> TODO()
         }
     }
 
