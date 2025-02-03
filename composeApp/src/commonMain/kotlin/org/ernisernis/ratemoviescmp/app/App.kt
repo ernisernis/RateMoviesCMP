@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -54,48 +55,61 @@ fun App(
         val navController = rememberNavController()
         var selectedIndex by rememberSaveable { mutableIntStateOf(0) }
 
+        val bottomBarState = rememberSaveable {
+            mutableStateOf(true)
+        }
+
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 Route.MovieList.serializer().generateHashCode() -> {
                     selectedIndex = 0
+                    bottomBarState.value = true
                 }
                 Route.MovieBookmark.serializer().generateHashCode() -> {
                     selectedIndex = 1
+                    bottomBarState.value = true
+                }
+                else -> {
+                    bottomBarState.value = false
                 }
             }
         }
 
         Scaffold(
             bottomBar = {
-                BottomNavigation(
-                    backgroundColor = MaterialTheme.colorScheme.surface,
+                BottomNavigationVisibility(
+                    visible = bottomBarState.value,
                 ) {
-                    topLevelRoutes.forEachIndexed { index, topLevelRoute ->
-                        NavigationBarItem(
-                            icon = { Icon(topLevelRoute.icon, contentDescription = topLevelRoute.name) } ,
-                            selected = index == selectedIndex,
-                            onClick = {
-                                selectedIndex = index
-                                navController.navigate(topLevelRoute.route) {
-                                    // Pop up to the start destination of the graph to
-                                    // avoid building up a large stack of destinations
-                                    // on the back stack as users select items
-                                    popUpTo(navController.graph.findStartDestination().id) {
-                                        saveState = true
+                    BottomNavigation(
+                        backgroundColor = MaterialTheme.colorScheme.surface,
+                    ) {
+                        topLevelRoutes.forEachIndexed { index, topLevelRoute ->
+                            NavigationBarItem(
+                                icon = { Icon(topLevelRoute.icon, contentDescription = topLevelRoute.name) } ,
+                                selected = index == selectedIndex,
+                                onClick = {
+                                    selectedIndex = index
+                                    navController.navigate(topLevelRoute.route) {
+                                        // Pop up to the start destination of the graph to
+                                        // avoid building up a large stack of destinations
+                                        // on the back stack as users select items
+                                        popUpTo(navController.graph.findStartDestination().id) {
+                                            saveState = true
+                                        }
+                                        // Avoid multiple copies of the same destination when
+                                        // reselecting the same item
+                                        launchSingleTop = true
+                                        // Restore state when reselecting a previously selected item
+                                        restoreState = true
                                     }
-                                    // Avoid multiple copies of the same destination when
-                                    // reselecting the same item
-                                    launchSingleTop = true
-                                    // Restore state when reselecting a previously selected item
-                                    restoreState = true
-                                }
-                            },
-                            colors = NavigationBarItemDefaults.colors(
-                                selectedIconColor = Color.White,
-                                unselectedIconColor = Color.DarkGray,
-                                indicatorColor = Color.Transparent
+                                },
+                                colors = NavigationBarItemDefaults.colors(
+                                    selectedIconColor = Color.White,
+                                    unselectedIconColor = Color.DarkGray,
+                                    indicatorColor = Color.Transparent
+                                )
                             )
-                        )
+                        }
                     }
                 }
             }
