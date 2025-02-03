@@ -71,7 +71,8 @@ fun MovieBookmarkScreen(
             columns = StaggeredGridCells.Adaptive(400.dp),
             verticalItemSpacing = Dimens.MovieBookmarkItemPaddingSmall,
             horizontalArrangement = Arrangement.spacedBy(Dimens.MovieBookmarkItemPaddingSmall),
-            modifier = modifier,
+            modifier = modifier
+                .padding(vertical = Dimens.MovieBookmarkItemPaddingSmall),
         ) {
             items(
                 items = state.movies,
