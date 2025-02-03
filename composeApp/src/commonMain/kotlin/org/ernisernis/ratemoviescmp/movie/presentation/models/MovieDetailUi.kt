@@ -1,5 +1,6 @@
 package org.ernisernis.ratemoviescmp.movie.presentation.models
 
+import org.ernisernis.ratemoviescmp.core.presentation.fractionDigits
 import org.ernisernis.ratemoviescmp.movie.domain.MovieDetail
 
 
@@ -27,7 +28,7 @@ fun MovieDetail.toMovieDetailUi(): MovieDetailUi {
         id = id,
         releaseDate = releaseDate,
         runtime = runtime.toDisplayableRuntime(),
-        voteAverage = voteAverage.toString(),
+        voteAverage = voteAverage.fractionDigits(1),
         voteCount = voteCount.toString(),
         genres = genres.map { it.toMovieGenreUi() },
         overview = overview,

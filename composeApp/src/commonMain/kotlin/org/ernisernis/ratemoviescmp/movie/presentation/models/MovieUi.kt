@@ -1,5 +1,6 @@
 package org.ernisernis.ratemoviescmp.movie.presentation.models
 
+import org.ernisernis.ratemoviescmp.core.presentation.fractionDigits
 import org.ernisernis.ratemoviescmp.movie.domain.Movie
 
 data class MovieUi(
@@ -26,7 +27,7 @@ fun Movie.toMovieUi(): MovieUi {
         imageUrl = "https://image.tmdb.org/t/p/w780$posterPath",
         releaseDate = releaseDate,
         genres = emptyList(),
-        voteAverage = voteAverage.toString(),
+        voteAverage = voteAverage.fractionDigits(1),
         popularity = popularity.toInt().toString(),
         banner = "https://image.tmdb.org/t/p/w1280$backdropPath",
         releaseYear = releaseDate.substringBefore("-"),

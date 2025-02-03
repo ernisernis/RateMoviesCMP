@@ -1,6 +1,5 @@
 package org.ernisernis.ratemoviescmp.movie.data.mappers
 
-import androidx.compose.ui.input.key.Key.Companion.D
 import org.ernisernis.ratemoviescmp.movie.data.database.MovieEntity
 import org.ernisernis.ratemoviescmp.movie.data.dto.MovieDto
 import org.ernisernis.ratemoviescmp.movie.domain.Movie
