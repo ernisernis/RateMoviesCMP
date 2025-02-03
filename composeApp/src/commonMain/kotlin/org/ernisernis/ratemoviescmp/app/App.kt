@@ -1,7 +1,7 @@
 package org.ernisernis.ratemoviescmp.app
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.Scaffold
 import androidx.compose.material3.Icon
@@ -81,6 +81,8 @@ fun App(
                     visible = bottomBarState.value,
                 ) {
                     BottomNavigation(
+                        modifier = Modifier
+                            .navigationBarsPadding(),
                         backgroundColor = MaterialTheme.colorScheme.surface,
                     ) {
                         topLevelRoutes.forEachIndexed { index, topLevelRoute ->
@@ -117,7 +119,6 @@ fun App(
             NavHost(
                 navController = navController,
                 modifier = Modifier
-                    .padding(innerPadding)
                     .background(MaterialTheme.colorScheme.background),
                 startDestination = Route.MovieGraph
             ) {

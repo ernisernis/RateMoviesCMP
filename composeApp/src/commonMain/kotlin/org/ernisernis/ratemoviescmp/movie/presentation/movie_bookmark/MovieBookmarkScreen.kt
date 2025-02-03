@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
@@ -35,6 +36,7 @@ fun MovieBookmarkScreenRoot(
     MovieBookmarkScreen(
         state = state,
         modifier = Modifier
+            .statusBarsPadding()
             .fillMaxSize(),
         onAction = { action ->
             when (action)   {
