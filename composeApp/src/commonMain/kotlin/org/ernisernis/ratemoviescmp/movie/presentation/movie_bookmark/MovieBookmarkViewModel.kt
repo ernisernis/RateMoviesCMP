@@ -28,7 +28,7 @@ class MovieBookmarkViewModel(
                         .deleteFromBookmark(action.id)
                 }
             }
-            is MovieBookmarkAction.OnMovieClick -> TODO()
+            else -> Unit
         }
     }
 
