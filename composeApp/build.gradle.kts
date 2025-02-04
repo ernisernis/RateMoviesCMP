@@ -1,6 +1,9 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
+import org.jetbrains.compose.ExperimentalComposeLibrary
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -11,12 +14,24 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.buildkonfig)
     alias(libs.plugins.room)
+    alias(libs.plugins.kover)
 }
 
 kotlin {
     androidTarget {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
+        }
+
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
+        instrumentedTestVariant {
+            sourceSetTree.set(KotlinSourceSetTree.test)
+
+            dependencies {
+                implementation(libs.core.ktx)
+                implementation(libs.compose.ui.test.junit4.android)
+                debugImplementation(libs.compose.ui.test.manifest)
+            }
         }
     }
     
@@ -30,7 +45,7 @@ kotlin {
             isStatic = true
         }
     }
-    
+
     jvm("desktop")
 
     room {
@@ -39,7 +54,7 @@ kotlin {
     
     sourceSets {
         val desktopMain by getting
-        
+
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
@@ -80,6 +95,13 @@ kotlin {
         nativeMain.dependencies {
             implementation(libs.ktor.client.darwin)
         }
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
+            implementation(kotlin("test-annotations-common"))
+            implementation(libs.assertk)
+            @OptIn(ExperimentalComposeLibrary::class)
+            implementation(compose.uiTest)
+        }
         dependencies {
             ksp(libs.androidx.room.compiler)
         }
@@ -96,6 +118,8 @@ android {
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     packaging {
         resources {
@@ -134,6 +158,38 @@ compose.desktop {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "org.ernisernis.ratemoviescmp"
             packageVersion = "1.0.0"
+        }
+    }
+}
+
+kover {
+    reports {
+        verify {
+            rule {
+                minBound(80)
+            }
+        }
+
+        filters {
+            excludes {
+                packages("*di*", "ratemoviescmp.composeapp.generated.resources")
+                classes(
+                    "*MainActivity*",
+                    "*BuildKonfig*",
+                    "*ComposableSingletons*",
+                    "*MainKt*",
+                    "*PreviewsKt*",
+                    "*RateMoviesApplication*",
+                    "*Route*",
+                    "*TopLevelRoute*",
+                    "*TopLevelRouteKt*",
+                    "*HttpClientFactory*",
+                    "*DataError*",
+                    "*Result*",
+                    "*ResultKt*",
+                    "*RmIcons*",
+                )
+            }
         }
     }
 }

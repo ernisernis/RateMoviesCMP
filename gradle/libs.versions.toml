@@ -23,8 +23,12 @@ coil3 = "3.0.0-rc02"
 ksp = "2.1.0-1.0.29"
 buildkonfig = "0.15.2"
 icons-extended = "1.7.3"
-sqlite = "2.5.0-alpha11"
-room = "2.7.0-alpha11"
+sqlite = "2.5.0-alpha13"
+room = "2.7.0-alpha13"
+assertk = "0.28.1"
+coreKtx = "1.6.1"
+composeTest = "1.7.7"
+kover = "0.9.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -40,6 +44,11 @@ androidx-activity-compose = { module = "androidx.activity:activity-compose", ver
 androidx-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
+
+assertk = { module = "com.willowtreeapps.assertk:assertk", version.ref = "assertk" }
+compose-ui-test-junit4-android = { module = "androidx.compose.ui:ui-test-junit4-android", version.ref = "composeTest" }
+compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "composeTest" }
+core-ktx = { group = "androidx.test", name = "core-ktx", version.ref = "coreKtx" }
 
 compose-material-icons-extended = { module = "org.jetbrains.compose.material:material-icons-extended", version.ref = "icons-extended" }
 
@@ -81,6 +90,7 @@ jetbrains-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serializati
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
 room = { id = "androidx.room", version.ref = "room" }
+kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 
 [bundles]
 ktor = [
