@@ -1,4 +1,4 @@
-package org.ernisernis.ratemoviescmp.app
+package org.ernisernis.ratemoviescmp.core.presentation
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.AnimatedVisibilityScope
