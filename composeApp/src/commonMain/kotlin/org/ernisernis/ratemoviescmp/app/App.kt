@@ -2,6 +2,7 @@ package org.ernisernis.ratemoviescmp.app
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.Scaffold
 import androidx.compose.material3.Icon
@@ -29,6 +30,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.serialization.generateHashCode
+import org.ernisernis.ratemoviescmp.core.presentation.BottomNavigationVisibility
 import org.ernisernis.ratemoviescmp.core.presentation.RateMoviesTheme
 import org.ernisernis.ratemoviescmp.movie.presentation.SelectedMovieViewModel
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_bookmark.MovieBookmarkScreenRoot
@@ -119,6 +121,7 @@ fun App(
             NavHost(
                 navController = navController,
                 modifier = Modifier
+                    .padding(innerPadding)
                     .background(MaterialTheme.colorScheme.background),
                 startDestination = Route.MovieGraph
             ) {
