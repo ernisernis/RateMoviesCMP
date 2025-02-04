@@ -53,4 +53,14 @@ class FormatVoteAverageKtTest {
 
         assertEquals(expected, actual, "String should be $expected")
     }
+
+    @Test
+    fun `Case 6`() {
+        val value = 7.60
+        val expected = "7.6"
+
+        val actual = value.formatVoteAverage()
+
+        assertEquals(expected, actual, "String should be $expected")
+    }
 }
