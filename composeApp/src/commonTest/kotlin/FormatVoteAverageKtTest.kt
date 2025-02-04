@@ -2,6 +2,7 @@ import org.ernisernis.ratemoviescmp.core.presentation.formatVoteAverage
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
+// The value from the backend is always between 0.0 and 10.0
 class FormatVoteAverageKtTest {
 
     @Test
