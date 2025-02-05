@@ -19,7 +19,7 @@ class FormatVoteAverageKtTest {
     )
 
     @Test
-    fun `Check if formatter outputs correct values`() {
+    fun check_if_formatter_outputs_correct_values() {
         testCases.forEach { (value, expected) ->
             val actual = value.formatVoteAverage()
             assertEquals(expected, actual, "String should be $expected")

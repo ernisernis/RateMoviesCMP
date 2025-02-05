@@ -15,7 +15,7 @@ class ConstructUrlKtTest {
     )
 
     @Test
-    fun `The string should be constructed properly to include base URL`() {
+    fun the_string_should_be_constructed_properly_to_include_base_URL() {
         testCases.forEach { (value, expected) ->
            val actual = constructUrl(value)
 
