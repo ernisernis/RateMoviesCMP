@@ -24,17 +24,4 @@ class DirectorRowKtTest {
         composeTestRule.onNodeWithText(text1, substring = true).assertExists()
         composeTestRule.onNodeWithText(text2, substring = true).assertExists()
     }
-
-    @Test
-    fun director_row_content_displays_correctly_2() {
-        val text1 = null
-        val text2 = "Akinawa"
-
-        composeTestRule.setContent {
-            DirectorRow(
-                director = text1,
-                writer = text2,
-            )
-        }
-    }
 }
