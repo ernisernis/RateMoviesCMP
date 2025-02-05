@@ -172,7 +172,15 @@ kover {
 
         filters {
             excludes {
-                packages("*di*", "ratemoviescmp.composeapp.generated.resources")
+                packages(
+                    "*di*",
+                    "ratemoviescmp.composeapp.generated.resources",
+                    "*.database",
+                    "*.dto",
+                    "*.mappers",
+                    "*.models",
+                    "*.domain"
+                )
                 classes(
                     "*MainActivity*",
                     "*BuildKonfig*",
@@ -188,6 +196,10 @@ kover {
                     "*Result*",
                     "*ResultKt*",
                     "*RmIcons*",
+                    "*Dimens*",
+                    "*RateMoviesTheme*",
+                    "*Typography*",
+                    "*UiText*",
                 )
             }
         }
