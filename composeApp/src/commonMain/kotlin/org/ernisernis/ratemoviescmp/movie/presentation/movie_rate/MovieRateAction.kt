@@ -7,4 +7,5 @@ sealed interface MovieRateAction {
     data object OnMovieRateSubmit: MovieRateAction
     data class OnSelectedMovieChange(val movie: Movie): MovieRateAction
     data object OnBackClick: MovieRateAction
+    data class OnDescriptionChange(val text: String): MovieRateAction
 }

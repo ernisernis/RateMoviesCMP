@@ -27,6 +27,11 @@ class MovieRateViewModel(): ViewModel() {
                    movieUi = action.movie.toMovieUi()
                ) }
            }
+           is MovieRateAction.OnDescriptionChange -> {
+               _state.update { it.copy(
+                   description = action.text
+               ) }
+           }
            else -> Unit
        }
     }

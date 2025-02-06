@@ -8,6 +8,7 @@ data class MovieRateState(
     val movie: Movie? = null,
     val movieUi: MovieUi? = null,
     val selectedIndex: Int = 0,
+    val description: String = "",
 )
 
 

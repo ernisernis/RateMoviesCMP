@@ -64,6 +64,9 @@ object Dimens {
     val MovieRateItemPaddingSmall: Dp
         @Composable get() = 4.dp
 
+    val MovieRateDescriptionMinHeight: Dp
+        @Composable get() = 80.dp
+
     val MovieRateComponentPadding: PaddingValues
         @Composable get() = PaddingValues(
             horizontal = MovieRateItemPaddingBig,

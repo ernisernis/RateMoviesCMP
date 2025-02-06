@@ -9,13 +9,17 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -24,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.BlurredEdgeTreatment
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -40,6 +45,7 @@ import ratemoviescmp.composeapp.generated.resources.Res
 import ratemoviescmp.composeapp.generated.resources.banner1280wpreview
 import ratemoviescmp.composeapp.generated.resources.description_banner
 import ratemoviescmp.composeapp.generated.resources.rate
+import ratemoviescmp.composeapp.generated.resources.rate_description_hint
 import ratemoviescmp.composeapp.generated.resources.rate_title
 
 
@@ -52,6 +58,7 @@ fun MovieRateScreenRoot(
     MovieRateScreen(
         state = state,
         modifier = Modifier
+            .imePadding()
             .fillMaxSize(),
         onAction = { action ->
             when (action) {
@@ -94,6 +101,7 @@ fun MovieRateScreen(
         DefaultIconContainer(
             icon = RmIcons.Back,
             modifier = Modifier
+                .statusBarsPadding()
                 .padding(Dimens.MovieRateItemPaddingBig),
             onClick = {
                 onAction(MovieRateAction.OnBackClick)
@@ -140,6 +148,23 @@ fun MovieRateScreen(
                    )
                 }
             }
+
+            // Description
+            OutlinedTextField(
+                value = state.description,
+                onValueChange = {
+                    onAction(MovieRateAction.OnDescriptionChange(it))
+                },
+                modifier = Modifier
+                    .heightIn(min = Dimens.MovieRateDescriptionMinHeight),
+                placeholder = {
+                    Text(
+                        text = stringResource(Res.string.rate_description_hint),
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                }
+            )
+
             // Button
             Box(
                 modifier = Modifier
