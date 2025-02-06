@@ -5,6 +5,9 @@ import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.BookmarkBorder
 import androidx.compose.material.icons.filled.Bookmarks
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.Hearing
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.StarOutline
@@ -21,4 +24,5 @@ object RmIcons {
     val Bookmarks = Icons.Default.Bookmarks
     val BookmarkUnselected = Icons.Default.BookmarkBorder
     val BookmarkSelected = Icons.Default.Bookmark
+    val Ratings = Icons.Default.Favorite
 }

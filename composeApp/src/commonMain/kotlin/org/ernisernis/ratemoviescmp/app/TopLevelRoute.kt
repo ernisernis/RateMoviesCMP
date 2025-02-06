@@ -7,5 +7,6 @@ data class TopLevelRoute<T: Any> (val name: String, val route: T, val icon: Imag
 
 val topLevelRoutes = listOf(
     TopLevelRoute("Home", Route.MovieGraph, RmIcons.Home),
-    TopLevelRoute("Bookmark", Route.MovieBookmark, RmIcons.Bookmarks)
+    TopLevelRoute("Bookmark", Route.MovieBookmark, RmIcons.Bookmarks),
+    TopLevelRoute("Ratings", Route.MovieRatings, RmIcons.Ratings)
 )
