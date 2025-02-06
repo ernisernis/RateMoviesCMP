@@ -4,6 +4,8 @@ import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
 import kotlinx.coroutines.flow.Flow
+import org.ernisernis.ratemoviescmp.movie.data.database.entities.BookmarkEntity
+import org.ernisernis.ratemoviescmp.movie.data.database.entities.MovieEntity
 
 @Dao
 interface BookmarkMovieDao {

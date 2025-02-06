@@ -5,6 +5,8 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import org.ernisernis.ratemoviescmp.movie.data.database.converters.IntListTypeConverter
 import org.ernisernis.ratemoviescmp.movie.data.database.converters.MovieTypeConverter
+import org.ernisernis.ratemoviescmp.movie.data.database.entities.BookmarkEntity
+import org.ernisernis.ratemoviescmp.movie.data.database.entities.MovieEntity
 
 
 @Database(

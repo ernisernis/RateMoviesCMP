@@ -1,4 +1,4 @@
-package org.ernisernis.ratemoviescmp.movie.data.database
+package org.ernisernis.ratemoviescmp.movie.data.database.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

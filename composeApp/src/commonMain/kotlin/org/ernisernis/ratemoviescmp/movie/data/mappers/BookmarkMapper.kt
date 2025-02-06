@@ -1,6 +1,6 @@
 package org.ernisernis.ratemoviescmp.movie.data.mappers
 
-import org.ernisernis.ratemoviescmp.movie.data.database.BookmarkEntity
+import org.ernisernis.ratemoviescmp.movie.data.database.entities.BookmarkEntity
 import org.ernisernis.ratemoviescmp.movie.domain.BookmarkMovie
 import org.ernisernis.ratemoviescmp.movie.presentation.models.BookmarkMovieUi
 
