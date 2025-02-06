@@ -75,7 +75,7 @@ fun App(
                     selectedIndex = 1
                     bottomBarState.value = true
                 }
-                Route.MovieRatings.serializer().generateHashCode() -> {
+                Route.MovieProfile.serializer().generateHashCode() -> {
                     selectedIndex = 2
                     bottomBarState.value = true
                 }
@@ -220,7 +220,7 @@ fun NavGraphBuilder.MovieApp(
         )
     }
 
-    composable<Route.MovieRatings> {
+    composable<Route.MovieProfile> {
        Box(
            modifier = Modifier
                .background(Color.Red)
@@ -228,7 +228,7 @@ fun NavGraphBuilder.MovieApp(
            contentAlignment = Alignment.Center
        ) {
          Text(
-             text = "Rating screen"
+             text = "Profile screen"
          )
        }
     }

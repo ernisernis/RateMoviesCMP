@@ -20,6 +20,5 @@ sealed interface Route {
     data object MovieBookmark: Route
 
     @Serializable
-    data object MovieRatings: Route
-
+    data object MovieProfile: Route
 }
