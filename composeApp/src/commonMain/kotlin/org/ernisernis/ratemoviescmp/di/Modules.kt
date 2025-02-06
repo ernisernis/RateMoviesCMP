@@ -32,6 +32,7 @@ val sharedModule = module {
             .build()
     }
     single { get<MovieDatabase>().bookmarkMovieDao }
+    single { get<MovieDatabase>().ratingDao }
 
     viewModelOf(::MovieListViewModel)
     viewModelOf(::MovieDetailViewModel)
