@@ -2,8 +2,8 @@ package org.ernisernis.ratemoviescmp.di
 
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import org.ernisernis.ratemoviescmp.core.data.networking.HttpClientFactory
-import org.ernisernis.ratemoviescmp.movie.data.database.BookmarkMovieDatabase
 import org.ernisernis.ratemoviescmp.movie.data.database.DatabaseFactory
+import org.ernisernis.ratemoviescmp.movie.data.database.MovieDatabase
 import org.ernisernis.ratemoviescmp.movie.data.network.KtorRemoteMovieDataSource
 import org.ernisernis.ratemoviescmp.movie.data.network.RemoteMovieDataSource
 import org.ernisernis.ratemoviescmp.movie.data.repository.DefaultMovieRepository
@@ -31,7 +31,7 @@ val sharedModule = module {
             .setDriver(BundledSQLiteDriver())
             .build()
     }
-    single { get<BookmarkMovieDatabase>().bookmarkMovieDao }
+    single { get<MovieDatabase>().bookmarkMovieDao }
 
     viewModelOf(::MovieListViewModel)
     viewModelOf(::MovieDetailViewModel)

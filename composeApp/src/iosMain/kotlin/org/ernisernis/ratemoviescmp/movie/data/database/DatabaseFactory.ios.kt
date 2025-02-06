@@ -10,9 +10,9 @@ import platform.Foundation.NSFileManager
 import platform.Foundation.NSUserDomainMask
 
 actual class DatabaseFactory {
-    actual fun create(): RoomDatabase.Builder<BookmarkMovieDatabase> {
-        val dbFile = documentDirectory() + "/${BookmarkMovieDatabase.DB_NAME}"
-        return Room.databaseBuilder<BookmarkMovieDatabase>(
+    actual fun create(): RoomDatabase.Builder<MovieDatabase> {
+        val dbFile = documentDirectory() + "/${MovieDatabase.DB_NAME}"
+        return Room.databaseBuilder<MovieDatabase>(
             name = dbFile
         )
     }

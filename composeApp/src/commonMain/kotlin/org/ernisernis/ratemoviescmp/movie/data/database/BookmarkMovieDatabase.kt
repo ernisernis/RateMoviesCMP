@@ -20,7 +20,7 @@ import org.ernisernis.ratemoviescmp.movie.data.database.entities.MovieEntity
     IntListTypeConverter::class,
     MovieTypeConverter::class,
 )
-abstract class BookmarkMovieDatabase: RoomDatabase() {
+abstract class MovieDatabase: RoomDatabase() {
     abstract val bookmarkMovieDao: BookmarkMovieDao
 
     companion object {

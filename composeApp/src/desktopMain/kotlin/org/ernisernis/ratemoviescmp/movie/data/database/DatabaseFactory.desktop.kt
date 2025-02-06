@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import java.io.File
 
 actual class DatabaseFactory {
-    actual fun create(): RoomDatabase.Builder<BookmarkMovieDatabase> {
+    actual fun create(): RoomDatabase.Builder<MovieDatabase> {
         val os = System.getProperty("os.name").lowercase()
         val userHome = System.getProperty("user.home")
         val appDataDir = when {
@@ -18,7 +18,7 @@ actual class DatabaseFactory {
             appDataDir.mkdirs()
         }
 
-        val dbFile = File(appDataDir, BookmarkMovieDatabase.DB_NAME)
+        val dbFile = File(appDataDir, MovieDatabase.DB_NAME)
         return Room.databaseBuilder(dbFile.absolutePath)
     }
 }
