@@ -16,6 +16,8 @@ import androidx.compose.ui.unit.dp
 import org.ernisernis.ratemoviescmp.movie.presentation.components.PosterImage
 import org.ernisernis.ratemoviescmp.core.presentation.Dimens
 import org.ernisernis.ratemoviescmp.core.presentation.RateMoviesTheme
+import org.ernisernis.ratemoviescmp.movie.data.mappers.toBookmarkMovieUi
+import org.ernisernis.ratemoviescmp.movie.domain.BookmarkMovie
 import org.ernisernis.ratemoviescmp.movie.presentation.components.DefaultIconContainer
 import org.ernisernis.ratemoviescmp.movie.domain.Cast
 import org.ernisernis.ratemoviescmp.movie.domain.CreditsResponse
@@ -133,7 +135,7 @@ fun MovieBookmarkListItemPreview() {
     RateMoviesTheme(darkTheme = true, dynamicColor = false) {
         MovieBookmarkListItem(
             modifier = Modifier,
-            movieUi = movie.toMovieUi(),
+            bookmarkMovieUi = bookmarkMovie.toBookmarkMovieUi(),
             onClick = {},
             onBookmarkClick = {}
         )
@@ -145,7 +147,7 @@ fun MovieBookmarkListItemPreview() {
 fun MovieBookmarkScreenPreview() {
     RateMoviesTheme(darkTheme = true, dynamicColor = false) {
         val state = MovieBookmarkState(
-            movies = (1..100).map { movie }
+            bookmarkMovies = (1..100).map { bookmarkMovie }
         )
         MovieBookmarkScreen(
             state = state,
@@ -155,6 +157,15 @@ fun MovieBookmarkScreenPreview() {
         )
     }
 }
+
+internal val bookmarkMovie = BookmarkMovie(
+    id = 0,
+    posterPath = "/aosm8NMQ3UyoBVpSxyimorCQykC.jpg",
+    title = "Terrifier 3",
+    releaseDate = "2024.12.12",
+    runtimeFormatted = "201555",
+    voteAverage = "7.5",
+)
 
 internal val movie = Movie(
     id = 0,

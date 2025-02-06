@@ -8,10 +8,13 @@ import org.ernisernis.ratemoviescmp.core.domain.util.EmptyResult
 import org.ernisernis.ratemoviescmp.core.domain.util.Result
 import org.ernisernis.ratemoviescmp.core.domain.util.map
 import org.ernisernis.ratemoviescmp.movie.data.database.BookmarkMovieDao
+import org.ernisernis.ratemoviescmp.movie.data.mappers.toBookmarkEntity
+import org.ernisernis.ratemoviescmp.movie.data.mappers.toBookmarkMovie
 import org.ernisernis.ratemoviescmp.movie.data.mappers.toMovie
 import org.ernisernis.ratemoviescmp.movie.data.mappers.toMovieDetail
 import org.ernisernis.ratemoviescmp.movie.data.mappers.toMovieEntity
 import org.ernisernis.ratemoviescmp.movie.data.network.RemoteMovieDataSource
+import org.ernisernis.ratemoviescmp.movie.domain.BookmarkMovie
 import org.ernisernis.ratemoviescmp.movie.domain.Movie
 import org.ernisernis.ratemoviescmp.movie.domain.MovieDetail
 import org.ernisernis.ratemoviescmp.movie.domain.MovieRepository
@@ -28,7 +31,7 @@ class DefaultMovieRepository(
             }
     }
     override suspend fun getMovieDetail(id: Int): Result<MovieDetail, DataError.Remote> {
-        val localResult = bookmarkMovieDao.getBookmarkMovie(id)
+        val localResult = bookmarkMovieDao.getMovieEntity(id)
 
         return if (localResult == null) {
             remoteMovieDataSource
@@ -41,11 +44,21 @@ class DefaultMovieRepository(
         }
     }
 
-    override fun getBookmarkMovies(): Flow<List<Movie>> {
+    override suspend fun getMovie(id: Int): Result<Movie, DataError.Local> {
+        val localResult = bookmarkMovieDao.getMovieEntity(id)
+
+        return if (localResult == null) {
+            Result.Error(DataError.Local.UNKNOWN)
+        } else {
+            Result.Success(localResult.toMovie())
+        }
+    }
+
+    override fun getBookmarkMovies(): Flow<List<BookmarkMovie>> {
         return bookmarkMovieDao
             .getBookmarkMovies()
-            .map { movieEntities ->
-               movieEntities.map { it.toMovie() }
+            .map { bookmarkEntities ->
+               bookmarkEntities.map { it.toBookmarkMovie() }
             }
     }
 
@@ -60,6 +73,7 @@ class DefaultMovieRepository(
     override suspend fun markAsBookmarked(movie: Movie): EmptyResult<DataError.Local> {
         return try {
             bookmarkMovieDao.upsertMovieEntity(movie.toMovieEntity())
+            bookmarkMovieDao.upsertBookmarkEntity(movie.toBookmarkEntity())
             Result.Success(Unit)
         } catch (e: SQLiteException) {
             Result.Error(DataError.Local.DISK_FULL)

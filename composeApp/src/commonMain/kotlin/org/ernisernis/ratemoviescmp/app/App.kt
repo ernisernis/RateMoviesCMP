@@ -205,9 +205,9 @@ fun NavGraphBuilder.MovieApp(
 
         MovieBookmarkScreenRoot(
             viewModel = viewModel,
-            onMovieClick = { movie ->
-                selectedMovieViewModel.onSelectMovie(movie)
-                navController.navigate(Route.MovieDetail(movie.id))
+            onMovieIdClick = { id ->
+                selectedMovieViewModel.onSelectMovieId(id)
+                navController.navigate(Route.MovieDetail(id))
             }
         )
     }

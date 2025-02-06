@@ -22,6 +22,7 @@ import org.ernisernis.ratemoviescmp.core.presentation.Dimens
 import org.ernisernis.ratemoviescmp.core.presentation.RmIcons
 import org.ernisernis.ratemoviescmp.movie.presentation.components.DefaultIconContainer
 import org.ernisernis.ratemoviescmp.movie.presentation.components.PosterImage
+import org.ernisernis.ratemoviescmp.movie.presentation.models.BookmarkMovieUi
 import org.ernisernis.ratemoviescmp.movie.presentation.models.MovieUi
 import org.jetbrains.compose.resources.stringResource
 import ratemoviescmp.composeapp.generated.resources.Res
@@ -31,7 +32,7 @@ import ratemoviescmp.composeapp.generated.resources.description_movie_star
 @Composable
 fun MovieBookmarkListItem(
     modifier: Modifier = Modifier,
-    movieUi: MovieUi,
+    bookmarkMovieUi: BookmarkMovieUi,
     onClick: () -> Unit,
     onBookmarkClick: () -> Unit,
 ) {
@@ -48,7 +49,7 @@ fun MovieBookmarkListItem(
         PosterImage(
             modifier = Modifier
                 .width(Dimens.MovieBookmarkImageWidth),
-            url = movieUi.imageUrl,
+            url = bookmarkMovieUi.imageUrl,
         )
 
         Column(
@@ -58,7 +59,7 @@ fun MovieBookmarkListItem(
         ) {
             // Title
             Text(
-                text = movieUi.title,
+                text = bookmarkMovieUi.title,
                 color = MaterialTheme.colorScheme.onSurface,
                 style = MaterialTheme.typography.bodyLarge,
                 maxLines = 2,
@@ -71,11 +72,11 @@ fun MovieBookmarkListItem(
                 horizontalArrangement = Arrangement.spacedBy(Dimens.MovieBookmarkItemPaddingNormal)
             ) {
                 Text(
-                    text = movieUi.releaseYear,
+                    text = bookmarkMovieUi.releaseYear,
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = Dimens.MovieBookmarkAlpha),
                     style = MaterialTheme.typography.bodyMedium,
                 )
-                movieUi.movieDetailUi?.runtime?.formatted?.let {
+                bookmarkMovieUi.runtimeFormatted?.let {
                     Text(
                         text = it,
                         color = MaterialTheme.colorScheme.onSurface.copy(alpha = Dimens.MovieBookmarkAlpha),
@@ -98,7 +99,7 @@ fun MovieBookmarkListItem(
                         .size(24.dp)
                 )
                 Text(
-                    text = movieUi.voteAverage,
+                    text = bookmarkMovieUi.voteAverage,
                     color = MaterialTheme.colorScheme.onSurface,
                     style = MaterialTheme.typography.bodyMedium,
                 )

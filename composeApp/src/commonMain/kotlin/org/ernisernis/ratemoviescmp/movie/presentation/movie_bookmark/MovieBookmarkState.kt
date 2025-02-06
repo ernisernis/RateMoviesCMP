@@ -1,7 +1,7 @@
 package org.ernisernis.ratemoviescmp.movie.presentation.movie_bookmark
 
-import org.ernisernis.ratemoviescmp.movie.domain.Movie
+import org.ernisernis.ratemoviescmp.movie.domain.BookmarkMovie
 
 data class MovieBookmarkState(
-    val movies: List<Movie> = listOf(),
+    val bookmarkMovies: List<BookmarkMovie> = listOf(),
 )

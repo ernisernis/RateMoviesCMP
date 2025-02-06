@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.ernisernis.ratemoviescmp.core.presentation.Dimens
+import org.ernisernis.ratemoviescmp.movie.data.mappers.toBookmarkMovieUi
 import org.ernisernis.ratemoviescmp.movie.domain.Movie
 import org.ernisernis.ratemoviescmp.movie.presentation.models.toMovieUi
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_bookmark.components.MovieBookmarkListItem
@@ -29,7 +30,7 @@ import ratemoviescmp.composeapp.generated.resources.bookmarks
 @Composable
 fun MovieBookmarkScreenRoot(
     viewModel: MovieBookmarkViewModel = koinViewModel(),
-    onMovieClick: (Movie) -> Unit,
+    onMovieIdClick: (Int) -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -40,7 +41,7 @@ fun MovieBookmarkScreenRoot(
             .fillMaxSize(),
         onAction = { action ->
             when (action)   {
-                is MovieBookmarkAction.OnMovieClick -> onMovieClick(action.movie)
+                is MovieBookmarkAction.OnMovieClick -> onMovieIdClick(action.id)
                 else -> Unit
             }
             viewModel.onAction(action)
@@ -75,19 +76,19 @@ fun MovieBookmarkScreen(
                 .padding(vertical = Dimens.MovieBookmarkItemPaddingSmall),
         ) {
             items(
-                items = state.movies,
+                items = state.bookmarkMovies,
                 key = { it.id }
-            ) { movie ->
+            ) { bookmarkMovie ->
                MovieBookmarkListItem(
                    modifier = Modifier
                        .animateItem()
                        .height(Dimens.MovieBookmarkItemHeight),
-                   movieUi = movie.toMovieUi(),
+                   bookmarkMovieUi = bookmarkMovie.toBookmarkMovieUi(),
                    onClick = {
-                       onAction(MovieBookmarkAction.OnMovieClick(movie))
+                       onAction(MovieBookmarkAction.OnMovieClick(bookmarkMovie.id))
                    },
                    onBookmarkClick = {
-                       onAction(MovieBookmarkAction.OnBookmarkClick(movie.id))
+                       onAction(MovieBookmarkAction.OnBookmarkClick(bookmarkMovie.id))
                    }
                )
             }

@@ -10,12 +10,16 @@ interface BookmarkMovieDao {
     @Upsert
     suspend fun upsertMovieEntity(movie: MovieEntity)
 
-    @Query("SELECT * FROM MovieEntity")
-    fun getBookmarkMovies(): Flow<List<MovieEntity>>
+    @Upsert
+    suspend fun upsertBookmarkEntity(bookmark: BookmarkEntity)
+
+    @Query("SELECT * FROM BookmarkEntity")
+    fun getBookmarkMovies(): Flow<List<BookmarkEntity>>
 
     @Query("SELECT * FROM MovieEntity WHERE id = :id")
-    suspend fun getBookmarkMovie(id: Int): MovieEntity?
+    suspend fun getMovieEntity(id: Int): MovieEntity?
 
+    // TODO: Delete BookmarkEntity and delete MovieEntity IF it does not exist on RatingEntity
     @Query("DELETE FROM MovieEntity WHERE id = :id")
     suspend fun deleteBookmarkMovie(id: Int)
 }
