@@ -44,6 +44,8 @@ import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailS
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailViewModel
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.MovieListScreenRoot
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.MovieListViewModel
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_profile.MovieProfileScreenRoot
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_profile.MovieProfileViewModel
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_rate.MovieRateAction
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_rate.MovieRateScreenRoot
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_rate.MovieRateViewModel
@@ -221,16 +223,16 @@ fun NavGraphBuilder.MovieApp(
     }
 
     composable<Route.MovieProfile> {
-       Box(
-           modifier = Modifier
-               .background(Color.Red)
-               .fillMaxSize(),
-           contentAlignment = Alignment.Center
-       ) {
-         Text(
-             text = "Profile screen"
-         )
-       }
+        val viewModel = koinViewModel<MovieProfileViewModel>()
+        val selectedMovieViewModel = it.sharedKoinViewModel<SelectedMovieViewModel>(navController)
+
+        MovieProfileScreenRoot(
+            viewModel = viewModel,
+            onMovieIdClick = { id ->
+                selectedMovieViewModel.onSelectMovieId(id)
+                navController.navigate(Route.MovieDetail(id))
+            }
+        )
     }
 }
 

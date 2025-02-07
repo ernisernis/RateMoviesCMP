@@ -12,6 +12,7 @@ import org.ernisernis.ratemoviescmp.movie.presentation.SelectedMovieViewModel
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_bookmark.MovieBookmarkViewModel
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailViewModel
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.MovieListViewModel
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_profile.MovieProfileViewModel
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_rate.MovieRateViewModel
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
@@ -39,4 +40,5 @@ val sharedModule = module {
     viewModelOf(::MovieRateViewModel)
     viewModelOf(::SelectedMovieViewModel)
     viewModelOf(::MovieBookmarkViewModel)
+    viewModelOf(::MovieProfileViewModel)
 }
