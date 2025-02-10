@@ -9,6 +9,7 @@ import kotlinx.coroutines.launch
 import org.ernisernis.ratemoviescmp.core.domain.util.onError
 import org.ernisernis.ratemoviescmp.core.domain.util.onSuccess
 import org.ernisernis.ratemoviescmp.movie.data.mappers.toRating
+import org.ernisernis.ratemoviescmp.movie.data.mappers.toRatingUi
 import org.ernisernis.ratemoviescmp.movie.domain.MovieRepository
 import org.ernisernis.ratemoviescmp.movie.presentation.models.toMovieUi
 
@@ -48,6 +49,7 @@ class MovieRateViewModel(
                }
            }
            is MovieRateAction.OnSelectedMovieChange -> {
+               getMovieRating(action.movie.id)
                _state.update { it.copy(
                    movie = action.movie,
                    movieUi = action.movie.toMovieUi()
@@ -60,5 +62,19 @@ class MovieRateViewModel(
            }
            else -> Unit
        }
+    }
+
+    private fun getMovieRating(movieId: Int) {
+        viewModelScope.launch {
+            movieRepository
+                .getRating(movieId)
+                .onSuccess { rating ->
+                    val ratingUi = rating.toRatingUi()
+                    _state.update { it.copy(
+                        description = ratingUi.description ?: "",
+                        selectedIndex = ratingUi.userRating,
+                    ) }
+                }
+        }
     }
 }
