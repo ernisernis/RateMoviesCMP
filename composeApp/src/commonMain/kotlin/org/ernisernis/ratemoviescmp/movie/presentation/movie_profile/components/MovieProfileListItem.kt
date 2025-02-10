@@ -90,7 +90,7 @@ fun MovieProfileListItem(
                )
            }
 
-           // Star icon + rating
+           // Movie rating + User rating
            Row(
                modifier = Modifier,
                horizontalArrangement = Arrangement.spacedBy(Dimens.ProfileItemPaddingSmall),
@@ -101,14 +101,28 @@ fun MovieProfileListItem(
                    contentDescription = stringResource(Res.string.description_movie_star),
                    tint = MaterialTheme.colorScheme.primary,
                    modifier = Modifier
-                       .size(24.dp)
+                       .size(Dimens.ProfileIconSize)
                )
                Text(
                    text = ratingUi.voteAverage,
                    color = MaterialTheme.colorScheme.onSurface,
                    style = MaterialTheme.typography.bodyMedium,
                )
-               Spacer(modifier = Modifier.width(Dimens.ProfileItemPaddingNormal))
+
+               Spacer(modifier = Modifier.width(Dimens.ProfileItemPaddingSmall))
+
+               Icon(
+                   imageVector = RmIcons.StarRate,
+                   contentDescription = stringResource(Res.string.description_movie_star),
+                   tint = MaterialTheme.colorScheme.secondary,
+                   modifier = Modifier
+                       .size(Dimens.ProfileIconSize)
+               )
+               Text(
+                   text = ratingUi.userRating.toString(),
+                   color = MaterialTheme.colorScheme.onSurface,
+                   style = MaterialTheme.typography.bodyMedium,
+               )
            }
        }
    }
