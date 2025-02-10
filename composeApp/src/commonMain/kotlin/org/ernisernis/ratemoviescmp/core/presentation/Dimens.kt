@@ -100,4 +100,23 @@ object Dimens {
             horizontal = MovieBookmarkItemPaddingBig,
             vertical = MovieBookmarkItemPaddingNormal
         )
+
+    // movie_profile
+    val ProfileContainerPadding: Dp
+        @Composable get() = 16.dp
+
+    val ProfileItemPaddingBig: Dp
+        @Composable get() = 16.dp
+
+    val ProfileItemPaddingNormal: Dp
+        @Composable get() = 8.dp
+
+    val ProfileItemPaddingSmall: Dp
+        @Composable get() = 4.dp
+
+    val ProfileComponentPadding: PaddingValues
+        @Composable get() = PaddingValues(
+            horizontal = ProfileItemPaddingBig,
+            vertical = ProfileItemPaddingNormal
+        )
 }
