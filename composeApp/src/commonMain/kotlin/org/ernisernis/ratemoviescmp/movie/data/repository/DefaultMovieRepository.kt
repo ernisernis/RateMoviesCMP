@@ -15,6 +15,7 @@ import org.ernisernis.ratemoviescmp.movie.data.mappers.toBookmarkMovie
 import org.ernisernis.ratemoviescmp.movie.data.mappers.toMovie
 import org.ernisernis.ratemoviescmp.movie.data.mappers.toMovieDetail
 import org.ernisernis.ratemoviescmp.movie.data.mappers.toMovieEntity
+import org.ernisernis.ratemoviescmp.movie.data.mappers.toRating
 import org.ernisernis.ratemoviescmp.movie.data.mappers.toRatingEntity
 import org.ernisernis.ratemoviescmp.movie.data.network.RemoteMovieDataSource
 import org.ernisernis.ratemoviescmp.movie.domain.BookmarkMovie
@@ -46,6 +47,16 @@ class DefaultMovieRepository(
                 }
         } else {
             Result.Success(localResult.movieDetailDto?.toMovieDetail()!!)
+        }
+    }
+
+    override suspend fun getRating(id: Int): Result<Rating, DataError.Local> {
+        val result = ratingDao.getRatingEntity(id)
+
+        return if (result == null) {
+            Result.Error(DataError.Local.DISK_FULL)
+        } else {
+            Result.Success(result.toRating())
         }
     }
 

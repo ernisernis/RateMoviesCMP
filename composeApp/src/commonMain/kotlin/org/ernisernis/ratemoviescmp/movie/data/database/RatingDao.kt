@@ -18,8 +18,8 @@ interface RatingDao {
     @Query("SELECT * FROM RatingEntity")
     fun getRatings(): Flow<List<RatingEntity>>
 
-    @Query("SELECT * FROM MovieEntity WHERE id = :id")
-    suspend fun getMovieEntity(id: Int): MovieEntity?
+    @Query("SELECT * FROM RatingEntity WHERE id = :id")
+    suspend fun getRatingEntity(id: Int): RatingEntity?
 
     // TODO Fix deleteRating, need to add a separate delete RatingEntity
     @Query("DELETE FROM MovieEntity WHERE id = :id")

@@ -1,6 +1,7 @@
 package org.ernisernis.ratemoviescmp.movie.presentation.movie_detail
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -37,6 +38,8 @@ import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.components.C
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.components.DetailRatings
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.components.DirectorRow
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.components.GenreRow
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.components.RatingAvailable
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.components.RatingColumn
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.components.SubtitleRow
 import org.ernisernis.ratemoviescmp.movie.presentation.util.bottomInnerShadow
 import org.jetbrains.compose.resources.painterResource
@@ -176,9 +179,29 @@ fun MovieDetailScreen(
                        .padding(Dimens.MovieDetailComponentPadding),
                    voteAverage = state.movieUi?.movieDetailUi?.voteAverage,
                    voteCount = state.movieUi?.movieDetailUi?.voteCount,
-                   onRatingClick = {
-                       onAction(MovieDetailAction.OnRateClick)
-                   }
+                   userRatingContent = {
+                        if (state.ratingUi != null) {
+                            RatingColumn(
+                                modifier = Modifier
+                                    .clickable {
+                                        onAction(MovieDetailAction.OnRateClick)
+                                    },
+                                icon = RmIcons.StarRate,
+                                iconTint = MaterialTheme.colorScheme.secondary,
+                                voteAverage = state.ratingUi.userRating.toString(),
+                                voteCount = "",
+                            )
+                        } else {
+                            RatingAvailable(
+                                modifier = Modifier
+                                    .clickable{
+                                        onAction(MovieDetailAction.OnRateClick)
+                                    },
+                                icon = RmIcons.StarOutline,
+                                iconTint = MaterialTheme.colorScheme.onBackground,
+                            )
+                        }
+                   },
                )
                // Genre list
                GenreRow(

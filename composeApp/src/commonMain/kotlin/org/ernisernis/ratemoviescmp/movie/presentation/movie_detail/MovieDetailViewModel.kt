@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.ernisernis.ratemoviescmp.app.Route
 import org.ernisernis.ratemoviescmp.core.domain.util.onSuccess
+import org.ernisernis.ratemoviescmp.movie.data.mappers.toRatingUi
 import org.ernisernis.ratemoviescmp.movie.domain.MovieRepository
 import org.ernisernis.ratemoviescmp.movie.presentation.models.toMovieDetailUi
 import org.ernisernis.ratemoviescmp.movie.presentation.models.toMovieUi
@@ -28,6 +29,7 @@ class MovieDetailViewModel(
 
     init {
         observeBookmarkStatus()
+        getMovieRating()
     }
 
     fun onAction(action: MovieDetailAction) {
@@ -76,5 +78,17 @@ class MovieDetailViewModel(
                 ) }
             }
             .launchIn(viewModelScope)
+    }
+
+    private fun getMovieRating() {
+        viewModelScope.launch {
+           movieRepository
+               .getRating(movieId)
+               .onSuccess { rating ->
+                   _state.update { it.copy(
+                       ratingUi = rating.toRatingUi()
+                   ) }
+               }
+        }
     }
 }

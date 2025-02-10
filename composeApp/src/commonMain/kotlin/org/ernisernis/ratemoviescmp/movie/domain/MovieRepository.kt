@@ -9,6 +9,7 @@ interface MovieRepository {
     suspend fun getNowPlayingMovies(): Result<List<Movie>, DataError.Remote>
     suspend fun getMovieDetail(id: Int): Result<MovieDetail, DataError.Remote>
 
+    suspend fun getRating(id: Int): Result<Rating, DataError.Local>
     suspend fun getMovie(id: Int): Result<Movie, DataError.Local>
     fun getBookmarkMovies(): Flow<List<BookmarkMovie>>
     fun isBookBookmarked(id: Int): Flow<Boolean>
