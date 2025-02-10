@@ -114,6 +114,9 @@ object Dimens {
     val ProfileItemPaddingSmall: Dp
         @Composable get() = 4.dp
 
+    val ProfileAlpha: Float
+        get() = 0.8f
+
     val ProfileComponentPadding: PaddingValues
         @Composable get() = PaddingValues(
             horizontal = ProfileItemPaddingBig,

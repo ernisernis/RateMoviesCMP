@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -38,8 +39,8 @@ fun MovieProfileListItem(
            .background(MaterialTheme.colorScheme.surface)
            .fillMaxWidth()
            .clickable(onClick = onClick)
-           .padding(Dimens.MovieBookmarkItemPaddingNormal),
-       horizontalArrangement = Arrangement.spacedBy(Dimens.MovieBookmarkItemPaddingNormal),
+           .padding(Dimens.ProfileItemPaddingNormal),
+       horizontalArrangement = Arrangement.spacedBy(Dimens.ProfileItemPaddingNormal),
        verticalAlignment = Alignment.CenterVertically
    ) {
 
@@ -52,7 +53,7 @@ fun MovieProfileListItem(
        Column(
            modifier = Modifier
                .weight(1f),
-           verticalArrangement = Arrangement.spacedBy(Dimens.MovieBookmarkItemPaddingSmall, Alignment.CenterVertically),
+           verticalArrangement = Arrangement.spacedBy(Dimens.ProfileItemPaddingSmall, Alignment.CenterVertically),
        ) {
            // Title
            Text(
@@ -66,17 +67,17 @@ fun MovieProfileListItem(
 
            // Year + runtime
            Row(
-               horizontalArrangement = Arrangement.spacedBy(Dimens.MovieBookmarkItemPaddingNormal)
+               horizontalArrangement = Arrangement.spacedBy(Dimens.ProfileItemPaddingNormal)
            ) {
                Text(
                    text = ratingUi.releaseYear,
-                   color = MaterialTheme.colorScheme.onSurface.copy(alpha = Dimens.MovieBookmarkAlpha),
+                   color = MaterialTheme.colorScheme.onSurface.copy(alpha = Dimens.ProfileAlpha),
                    style = MaterialTheme.typography.bodyMedium,
                )
                ratingUi.runtimeFormatted?.let {
                    Text(
                        text = it,
-                       color = MaterialTheme.colorScheme.onSurface.copy(alpha = Dimens.MovieBookmarkAlpha),
+                       color = MaterialTheme.colorScheme.onSurface.copy(alpha = Dimens.ProfileAlpha),
                        style = MaterialTheme.typography.bodyMedium,
                    )
                }
@@ -92,7 +93,7 @@ fun MovieProfileListItem(
            // Star icon + rating
            Row(
                modifier = Modifier,
-               horizontalArrangement = Arrangement.spacedBy(Dimens.MovieBookmarkItemPaddingSmall),
+               horizontalArrangement = Arrangement.spacedBy(Dimens.ProfileItemPaddingSmall),
                verticalAlignment = Alignment.CenterVertically,
            ) {
                Icon(
@@ -107,6 +108,7 @@ fun MovieProfileListItem(
                    color = MaterialTheme.colorScheme.onSurface,
                    style = MaterialTheme.typography.bodyMedium,
                )
+               Spacer(modifier = Modifier.width(Dimens.ProfileItemPaddingNormal))
            }
        }
    }
