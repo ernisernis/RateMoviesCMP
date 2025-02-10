@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
@@ -19,6 +20,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.ernisernis.ratemoviescmp.core.presentation.Dimens
 import org.ernisernis.ratemoviescmp.movie.data.mappers.toRatingUi
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_profile.components.MovieProfileListItem
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_profile.components.ProfileRatingDescription
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import ratemoviescmp.composeapp.generated.resources.Res
@@ -81,8 +83,15 @@ fun MovieProfileScreen(
                 MovieProfileListItem(
                     modifier = Modifier
                         .animateItem()
-                        .height(Dimens.MovieBookmarkItemHeight),
+                        .heightIn(min = Dimens.ProfileRatingItemHeight),
                     ratingUi = rating.toRatingUi(),
+                    description = {
+                        rating.description?.let {
+                            ProfileRatingDescription(
+                                text = it
+                            )
+                        }
+                    },
                     onClick = {
                         onAction(MovieProfileAction.OnMovieClick(rating.id))
                     },

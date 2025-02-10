@@ -117,6 +117,9 @@ object Dimens {
     val ProfileAlpha: Float
         get() = 0.8f
 
+    val ProfileRatingItemHeight: Dp
+        @Composable get() = 144.dp
+
     val ProfileIconSize: Dp
         @Composable get() = 22.dp
 

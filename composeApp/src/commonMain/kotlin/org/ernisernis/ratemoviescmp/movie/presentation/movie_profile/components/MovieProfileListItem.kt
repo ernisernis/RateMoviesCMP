@@ -32,6 +32,7 @@ import ratemoviescmp.composeapp.generated.resources.description_movie_star
 fun MovieProfileListItem(
     modifier: Modifier = Modifier,
     ratingUi: RatingUi,
+    description: @Composable () -> Unit,
     onClick: () -> Unit,
 ) {
    Row(
@@ -83,13 +84,6 @@ fun MovieProfileListItem(
                }
            }
 
-           // user entered description
-           ratingUi.description?.let {
-               Text(
-                   text = it
-               )
-           }
-
            // Movie rating + User rating
            Row(
                modifier = Modifier,
@@ -124,6 +118,8 @@ fun MovieProfileListItem(
                    style = MaterialTheme.typography.bodyMedium,
                )
            }
+
+           description()
        }
    }
 }
