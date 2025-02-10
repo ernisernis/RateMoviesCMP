@@ -42,7 +42,7 @@ fun MovieProfileScreenRoot(
         state = state,
         onAction = { action ->
             when (action)  {
-                is MovieProfileAction.OnTestClick -> {}
+                is MovieProfileAction.OnMovieClick -> onMovieIdClick(action.id)
                 else -> Unit
             }
             viewModel.onAction(action)
