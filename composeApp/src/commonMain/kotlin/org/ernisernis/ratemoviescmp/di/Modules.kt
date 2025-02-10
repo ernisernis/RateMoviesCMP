@@ -7,7 +7,9 @@ import org.ernisernis.ratemoviescmp.movie.data.database.MovieDatabase
 import org.ernisernis.ratemoviescmp.movie.data.network.KtorRemoteMovieDataSource
 import org.ernisernis.ratemoviescmp.movie.data.network.RemoteMovieDataSource
 import org.ernisernis.ratemoviescmp.movie.data.repository.DefaultMovieRepository
+import org.ernisernis.ratemoviescmp.movie.data.repository.DefaultProfileRepository
 import org.ernisernis.ratemoviescmp.movie.domain.MovieRepository
+import org.ernisernis.ratemoviescmp.movie.domain.ProfileRepository
 import org.ernisernis.ratemoviescmp.movie.presentation.SelectedMovieViewModel
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_bookmark.MovieBookmarkViewModel
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailViewModel
@@ -26,6 +28,7 @@ val sharedModule = module {
     single { HttpClientFactory.create(get()) }
     singleOf(::KtorRemoteMovieDataSource).bind<RemoteMovieDataSource>()
     singleOf(::DefaultMovieRepository).bind<MovieRepository>()
+    singleOf(::DefaultProfileRepository).bind<ProfileRepository>()
 
     single {
         get<DatabaseFactory>().create()

@@ -21,7 +21,16 @@ interface BookmarkMovieDao {
     @Query("SELECT * FROM MovieEntity WHERE id = :id")
     suspend fun getMovieEntity(id: Int): MovieEntity?
 
-    // TODO: Delete BookmarkEntity and delete MovieEntity IF it does not exist on RatingEntity
-    @Query("DELETE FROM MovieEntity WHERE id = :id")
-    suspend fun deleteBookmarkMovie(id: Int)
+    // Do not delete MovieEntity if Review(Rating) exists
+    @Query("""
+    DELETE FROM MovieEntity 
+    WHERE id = :id 
+    AND NOT EXISTS (
+        SELECT 1 FROM RatingEntity WHERE id = :id
+    )
+    """)
+    suspend fun deleteMovieEntity(id: Int)
+
+    @Query("DELETE FROM BookmarkEntity WHERE id = :id")
+    suspend fun deleteBookmarkEntity(id: Int)
 }

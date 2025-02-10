@@ -25,6 +25,7 @@ import org.ernisernis.ratemoviescmp.movie.domain.Crew
 import org.ernisernis.ratemoviescmp.movie.domain.Movie
 import org.ernisernis.ratemoviescmp.movie.domain.MovieDetail
 import org.ernisernis.ratemoviescmp.movie.domain.MovieGenre
+import org.ernisernis.ratemoviescmp.movie.domain.Rating
 import org.ernisernis.ratemoviescmp.movie.presentation.models.toMovieUi
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_bookmark.MovieBookmarkScreen
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_bookmark.MovieBookmarkState
@@ -34,6 +35,8 @@ import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailS
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.MovieListScreen
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.MovieListState
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.components.MovieListItem
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_profile.MovieProfileScreen
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_profile.MovieProfileState
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_rate.MovieRateScreen
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_rate.MovieRateState
 
@@ -142,7 +145,7 @@ fun MovieBookmarkListItemPreview() {
     }
 }
 
-@Preview(widthDp = 2_000)
+@Preview(widthDp = 1_000)
 @Composable
 fun MovieBookmarkScreenPreview() {
     RateMoviesTheme(darkTheme = true, dynamicColor = false) {
@@ -157,6 +160,33 @@ fun MovieBookmarkScreenPreview() {
         )
     }
 }
+
+@Preview
+@Composable
+fun MovieProfileScreenPreview() {
+    RateMoviesTheme(darkTheme = true, dynamicColor = false) {
+        val state = MovieProfileState(
+            ratings = (1..100).map { rating }
+        )
+        MovieProfileScreen(
+            state = state,
+            modifier = Modifier
+                .fillMaxSize(),
+            onAction = {}
+        )
+    }
+}
+
+internal val rating = Rating(
+    id = 0,
+    posterPath = "/aosm8NMQ3UyoBVpSxyimorCQykC.jpg",
+    title = "Terrifier 3",
+    releaseDate = "2024.12.12",
+    runtimeFormatted = "201555",
+    voteAverage = "7.5",
+    description = "Test Test test description! Cool movie!",
+    userRating = 8,
+)
 
 internal val bookmarkMovie = BookmarkMovie(
     id = 0,

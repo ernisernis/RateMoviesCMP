@@ -181,7 +181,8 @@ fun NavGraphBuilder.MovieApp(
 
         MovieDetailScreenRoot(
             viewModel = viewModel,
-            onRateClick = {
+            onRateClick = { movie ->
+                selectedMovieViewModel.onSelectMovie(movie)
                 navController.navigate(Route.MovieRate)
             },
             onBackClick = {

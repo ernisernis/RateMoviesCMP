@@ -31,6 +31,7 @@ import coil3.compose.AsyncImage
 import org.ernisernis.ratemoviescmp.movie.presentation.components.PosterImage
 import org.ernisernis.ratemoviescmp.core.presentation.Dimens
 import org.ernisernis.ratemoviescmp.core.presentation.RmIcons
+import org.ernisernis.ratemoviescmp.movie.domain.Movie
 import org.ernisernis.ratemoviescmp.movie.presentation.components.DefaultIconContainer
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.components.CastLazyHorizontalRow
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.components.DetailRatings
@@ -50,7 +51,7 @@ import ratemoviescmp.composeapp.generated.resources.movie_detail_starring
 @Composable
 fun MovieDetailScreenRoot(
     viewModel: MovieDetailViewModel = koinViewModel(),
-    onRateClick: () -> Unit,
+    onRateClick: (Movie) -> Unit,
     onBackClick: () -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -60,7 +61,11 @@ fun MovieDetailScreenRoot(
             .fillMaxSize(),
         onAction = { action ->
             when (action) {
-                is MovieDetailAction.OnRateClick -> onRateClick()
+                is MovieDetailAction.OnRateClick -> {
+                    state.movie?.let {
+                        onRateClick(it)
+                    }
+                }
                 is MovieDetailAction.OnBackClick -> onBackClick()
                 else -> Unit
             }

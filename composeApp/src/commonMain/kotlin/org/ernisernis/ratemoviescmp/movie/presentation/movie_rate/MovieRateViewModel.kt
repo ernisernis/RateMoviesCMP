@@ -1,12 +1,20 @@
 package org.ernisernis.ratemoviescmp.movie.presentation.movie_rate
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import org.ernisernis.ratemoviescmp.core.domain.util.onError
+import org.ernisernis.ratemoviescmp.core.domain.util.onSuccess
+import org.ernisernis.ratemoviescmp.movie.data.mappers.toRating
+import org.ernisernis.ratemoviescmp.movie.domain.MovieRepository
 import org.ernisernis.ratemoviescmp.movie.presentation.models.toMovieUi
 
-class MovieRateViewModel(): ViewModel() {
+class MovieRateViewModel(
+    private val movieRepository: MovieRepository,
+): ViewModel() {
 
     private val _state = MutableStateFlow(MovieRateState())
     val state = _state.asStateFlow()
@@ -20,7 +28,25 @@ class MovieRateViewModel(): ViewModel() {
                    )
                }
            }
-           MovieRateAction.OnMovieRateSubmit -> {}
+           is MovieRateAction.OnMovieRateSubmit -> {
+               viewModelScope.launch {
+                   val rating = action.movie.toRating().copy(
+                       description = state.value.description,
+                       userRating = state.value.selectedIndex,
+                   )
+                   movieRepository
+                       .rateMovie(
+                           movie = action.movie,
+                           rating = rating
+                       )
+                       .onSuccess {
+                           // TODO: Exit the rating screen
+                       }
+                       .onError {
+                           // TODO: handle error
+                       }
+               }
+           }
            is MovieRateAction.OnSelectedMovieChange -> {
                _state.update { it.copy(
                    movie = action.movie,

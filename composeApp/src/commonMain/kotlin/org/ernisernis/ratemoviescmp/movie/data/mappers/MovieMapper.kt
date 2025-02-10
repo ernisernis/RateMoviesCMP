@@ -5,6 +5,7 @@ import org.ernisernis.ratemoviescmp.movie.data.database.entities.BookmarkEntity
 import org.ernisernis.ratemoviescmp.movie.data.database.entities.MovieEntity
 import org.ernisernis.ratemoviescmp.movie.data.dto.MovieDto
 import org.ernisernis.ratemoviescmp.movie.domain.Movie
+import org.ernisernis.ratemoviescmp.movie.domain.Rating
 import org.ernisernis.ratemoviescmp.movie.presentation.models.toDisplayableRuntime
 
 fun MovieDto.toMovie(): Movie {
@@ -76,5 +77,18 @@ fun MovieEntity.toMovie(): Movie{
         voteAverage = voteAverage,
         voteCount = voteCount,
         movieDetail = movieDetailDto?.toMovieDetail(),
+    )
+}
+
+fun Movie.toRating(): Rating {
+    return Rating(
+        id = id,
+        posterPath = posterPath,
+        title = title,
+        releaseDate = releaseDate,
+        runtimeFormatted = movieDetail?.runtime?.toDisplayableRuntime()?.formatted,
+        voteAverage = voteAverage.formatVoteAverage(),
+        description = null,
+        userRating = 0,
     )
 }

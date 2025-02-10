@@ -4,5 +4,5 @@ import org.ernisernis.ratemoviescmp.movie.domain.Rating
 
 
 data class MovieProfileState(
-    val rateMovies: List<Rating> = listOf()
+    val ratings: List<Rating> = listOf()
 )

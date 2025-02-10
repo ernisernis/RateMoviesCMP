@@ -170,7 +170,9 @@ fun MovieRateScreen(
                 modifier = Modifier
                     .fillMaxWidth(0.8f)
                     .clickable {
-                        onAction(MovieRateAction.OnMovieRateSubmit)
+                        state.movie?.let {
+                            onAction(MovieRateAction.OnMovieRateSubmit(it))
+                        }
                     }
                     .padding(Dimens.MovieRateComponentPadding)
                     .background(MaterialTheme.colorScheme.secondary, RoundedCornerShape(20)),
