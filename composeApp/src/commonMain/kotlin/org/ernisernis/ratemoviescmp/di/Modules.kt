@@ -11,6 +11,8 @@ import org.ernisernis.ratemoviescmp.movie.data.repository.DefaultProfileReposito
 import org.ernisernis.ratemoviescmp.movie.domain.MovieRepository
 import org.ernisernis.ratemoviescmp.movie.domain.ProfileRepository
 import org.ernisernis.ratemoviescmp.movie.presentation.SelectedMovieViewModel
+import org.ernisernis.ratemoviescmp.movie.presentation.models.use_case.ValidateRateDescription
+import org.ernisernis.ratemoviescmp.movie.presentation.models.use_case.ValidateRateNumber
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_bookmark.MovieBookmarkViewModel
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_detail.MovieDetailViewModel
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.MovieListViewModel
@@ -26,6 +28,8 @@ expect val platformModule: Module
 
 val sharedModule = module {
     single { HttpClientFactory.create(get()) }
+    single { ValidateRateDescription() }
+    single { ValidateRateNumber() }
     singleOf(::KtorRemoteMovieDataSource).bind<RemoteMovieDataSource>()
     singleOf(::DefaultMovieRepository).bind<MovieRepository>()
     singleOf(::DefaultProfileRepository).bind<ProfileRepository>()

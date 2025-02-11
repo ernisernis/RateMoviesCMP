@@ -1,6 +1,7 @@
 package org.ernisernis.ratemoviescmp.movie.presentation.movie_rate
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -27,8 +28,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.BlurredEdgeTreatment
 import androidx.compose.ui.draw.blur
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -38,6 +39,7 @@ import org.ernisernis.ratemoviescmp.core.presentation.RmIcons
 import org.ernisernis.ratemoviescmp.movie.presentation.components.DefaultIconContainer
 import org.ernisernis.ratemoviescmp.movie.presentation.components.PosterImage
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_rate.components.IconRate
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_rate.components.RateErrorText
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -136,34 +138,69 @@ fun MovieRateScreen(
                 color = MaterialTheme.colorScheme.onBackground,
                 textAlign = TextAlign.Center,
             )
+
             // Star ratings
-            Row {
-                (1..10).map { i ->
-                   IconRate(
-                       icon = if (i <= state.selectedIndex) RmIcons.StarRate else RmIcons.StarOutline,
-                       modifier = Modifier.size(32.dp),
-                       onClick = {
-                          onAction(MovieRateAction.OnMovieRateClick(i))
-                       }
-                   )
+            Column {
+                Row(
+                    modifier = Modifier
+                        .border(
+                            width = if (state.indexError != null) 2.dp else 0.dp,
+                            color = if (state.indexError != null) MaterialTheme.colorScheme.error else Color.Transparent,
+                            shape = RoundedCornerShape(20)
+                        )
+                        .padding(Dimens.MovieRateItemPaddingSmall)
+                ) {
+                    (1..10).map { i ->
+                        IconRate(
+                            icon = if (i <= state.selectedIndex) RmIcons.StarRate else RmIcons.StarOutline,
+                            modifier = Modifier.size(32.dp),
+                            onClick = {
+                                onAction(MovieRateAction.OnMovieRateClick(i))
+                            }
+                        )
+                    }
+                }
+                if (state.indexError != null) {
+                    RateErrorText(
+                        text = state.indexError,
+                        modifier = Modifier
+                            .padding(top = Dimens.MovieRateItemPaddingSmall)
+                            .align(Alignment.End)
+                    )
                 }
             }
 
             // Description
-            OutlinedTextField(
-                value = state.description,
-                onValueChange = {
-                    onAction(MovieRateAction.OnDescriptionChange(it))
-                },
+            Column(
                 modifier = Modifier
-                    .heightIn(min = Dimens.MovieRateDescriptionMinHeight),
-                placeholder = {
-                    Text(
-                        text = stringResource(Res.string.rate_description_hint),
-                        style = MaterialTheme.typography.bodyMedium
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                OutlinedTextField(
+                    value = state.description,
+                    onValueChange = {
+                        onAction(MovieRateAction.OnDescriptionChange(it))
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .heightIn(min = Dimens.MovieRateDescriptionMinHeight),
+                    placeholder = {
+                        Text(
+                            text = stringResource(Res.string.rate_description_hint),
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                    },
+                    isError = state.descriptionError != null,
+                )
+                if (state.descriptionError != null) {
+                    RateErrorText(
+                        text = state.descriptionError,
+                        modifier = Modifier
+                            .padding(top = Dimens.MovieRateItemPaddingSmall)
+                            .align(Alignment.End)
                     )
                 }
-            )
+            }
 
             // Button
             Box(

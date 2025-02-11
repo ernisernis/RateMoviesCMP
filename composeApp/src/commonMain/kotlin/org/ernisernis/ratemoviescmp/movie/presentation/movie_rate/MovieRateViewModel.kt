@@ -10,11 +10,16 @@ import org.ernisernis.ratemoviescmp.core.domain.util.onError
 import org.ernisernis.ratemoviescmp.core.domain.util.onSuccess
 import org.ernisernis.ratemoviescmp.movie.data.mappers.toRating
 import org.ernisernis.ratemoviescmp.movie.data.mappers.toRatingUi
+import org.ernisernis.ratemoviescmp.movie.domain.Movie
 import org.ernisernis.ratemoviescmp.movie.domain.MovieRepository
 import org.ernisernis.ratemoviescmp.movie.presentation.models.toMovieUi
+import org.ernisernis.ratemoviescmp.movie.presentation.models.use_case.ValidateRateDescription
+import org.ernisernis.ratemoviescmp.movie.presentation.models.use_case.ValidateRateNumber
 
 class MovieRateViewModel(
     private val movieRepository: MovieRepository,
+    private val validateRateDescription: ValidateRateDescription,
+    private val validateRateNumber: ValidateRateNumber,
 ): ViewModel() {
 
     private val _state = MutableStateFlow(MovieRateState())
@@ -26,28 +31,11 @@ class MovieRateViewModel(
                _state.update {
                    it.copy(
                        selectedIndex = action.index,
+                       indexError = null,
                    )
                }
            }
-           is MovieRateAction.OnMovieRateSubmit -> {
-               viewModelScope.launch {
-                   val rating = action.movie.toRating().copy(
-                       description = state.value.description,
-                       userRating = state.value.selectedIndex,
-                   )
-                   movieRepository
-                       .rateMovie(
-                           movie = action.movie,
-                           rating = rating
-                       )
-                       .onSuccess {
-                           // TODO: Exit the rating screen
-                       }
-                       .onError {
-                           // TODO: handle error
-                       }
-               }
-           }
+           is MovieRateAction.OnMovieRateSubmit -> submitRate(action.movie)
            is MovieRateAction.OnSelectedMovieChange -> {
                getMovieRating(action.movie.id)
                _state.update { it.copy(
@@ -62,6 +50,43 @@ class MovieRateViewModel(
            }
            else -> Unit
        }
+    }
+
+    private fun submitRate(movie: Movie) {
+        val descriptionResult = validateRateDescription.execute(state.value.description)
+        val numberResult = validateRateNumber.execute(state.value.selectedIndex)
+
+        val hasError = listOf(
+            descriptionResult,
+            numberResult,
+        ).any { !it.successful }
+
+        if (hasError) {
+            _state.update {
+                it.copy(
+                    descriptionError = descriptionResult.errorMessage,
+                    indexError = numberResult.errorMessage,
+                )
+            }
+        } else {
+            viewModelScope.launch {
+                val rating = movie.toRating().copy(
+                    description = state.value.description,
+                    userRating = state.value.selectedIndex,
+                )
+                movieRepository
+                    .rateMovie(
+                        movie = movie,
+                        rating = rating,
+                    )
+                    .onSuccess {
+                        // TODO: Exit the rating screen
+                    }
+                    .onError {
+                        // TODO: handle error
+                    }
+            }
+        }
     }
 
     private fun getMovieRating(movieId: Int) {
