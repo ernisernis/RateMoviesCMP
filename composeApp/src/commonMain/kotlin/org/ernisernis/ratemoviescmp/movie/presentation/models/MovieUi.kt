@@ -1,6 +1,7 @@
 package org.ernisernis.ratemoviescmp.movie.presentation.models
 
 import org.ernisernis.ratemoviescmp.core.presentation.formatVoteAverage
+import org.ernisernis.ratemoviescmp.core.presentation.getReleaseYear
 import org.ernisernis.ratemoviescmp.movie.domain.Movie
 
 data class MovieUi(
@@ -30,7 +31,7 @@ fun Movie.toMovieUi(): MovieUi {
         voteAverage = voteAverage.formatVoteAverage(),
         popularity = popularity.toInt().toString(),
         banner = "https://image.tmdb.org/t/p/w1280$backdropPath",
-        releaseYear = releaseDate.substringBefore("-"),
+        releaseYear = releaseDate.getReleaseYear(),
         movieDetailUi = movieDetail?.toMovieDetailUi(),
     )
 }
