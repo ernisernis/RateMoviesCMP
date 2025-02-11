@@ -1,0 +1,15 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="150dp"
+    android:viewportWidth="100"
+    android:viewportHeight="150">
+    <gradient
+        android:type="linear"
+        android:startX="0"
+        android:startY="0"
+        android:endX="0"
+        android:endY="150"
+        android:gradientRadius="150"
+        android:startColor="#B0B0B0"
+        android:endColor="#E0E0E0"/>
+</vector>

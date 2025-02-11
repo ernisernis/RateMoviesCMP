@@ -46,9 +46,9 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import ratemoviescmp.composeapp.generated.resources.Res
-import ratemoviescmp.composeapp.generated.resources.banner1280wpreview
 import ratemoviescmp.composeapp.generated.resources.description_banner
 import ratemoviescmp.composeapp.generated.resources.movie_detail_starring
+import ratemoviescmp.composeapp.generated.resources.placeholder_gradient
 
 
 @Composable
@@ -96,9 +96,9 @@ fun MovieDetailScreen(
                     .aspectRatio(16 / 9f)
                     .bottomInnerShadow(),
                 contentDescription = stringResource(Res.string.description_banner),
-                error = painterResource(Res.drawable.banner1280wpreview),
-                placeholder = painterResource(Res.drawable.banner1280wpreview),
-                fallback = painterResource(Res.drawable.banner1280wpreview),
+                error = painterResource(Res.drawable.placeholder_gradient),
+                placeholder = painterResource(Res.drawable.placeholder_gradient),
+                fallback = painterResource(Res.drawable.placeholder_gradient),
             )
 
             // Close, Bookmark buttons

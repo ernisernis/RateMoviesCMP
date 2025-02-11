@@ -44,8 +44,8 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import ratemoviescmp.composeapp.generated.resources.Res
-import ratemoviescmp.composeapp.generated.resources.banner1280wpreview
 import ratemoviescmp.composeapp.generated.resources.description_banner
+import ratemoviescmp.composeapp.generated.resources.placeholder_gradient
 import ratemoviescmp.composeapp.generated.resources.rate
 import ratemoviescmp.composeapp.generated.resources.rate_description_hint
 import ratemoviescmp.composeapp.generated.resources.rate_title
@@ -93,9 +93,9 @@ fun MovieRateScreen(
                     edgeTreatment = BlurredEdgeTreatment.Unbounded
                 ),
             contentDescription = stringResource(Res.string.description_banner),
-            error = painterResource(Res.drawable.banner1280wpreview),
-            placeholder = painterResource(Res.drawable.banner1280wpreview),
-            fallback = painterResource(Res.drawable.banner1280wpreview),
+            error = painterResource(Res.drawable.placeholder_gradient),
+            placeholder = painterResource(Res.drawable.placeholder_gradient),
+            fallback = painterResource(Res.drawable.placeholder_gradient),
             contentScale = ContentScale.Crop,
         )
 

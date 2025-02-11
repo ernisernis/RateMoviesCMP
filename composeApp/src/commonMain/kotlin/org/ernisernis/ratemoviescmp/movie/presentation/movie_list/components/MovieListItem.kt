@@ -30,7 +30,7 @@ import ratemoviescmp.composeapp.generated.resources.Res
 import ratemoviescmp.composeapp.generated.resources.description_movie_item
 import ratemoviescmp.composeapp.generated.resources.description_movie_star
 import ratemoviescmp.composeapp.generated.resources.description_movie_thumb_up
-import ratemoviescmp.composeapp.generated.resources.poster780w1170hpreview
+import ratemoviescmp.composeapp.generated.resources.placeholder_gradient
 
 
 @Composable
@@ -59,8 +59,8 @@ fun MovieListItem(
                     .aspectRatio(2f / 3f),
                 model = movieUi.imageUrl,
                 contentDescription = stringResource(Res.string.description_movie_item),
-                error = painterResource(Res.drawable.poster780w1170hpreview),
-                placeholder = painterResource(Res.drawable.poster780w1170hpreview),
+                error = painterResource(Res.drawable.placeholder_gradient),
+                placeholder = painterResource(Res.drawable.placeholder_gradient),
                 contentScale = ContentScale.Fit
             )
 

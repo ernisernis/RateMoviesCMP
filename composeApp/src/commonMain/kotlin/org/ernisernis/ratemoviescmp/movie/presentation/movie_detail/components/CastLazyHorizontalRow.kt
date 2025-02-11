@@ -23,7 +23,7 @@ import org.ernisernis.ratemoviescmp.core.presentation.Dimens
 import org.ernisernis.ratemoviescmp.movie.presentation.models.CastUi
 import org.jetbrains.compose.resources.painterResource
 import ratemoviescmp.composeapp.generated.resources.Res
-import ratemoviescmp.composeapp.generated.resources.poster780w1170hpreview
+import ratemoviescmp.composeapp.generated.resources.placeholder_gradient
 
 
 @Composable
@@ -59,7 +59,7 @@ fun CastItem(castUi: CastUi) {
                 .aspectRatio(2f / 3f)
                 .clip(RoundedCornerShape(20)),
             contentDescription = null,
-            error = painterResource(Res.drawable.poster780w1170hpreview),
+            error = painterResource(Res.drawable.placeholder_gradient),
         )
         Column(
             modifier = Modifier

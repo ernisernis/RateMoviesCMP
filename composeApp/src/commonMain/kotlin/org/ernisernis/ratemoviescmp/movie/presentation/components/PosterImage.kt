@@ -12,7 +12,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ratemoviescmp.composeapp.generated.resources.Res
 import ratemoviescmp.composeapp.generated.resources.description_poster
-import ratemoviescmp.composeapp.generated.resources.poster780w1170hpreview
+import ratemoviescmp.composeapp.generated.resources.placeholder_gradient
 
 
 @Composable
@@ -30,8 +30,8 @@ fun PosterImage(
                 .aspectRatio(2f / 3f),
             model = url,
             contentDescription = stringResource(Res.string.description_poster),
-            placeholder = painterResource(Res.drawable.poster780w1170hpreview),
-            error = painterResource(Res.drawable.poster780w1170hpreview),
+            placeholder = painterResource(Res.drawable.placeholder_gradient),
+            error = painterResource(Res.drawable.placeholder_gradient),
             contentScale = ContentScale.Fit,
         )
     }
