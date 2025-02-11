@@ -13,4 +13,5 @@ data class RatingEntity(
     val voteAverage: String,
     val description: String?,
     val userRating: Int,
+    val creationTime: Long,
 )

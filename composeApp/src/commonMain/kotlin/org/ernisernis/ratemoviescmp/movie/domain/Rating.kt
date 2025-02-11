@@ -9,4 +9,5 @@ data class Rating(
     val voteAverage: String,
     val description: String?,
     val userRating: Int,
+    val creationTime: Long,
 )

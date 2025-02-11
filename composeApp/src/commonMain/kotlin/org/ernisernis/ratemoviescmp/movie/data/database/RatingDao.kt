@@ -15,8 +15,8 @@ interface RatingDao {
     @Upsert
     suspend fun upsertRatingEntity(rating: RatingEntity)
 
-    @Query("SELECT * FROM RatingEntity")
-    fun getRatings(): Flow<List<RatingEntity>>
+    @Query("SELECT * FROM RatingEntity ORDER BY creationTime DESC")
+    fun getRatingsOrderedByCreatedTime(): Flow<List<RatingEntity>>
 
     @Query("SELECT * FROM RatingEntity WHERE id = :id")
     suspend fun getRatingEntity(id: Int): RatingEntity?

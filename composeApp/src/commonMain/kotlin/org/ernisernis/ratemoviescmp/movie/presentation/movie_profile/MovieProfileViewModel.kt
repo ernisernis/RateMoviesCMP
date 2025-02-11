@@ -23,7 +23,7 @@ class MovieProfileViewModel(
 
     private fun observeRatings() {
         profileRepository
-            .getRatedMovies()
+            .getRatingsOrderedByCreatedTime()
             .onEach { ratings ->
                 _state.update { it.copy(
                     ratings = ratings

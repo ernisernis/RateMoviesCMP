@@ -186,6 +186,7 @@ internal val rating = Rating(
     voteAverage = "7.5",
     description = "Test Test test description! Cool movie!",
     userRating = 8,
+    creationTime = 1707654321234,
 )
 
 internal val bookmarkMovie = BookmarkMovie(

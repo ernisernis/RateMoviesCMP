@@ -91,5 +91,6 @@ fun Movie.toRating(): Rating {
         voteAverage = voteAverage.formatVoteAverage(),
         description = null,
         userRating = 0,
+        creationTime = Clock.System.now().toEpochMilliseconds()
     )
 }

@@ -1,6 +1,5 @@
 package org.ernisernis.ratemoviescmp.movie.data.mappers
 
-import androidx.collection.intLongMapOf
 import org.ernisernis.ratemoviescmp.movie.data.database.entities.RatingEntity
 import org.ernisernis.ratemoviescmp.movie.domain.Rating
 import org.ernisernis.ratemoviescmp.movie.presentation.models.RatingUi
@@ -16,6 +15,7 @@ fun RatingEntity.toRating(): Rating {
        voteAverage = voteAverage,
        description = description,
        userRating = userRating,
+       creationTime = creationTime,
    )
 }
 
@@ -41,5 +41,6 @@ fun Rating.toRatingEntity(): RatingEntity {
         voteAverage = voteAverage,
         description = description,
         userRating = userRating,
+        creationTime = creationTime,
     )
 }

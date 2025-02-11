@@ -11,9 +11,9 @@ class DefaultProfileRepository(
     private val ratingDao: RatingDao,
 ): ProfileRepository {
 
-    override fun getRatedMovies(): Flow<List<Rating>> {
+    override fun getRatingsOrderedByCreatedTime(): Flow<List<Rating>> {
         return ratingDao
-            .getRatings()
+            .getRatingsOrderedByCreatedTime()
             .map { ratingEntities ->
                 ratingEntities.map { it.toRating() }
             }
