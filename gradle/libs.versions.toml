@@ -29,6 +29,7 @@ assertk = "0.28.1"
 coreKtx = "1.6.1"
 composeTest = "1.7.7"
 kover = "0.9.1"
+kotlinx-datetime = "0.6.2"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -44,6 +45,8 @@ androidx-activity-compose = { module = "androidx.activity:activity-compose", ver
 androidx-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
+
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
 
 assertk = { module = "com.willowtreeapps.assertk:assertk", version.ref = "assertk" }
 compose-ui-test-junit4-android = { module = "androidx.compose.ui:ui-test-junit4-android", version.ref = "composeTest" }

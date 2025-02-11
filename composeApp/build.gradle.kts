@@ -73,6 +73,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
 
+            implementation(libs.kotlinx.datetime)
             implementation(libs.androidx.room.runtime)
             implementation(libs.sqlite.bundled)
             implementation("co.touchlab:kermit:2.0.4")

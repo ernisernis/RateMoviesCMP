@@ -8,9 +8,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.ernisernis.ratemoviescmp.core.domain.util.onError
-import org.ernisernis.ratemoviescmp.core.domain.util.onSuccess
-import org.ernisernis.ratemoviescmp.movie.domain.Movie
 import org.ernisernis.ratemoviescmp.movie.domain.MovieRepository
 
 class MovieBookmarkViewModel(
@@ -37,7 +34,7 @@ class MovieBookmarkViewModel(
 
     private fun observeBookmarks() {
         movieRepository
-            .getBookmarkMovies()
+            .getBookmarksOrderedByCreatedTime()
             .onEach { bookmarkMovies ->
                 _state.update { it.copy(
                     bookmarkMovies = bookmarkMovies

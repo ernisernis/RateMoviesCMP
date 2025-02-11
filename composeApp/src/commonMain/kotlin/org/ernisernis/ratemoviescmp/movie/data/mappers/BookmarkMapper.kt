@@ -12,7 +12,8 @@ fun BookmarkEntity.toBookmarkMovie(): BookmarkMovie {
         title = title,
         releaseDate = releaseDate,
         runtimeFormatted = runtimeFormatted,
-        voteAverage = voteAverage
+        voteAverage = voteAverage,
+        creationTime = creationTime,
     )
 }
 

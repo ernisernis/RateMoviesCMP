@@ -11,4 +11,5 @@ data class BookmarkEntity(
     val releaseDate: String,
     val runtimeFormatted: String?,
     val voteAverage: String,
+    val creationTime: Long,
 )

@@ -7,4 +7,5 @@ data class BookmarkMovie(
     val releaseDate: String,
     val runtimeFormatted: String?,
     val voteAverage: String,
+    val creationTime: Long,
 )

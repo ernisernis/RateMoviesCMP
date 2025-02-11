@@ -1,5 +1,6 @@
 package org.ernisernis.ratemoviescmp.movie.data.mappers
 
+import kotlinx.datetime.Clock
 import org.ernisernis.ratemoviescmp.core.presentation.formatVoteAverage
 import org.ernisernis.ratemoviescmp.movie.data.database.entities.BookmarkEntity
 import org.ernisernis.ratemoviescmp.movie.data.database.entities.MovieEntity
@@ -56,7 +57,7 @@ fun Movie.toBookmarkEntity(): BookmarkEntity {
         releaseDate = releaseDate,
         runtimeFormatted = movieDetail?.runtime?.toDisplayableRuntime()?.formatted,
         voteAverage = voteAverage.formatVoteAverage(),
-
+        creationTime = Clock.System.now().toEpochMilliseconds()
     )
 }
 

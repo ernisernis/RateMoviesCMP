@@ -1,7 +1,6 @@
 package org.ernisernis.ratemoviescmp.movie.data.repository
 
 import androidx.sqlite.SQLiteException
-import co.touchlab.kermit.Logger
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import org.ernisernis.ratemoviescmp.core.domain.util.DataError
@@ -70,11 +69,11 @@ class DefaultMovieRepository(
         }
     }
 
-    override fun getBookmarkMovies(): Flow<List<BookmarkMovie>> {
+    override fun getBookmarksOrderedByCreatedTime(): Flow<List<BookmarkMovie>> {
         return bookmarkMovieDao
-            .getBookmarkMovies()
+            .getBookmarksOrderedByCreatedTime()
             .map { bookmarkEntities ->
-               bookmarkEntities.map { it.toBookmarkMovie() }
+                bookmarkEntities.map { it.toBookmarkMovie() }
             }
     }
 

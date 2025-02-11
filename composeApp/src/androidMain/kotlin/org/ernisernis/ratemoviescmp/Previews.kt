@@ -195,6 +195,7 @@ internal val bookmarkMovie = BookmarkMovie(
     releaseDate = "2024.12.12",
     runtimeFormatted = "201555",
     voteAverage = "7.5",
+    creationTime = 1707654321234,
 )
 
 internal val movie = Movie(
