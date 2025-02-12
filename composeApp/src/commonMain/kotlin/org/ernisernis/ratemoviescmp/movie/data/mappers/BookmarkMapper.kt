@@ -1,5 +1,6 @@
 package org.ernisernis.ratemoviescmp.movie.data.mappers
 
+import org.ernisernis.ratemoviescmp.core.presentation.getImageUrl
 import org.ernisernis.ratemoviescmp.core.presentation.getReleaseYear
 import org.ernisernis.ratemoviescmp.movie.data.database.entities.BookmarkEntity
 import org.ernisernis.ratemoviescmp.movie.domain.BookmarkMovie
@@ -21,7 +22,7 @@ fun BookmarkEntity.toBookmarkMovie(): BookmarkMovie {
 fun BookmarkMovie.toBookmarkMovieUi(): BookmarkMovieUi {
     return BookmarkMovieUi(
         id = id,
-        imageUrl = "https://image.tmdb.org/t/p/w780$posterPath",
+        imageUrl = posterPath.getImageUrl(),
         title = title,
         releaseYear = releaseDate.getReleaseYear(),
         runtimeFormatted = runtimeFormatted,

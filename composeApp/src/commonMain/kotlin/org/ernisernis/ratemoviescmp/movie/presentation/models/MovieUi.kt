@@ -1,6 +1,8 @@
 package org.ernisernis.ratemoviescmp.movie.presentation.models
 
 import org.ernisernis.ratemoviescmp.core.presentation.formatVoteAverage
+import org.ernisernis.ratemoviescmp.core.presentation.getBannerUrl
+import org.ernisernis.ratemoviescmp.core.presentation.getImageUrl
 import org.ernisernis.ratemoviescmp.core.presentation.getReleaseYear
 import org.ernisernis.ratemoviescmp.movie.domain.Movie
 
@@ -25,12 +27,12 @@ fun Movie.toMovieUi(): MovieUi {
         title = title,
         adult = adult,
         overview = overview,
-        imageUrl = "https://image.tmdb.org/t/p/w780$posterPath",
+        imageUrl = posterPath.getImageUrl(),
         releaseDate = releaseDate,
         genres = emptyList(),
         voteAverage = voteAverage.formatVoteAverage(),
         popularity = popularity.toInt().toString(),
-        banner = "https://image.tmdb.org/t/p/w1280$backdropPath",
+        banner = backdropPath.getBannerUrl(),
         releaseYear = releaseDate.getReleaseYear(),
         movieDetailUi = movieDetail?.toMovieDetailUi(),
     )

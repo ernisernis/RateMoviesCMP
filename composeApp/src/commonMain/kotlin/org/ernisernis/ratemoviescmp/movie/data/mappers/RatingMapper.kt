@@ -1,5 +1,6 @@
 package org.ernisernis.ratemoviescmp.movie.data.mappers
 
+import org.ernisernis.ratemoviescmp.core.presentation.getImageUrl
 import org.ernisernis.ratemoviescmp.core.presentation.getReleaseYear
 import org.ernisernis.ratemoviescmp.movie.data.database.entities.RatingEntity
 import org.ernisernis.ratemoviescmp.movie.domain.Rating
@@ -23,7 +24,7 @@ fun RatingEntity.toRating(): Rating {
 fun Rating.toRatingUi(): RatingUi {
     return RatingUi(
         id = id,
-        imageUrl = "https://image.tmdb.org/t/p/w780$posterPath",
+        imageUrl = posterPath.getImageUrl(),
         title = title,
         releaseYear = releaseDate.getReleaseYear(),
         runtimeFormatted = runtimeFormatted,

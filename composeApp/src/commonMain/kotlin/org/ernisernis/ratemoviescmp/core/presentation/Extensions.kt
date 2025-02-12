@@ -13,3 +13,13 @@ internal fun Double.formatVoteAverage(): String {
 internal fun String.getReleaseYear(): String {
     return this.substringBefore("-")
 }
+
+// It should be used with `posterPath` field
+internal fun String.getImageUrl(): String {
+    return "https://image.tmdb.org/t/p/w780${this}"
+}
+
+// It should be used with `backdropPath` field
+internal fun String.getBannerUrl(): String {
+    return "https://image.tmdb.org/t/p/w1280${this}"
+}
