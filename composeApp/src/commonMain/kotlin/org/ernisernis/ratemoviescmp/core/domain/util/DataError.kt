@@ -9,7 +9,6 @@ sealed interface DataError: Error {
         SERIALIZATION,
         UNKNOWN,
     }
-    // TODO: We can always use this local when working with Room
     enum class Local: DataError {
         DISK_FULL,
         UNKNOWN
