@@ -10,7 +10,6 @@ import org.ernisernis.ratemoviescmp.core.domain.util.onError
 import org.ernisernis.ratemoviescmp.core.domain.util.onSuccess
 import org.ernisernis.ratemoviescmp.core.presentation.toUiText
 import org.ernisernis.ratemoviescmp.movie.domain.MovieRepository
-import org.ernisernis.ratemoviescmp.movie.presentation.models.toMovieUi
 
 class MovieListViewModel(
     private val movieRepository: MovieRepository

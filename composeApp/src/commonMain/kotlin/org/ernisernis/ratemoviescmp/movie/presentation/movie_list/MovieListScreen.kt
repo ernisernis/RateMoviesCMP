@@ -21,6 +21,7 @@ import org.ernisernis.ratemoviescmp.core.presentation.Dimens
 import org.ernisernis.ratemoviescmp.movie.domain.Movie
 import org.ernisernis.ratemoviescmp.movie.presentation.models.toMovieUi
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.components.MovieListItem
+import org.ernisernis.ratemoviescmp.movie.presentation.movie_list.components.MovieListLoading
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import ratemoviescmp.composeapp.generated.resources.Res
@@ -32,19 +33,28 @@ fun MovieListScreenRoot(
     onMovieClick: (Movie) -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    MovieListScreen(
-        state = state,
-        modifier = Modifier
-            .statusBarsPadding()
-            .fillMaxSize(),
-        onAction = { action ->
-            when (action)  {
-                is MovieListAction.OnMovieClick -> onMovieClick(action.movie)
-                else -> Unit
+
+    if (state.isLoading) {
+        MovieListLoading(
+            modifier = Modifier
+                .statusBarsPadding()
+                .fillMaxSize()
+        )
+    } else {
+        MovieListScreen(
+            state = state,
+            modifier = Modifier
+                .statusBarsPadding()
+                .fillMaxSize(),
+            onAction = { action ->
+                when (action)  {
+                    is MovieListAction.OnMovieClick -> onMovieClick(action.movie)
+                    else -> Unit
+                }
+                viewModel.onAction(action)
             }
-            viewModel.onAction(action)
-        }
-    )
+        )
+    }
 }
 
 @Composable
