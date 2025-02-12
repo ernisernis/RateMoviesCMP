@@ -17,7 +17,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.ernisernis.ratemoviescmp.core.presentation.Dimens
 import org.ernisernis.ratemoviescmp.core.presentation.RmIcons
@@ -42,12 +41,11 @@ fun MovieProfileListItem(
            .clickable(onClick = onClick)
            .padding(Dimens.ProfileItemPaddingNormal),
        horizontalArrangement = Arrangement.spacedBy(Dimens.ProfileItemPaddingNormal),
-       verticalAlignment = Alignment.CenterVertically
    ) {
 
        PosterImage(
            modifier = Modifier
-               .width(Dimens.MovieBookmarkImageWidth),
+               .width(Dimens.ProfileRatingItemImageWidth),
            url = ratingUi.imageUrl,
        )
 

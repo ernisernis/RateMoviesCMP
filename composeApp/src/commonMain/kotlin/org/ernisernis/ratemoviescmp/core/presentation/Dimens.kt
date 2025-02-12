@@ -123,6 +123,9 @@ object Dimens {
     val ProfileIconSize: Dp
         @Composable get() = 22.dp
 
+    val ProfileRatingItemImageWidth: Dp
+        @Composable get() = 88.dp
+
     val ProfileComponentPadding: PaddingValues
         @Composable get() = PaddingValues(
             horizontal = ProfileItemPaddingBig,

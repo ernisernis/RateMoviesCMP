@@ -82,8 +82,7 @@ fun MovieProfileScreen(
             ) { rating ->
                 MovieProfileListItem(
                     modifier = Modifier
-                        .animateItem()
-                        .heightIn(min = Dimens.ProfileRatingItemHeight),
+                        .animateItem(),
                     ratingUi = rating.toRatingUi(),
                     description = {
                         rating.description?.let {
