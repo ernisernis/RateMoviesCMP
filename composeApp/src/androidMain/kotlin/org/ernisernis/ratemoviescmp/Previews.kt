@@ -17,6 +17,7 @@ import org.ernisernis.ratemoviescmp.movie.presentation.components.PosterImage
 import org.ernisernis.ratemoviescmp.core.presentation.Dimens
 import org.ernisernis.ratemoviescmp.core.presentation.RateMoviesTheme
 import org.ernisernis.ratemoviescmp.movie.data.mappers.toBookmarkMovieUi
+import org.ernisernis.ratemoviescmp.movie.data.mappers.toRatingUi
 import org.ernisernis.ratemoviescmp.movie.domain.BookmarkMovie
 import org.ernisernis.ratemoviescmp.movie.presentation.components.DefaultIconContainer
 import org.ernisernis.ratemoviescmp.movie.domain.Cast
@@ -166,7 +167,7 @@ fun MovieBookmarkScreenPreview() {
 fun MovieProfileScreenPreview() {
     RateMoviesTheme(darkTheme = true, dynamicColor = false) {
         val state = MovieProfileState(
-            ratings = (1..100).map { rating }
+            ratingsUi = (1..100).map { rating.toRatingUi() }
         )
         MovieProfileScreen(
             state = state,

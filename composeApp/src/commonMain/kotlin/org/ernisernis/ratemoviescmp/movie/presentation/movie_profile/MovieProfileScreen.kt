@@ -1,10 +1,10 @@
 package org.ernisernis.ratemoviescmp.movie.presentation.movie_profile
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
@@ -18,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.ernisernis.ratemoviescmp.core.presentation.Dimens
-import org.ernisernis.ratemoviescmp.movie.data.mappers.toRatingUi
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_profile.components.MovieProfileListItem
 import org.ernisernis.ratemoviescmp.movie.presentation.movie_profile.components.ProfileRatingDescription
 import org.jetbrains.compose.resources.stringResource
@@ -77,22 +76,28 @@ fun MovieProfileScreen(
                 .padding(vertical = Dimens.MovieBookmarkItemPaddingSmall),
         ) {
             items(
-                items = state.ratings,
+                items = state.ratingsUi,
                 key = { it.id }
-            ) { rating ->
+            ) { ratingUi ->
                 MovieProfileListItem(
                     modifier = Modifier
                         .animateItem(),
-                    ratingUi = rating.toRatingUi(),
+                    ratingUi = ratingUi,
                     description = {
-                        rating.description?.let {
+                        ratingUi.description?.let {
                             ProfileRatingDescription(
-                                text = it
+                                text = it,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clickable {
+                                        onAction(MovieProfileAction.OnExtendRatingDescription(ratingUi.id, !ratingUi.extended))
+                                    },
+                                extended = ratingUi.extended
                             )
                         }
                     },
                     onClick = {
-                        onAction(MovieProfileAction.OnMovieClick(rating.id))
+                        onAction(MovieProfileAction.OnMovieClick(ratingUi.id))
                     },
                 )
             }

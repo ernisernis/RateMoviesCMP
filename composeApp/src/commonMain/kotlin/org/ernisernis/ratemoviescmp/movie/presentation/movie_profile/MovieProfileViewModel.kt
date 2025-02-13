@@ -2,12 +2,12 @@ package org.ernisernis.ratemoviescmp.movie.presentation.movie_profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import co.touchlab.kermit.Logger
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
+import org.ernisernis.ratemoviescmp.movie.data.mappers.toRatingUi
 import org.ernisernis.ratemoviescmp.movie.domain.ProfileRepository
 
 class MovieProfileViewModel(
@@ -25,8 +25,11 @@ class MovieProfileViewModel(
         profileRepository
             .getRatingsOrderedByCreatedTime()
             .onEach { ratings ->
+                val ratingsUi = ratings.map {
+                    it.toRatingUi()
+                }
                 _state.update { it.copy(
-                    ratings = ratings
+                    ratingsUi = ratingsUi
                 ) }
             }
             .launchIn(viewModelScope)
@@ -35,9 +38,19 @@ class MovieProfileViewModel(
 
     fun onAction(action: MovieProfileAction) {
         when (action) {
-            MovieProfileAction.OnTestClick -> TODO()
+            is MovieProfileAction.OnExtendRatingDescription -> extendRatingDescription(action.id, action.extend)
             else -> Unit
         }
+    }
+
+    private fun extendRatingDescription(id: Int, extended: Boolean) {
+        val ratingsUi = _state.value.ratingsUi.toMutableList()
+        val index = ratingsUi.indexOfFirst { it.id == id }
+        if (index < 0) return
+        ratingsUi[index] = ratingsUi[index].copy(extended = extended)
+        _state.update { it.copy(
+            ratingsUi = ratingsUi
+        ) }
     }
 
 }

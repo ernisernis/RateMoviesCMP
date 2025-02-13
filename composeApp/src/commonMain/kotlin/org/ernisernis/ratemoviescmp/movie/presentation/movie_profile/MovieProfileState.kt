@@ -1,8 +1,8 @@
 package org.ernisernis.ratemoviescmp.movie.presentation.movie_profile
 
-import org.ernisernis.ratemoviescmp.movie.domain.Rating
+import org.ernisernis.ratemoviescmp.movie.presentation.models.RatingUi
 
 
 data class MovieProfileState(
-    val ratings: List<Rating> = listOf()
+    val ratingsUi: List<RatingUi> = listOf()
 )

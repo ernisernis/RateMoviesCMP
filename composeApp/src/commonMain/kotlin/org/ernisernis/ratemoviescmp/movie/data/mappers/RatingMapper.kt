@@ -31,6 +31,7 @@ fun Rating.toRatingUi(): RatingUi {
         voteAverage = voteAverage,
         description = description,
         userRating = userRating,
+        extended = false,
     )
 }
 fun Rating.toRatingEntity(): RatingEntity {

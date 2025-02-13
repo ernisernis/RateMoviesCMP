@@ -9,4 +9,5 @@ data class RatingUi(
     val voteAverage: String,
     val description: String?,
     val userRating: Int,
+    val extended: Boolean,
 )

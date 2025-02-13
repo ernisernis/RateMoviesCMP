@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,6 +26,7 @@ import org.ernisernis.ratemoviescmp.movie.presentation.models.RatingUi
 import org.jetbrains.compose.resources.stringResource
 import ratemoviescmp.composeapp.generated.resources.Res
 import ratemoviescmp.composeapp.generated.resources.description_movie_star
+import ratemoviescmp.composeapp.generated.resources.more_options
 
 
 @Composable
@@ -49,75 +51,96 @@ fun MovieProfileListItem(
            url = ratingUi.imageUrl,
        )
 
-       Column(
-           modifier = Modifier
-               .weight(1f),
-           verticalArrangement = Arrangement.spacedBy(Dimens.ProfileItemPaddingSmall, Alignment.CenterVertically),
-       ) {
-           // Title
-           Text(
-               text = ratingUi.title,
-               color = MaterialTheme.colorScheme.onSurface,
-               style = MaterialTheme.typography.bodyLarge,
-               maxLines = 2,
-               overflow = TextOverflow.Ellipsis,
-               lineHeight = 18.sp,
-           )
-
-           // Year + runtime
+       Column {
            Row(
-               horizontalArrangement = Arrangement.spacedBy(Dimens.ProfileItemPaddingNormal)
-           ) {
-               Text(
-                   text = ratingUi.releaseYear,
-                   color = MaterialTheme.colorScheme.onSurface.copy(alpha = Dimens.ProfileAlpha),
-                   style = MaterialTheme.typography.bodyMedium,
-               )
-               ratingUi.runtimeFormatted?.let {
-                   Text(
-                       text = it,
-                       color = MaterialTheme.colorScheme.onSurface.copy(alpha = Dimens.ProfileAlpha),
-                       style = MaterialTheme.typography.bodyMedium,
-                   )
-               }
-           }
-
-           // Movie rating + User rating
-           Row(
-               modifier = Modifier,
-               horizontalArrangement = Arrangement.spacedBy(Dimens.ProfileItemPaddingSmall),
                verticalAlignment = Alignment.CenterVertically,
            ) {
-               Icon(
-                   imageVector = RmIcons.StarRate,
-                   contentDescription = stringResource(Res.string.description_movie_star),
-                   tint = MaterialTheme.colorScheme.primary,
+               Column(
                    modifier = Modifier
-                       .size(Dimens.ProfileIconSize)
-               )
-               Text(
-                   text = ratingUi.voteAverage,
-                   color = MaterialTheme.colorScheme.onSurface,
-                   style = MaterialTheme.typography.bodyMedium,
-               )
+                       .weight(1f),
+                   verticalArrangement = Arrangement.spacedBy(Dimens.ProfileItemPaddingSmall),
+               ) {
+                   // Title
+                   Text(
+                       text = ratingUi.title,
+                       color = MaterialTheme.colorScheme.onSurface,
+                       style = MaterialTheme.typography.bodyLarge,
+                       maxLines = 2,
+                       overflow = TextOverflow.Ellipsis,
+                       lineHeight = 18.sp,
+                   )
 
-               Spacer(modifier = Modifier.width(Dimens.ProfileItemPaddingSmall))
+                   // Year + runtime
+                   Row(
+                       horizontalArrangement = Arrangement.spacedBy(Dimens.ProfileItemPaddingNormal)
+                   ) {
+                       Text(
+                           text = ratingUi.releaseYear,
+                           color = MaterialTheme.colorScheme.onSurface.copy(alpha = Dimens.ProfileAlpha),
+                           style = MaterialTheme.typography.bodyMedium,
+                       )
+                       ratingUi.runtimeFormatted?.let {
+                           Text(
+                               text = it,
+                               color = MaterialTheme.colorScheme.onSurface.copy(alpha = Dimens.ProfileAlpha),
+                               style = MaterialTheme.typography.bodyMedium,
+                           )
+                       }
+                   }
 
-               Icon(
-                   imageVector = RmIcons.StarRate,
-                   contentDescription = stringResource(Res.string.description_movie_star),
-                   tint = MaterialTheme.colorScheme.secondary,
-                   modifier = Modifier
-                       .size(Dimens.ProfileIconSize)
-               )
-               Text(
-                   text = ratingUi.userRating.toString(),
-                   color = MaterialTheme.colorScheme.onSurface,
-                   style = MaterialTheme.typography.bodyMedium,
-               )
+                   // Movie rating + User rating
+                   Row(
+                       modifier = Modifier,
+                       horizontalArrangement = Arrangement.spacedBy(Dimens.ProfileItemPaddingSmall),
+                       verticalAlignment = Alignment.CenterVertically,
+                   ) {
+                       Icon(
+                           imageVector = RmIcons.StarRate,
+                           contentDescription = stringResource(Res.string.description_movie_star),
+                           tint = MaterialTheme.colorScheme.primary,
+                           modifier = Modifier
+                               .size(Dimens.ProfileIconSize)
+                       )
+                       Text(
+                           text = ratingUi.voteAverage,
+                           color = MaterialTheme.colorScheme.onSurface,
+                           style = MaterialTheme.typography.bodyMedium,
+                       )
+
+                       Spacer(modifier = Modifier.width(Dimens.ProfileItemPaddingSmall))
+
+                       Icon(
+                           imageVector = RmIcons.StarRate,
+                           contentDescription = stringResource(Res.string.description_movie_star),
+                           tint = MaterialTheme.colorScheme.secondary,
+                           modifier = Modifier
+                               .size(Dimens.ProfileIconSize)
+                       )
+                       Text(
+                           text = ratingUi.userRating.toString(),
+                           color = MaterialTheme.colorScheme.onSurface,
+                           style = MaterialTheme.typography.bodyMedium,
+                       )
+
+                   }
+               }
+
+               IconButton(
+                   onClick = {
+
+                   }
+               ) {
+                   Icon(
+                       imageVector = RmIcons.MoreVert,
+                       contentDescription = stringResource(Res.string.more_options),
+                       tint = MaterialTheme.colorScheme.onSurface,
+                   )
+               }
+
            }
 
            description()
        }
+
    }
 }
