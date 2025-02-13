@@ -55,6 +55,8 @@ class MovieDetailViewModel(
                 }
             }
             is MovieDetailAction.OnBookmarkClick -> {
+                if (state.value.movie?.movieDetail == null) return
+
                 viewModelScope.launch {
                     if (state.value.isBookmarked) {
                         movieRepository.deleteFromBookmark(movieId)
