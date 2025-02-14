@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import org.ernisernis.ratemoviescmp.movie.data.mappers.toRatingUi
 import org.ernisernis.ratemoviescmp.movie.domain.ProfileRepository
 
@@ -39,6 +40,8 @@ class MovieProfileViewModel(
     fun onAction(action: MovieProfileAction) {
         when (action) {
             is MovieProfileAction.OnExtendRatingDescription -> extendRatingDescription(action.id, action.extend)
+            is MovieProfileAction.OnShowTooltip -> showTooltip(action.id, action.show)
+            is MovieProfileAction.OnReviewDelete -> deleteReview(action.id)
             else -> Unit
         }
     }
@@ -51,6 +54,23 @@ class MovieProfileViewModel(
         _state.update { it.copy(
             ratingsUi = ratingsUi
         ) }
+    }
+
+    private fun showTooltip(id: Int, show: Boolean) {
+        val ratingsUi = _state.value.ratingsUi.toMutableList()
+        val index = ratingsUi.indexOfFirst { it.id == id }
+        if (index < 0) return
+        ratingsUi[index] = ratingsUi[index].copy(tooltip = show)
+        _state.update { it.copy(
+            ratingsUi = ratingsUi
+        ) }
+    }
+
+    private fun deleteReview(id: Int) {
+       viewModelScope.launch {
+           profileRepository
+               .deleteRating(id)
+       }
     }
 
 }

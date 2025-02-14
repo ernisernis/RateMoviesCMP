@@ -3,6 +3,7 @@ package org.ernisernis.ratemoviescmp.movie.presentation.movie_profile.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,6 +11,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -27,6 +30,7 @@ import org.jetbrains.compose.resources.stringResource
 import ratemoviescmp.composeapp.generated.resources.Res
 import ratemoviescmp.composeapp.generated.resources.description_movie_star
 import ratemoviescmp.composeapp.generated.resources.more_options
+import ratemoviescmp.composeapp.generated.resources.profile_review_delete
 
 
 @Composable
@@ -35,6 +39,9 @@ fun MovieProfileListItem(
     ratingUi: RatingUi,
     description: @Composable () -> Unit,
     onClick: () -> Unit,
+    onTooltipClick: () -> Unit,
+    onDismissTooltip: () -> Unit,
+    onReviewDelete: () -> Unit,
 ) {
    Row(
        modifier = modifier
@@ -125,16 +132,37 @@ fun MovieProfileListItem(
                    }
                }
 
-               IconButton(
-                   onClick = {
-
+               Box {
+                   DropdownMenu(
+                       expanded = ratingUi.tooltip,
+                       onDismissRequest = {
+                           onDismissTooltip()
+                       },
+                       containerColor = MaterialTheme.colorScheme.secondary
+                   ) {
+                       DropdownMenuItem(
+                           text = {
+                               Text(
+                                   text = stringResource(Res.string.profile_review_delete),
+                                   color = MaterialTheme.colorScheme.onSecondary,
+                               )
+                           },
+                           onClick = {
+                                onReviewDelete()
+                           }
+                       )
                    }
-               ) {
-                   Icon(
-                       imageVector = RmIcons.MoreVert,
-                       contentDescription = stringResource(Res.string.more_options),
-                       tint = MaterialTheme.colorScheme.onSurface,
-                   )
+                   IconButton(
+                       onClick = {
+                           onTooltipClick()
+                       }
+                   ) {
+                       Icon(
+                           imageVector = RmIcons.MoreVert,
+                           contentDescription = stringResource(Res.string.more_options),
+                           tint = MaterialTheme.colorScheme.onSurface,
+                       )
+                   }
                }
 
            }

@@ -32,6 +32,7 @@ fun Rating.toRatingUi(): RatingUi {
         description = description,
         userRating = userRating,
         extended = false,
+        tooltip = false,
     )
 }
 fun Rating.toRatingEntity(): RatingEntity {

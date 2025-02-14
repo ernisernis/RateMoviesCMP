@@ -21,7 +21,17 @@ interface RatingDao {
     @Query("SELECT * FROM RatingEntity WHERE id = :id")
     suspend fun getRatingEntity(id: Int): RatingEntity?
 
-    // TODO Fix deleteRating, need to add a separate delete RatingEntity
-    @Query("DELETE FROM MovieEntity WHERE id = :id")
+
+    // Do not delete MovieEntity if Bookmark exists
+    @Query("""
+    DELETE FROM MovieEntity 
+    WHERE id = :id 
+    AND NOT EXISTS (
+        SELECT 1 FROM BookmarkEntity WHERE id = :id
+    )
+    """)
+    suspend fun deleteMovieEntity(id: Int)
+
+    @Query("DELETE FROM RatingEntity WHERE id = :id")
     suspend fun deleteRating(id: Int)
 }

@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 4,
-    "identityHash": "7feea1870b3846aa2148a67113c75d10",
+    "identityHash": "7b9ee082727ebabdd88236d6b2494dbf",
     "entities": [
       {
         "tableName": "MovieEntity",
@@ -106,7 +106,7 @@
       },
       {
         "tableName": "BookmarkEntity",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `posterPath` TEXT NOT NULL, `title` TEXT NOT NULL, `releaseDate` TEXT NOT NULL, `runtimeFormatted` TEXT, `voteAverage` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `posterPath` TEXT NOT NULL, `title` TEXT NOT NULL, `releaseDate` TEXT NOT NULL, `runtimeFormatted` TEXT, `voteAverage` TEXT NOT NULL, `creationTime` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -142,6 +142,12 @@
             "columnName": "voteAverage",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "creationTime",
+            "columnName": "creationTime",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -153,7 +159,7 @@
       },
       {
         "tableName": "RatingEntity",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `posterPath` TEXT NOT NULL, `title` TEXT NOT NULL, `releaseDate` TEXT NOT NULL, `runtimeFormatted` TEXT, `voteAverage` TEXT NOT NULL, `description` TEXT, `userRating` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `posterPath` TEXT NOT NULL, `title` TEXT NOT NULL, `releaseDate` TEXT NOT NULL, `runtimeFormatted` TEXT, `voteAverage` TEXT NOT NULL, `description` TEXT, `userRating` INTEGER NOT NULL, `creationTime` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -200,6 +206,12 @@
             "columnName": "userRating",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "creationTime",
+            "columnName": "creationTime",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -212,7 +224,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7feea1870b3846aa2148a67113c75d10')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7b9ee082727ebabdd88236d6b2494dbf')"
     ]
   }
 }

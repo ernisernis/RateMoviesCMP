@@ -99,6 +99,15 @@ fun MovieProfileScreen(
                     onClick = {
                         onAction(MovieProfileAction.OnMovieClick(ratingUi.id))
                     },
+                    onTooltipClick = {
+                        onAction(MovieProfileAction.OnShowTooltip(ratingUi.id, !ratingUi.tooltip))
+                    },
+                    onDismissTooltip = {
+                        onAction(MovieProfileAction.OnShowTooltip(ratingUi.id, false))
+                    },
+                    onReviewDelete = {
+                        onAction(MovieProfileAction.OnReviewDelete(ratingUi.id))
+                    }
                 )
             }
         }

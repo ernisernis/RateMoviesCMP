@@ -10,4 +10,5 @@ data class RatingUi(
     val description: String?,
     val userRating: Int,
     val extended: Boolean,
+    val tooltip: Boolean,
 )
