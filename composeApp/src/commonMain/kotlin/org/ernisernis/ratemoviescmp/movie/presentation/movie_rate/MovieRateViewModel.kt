@@ -80,7 +80,9 @@ class MovieRateViewModel(
                         rating = rating,
                     )
                     .onSuccess {
-                        // TODO: Exit the rating screen
+                        _state.update { it.copy(
+                            popBackStackFlag = true
+                        ) }
                     }
                     .onError {
                         // TODO: handle error

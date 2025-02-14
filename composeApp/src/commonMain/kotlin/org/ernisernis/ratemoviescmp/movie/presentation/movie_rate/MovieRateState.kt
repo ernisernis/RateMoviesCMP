@@ -11,4 +11,5 @@ data class MovieRateState(
     val description: String = "",
     val indexError: String? = null,
     val descriptionError: String? = null,
+    val popBackStackFlag: Boolean = false,
 )

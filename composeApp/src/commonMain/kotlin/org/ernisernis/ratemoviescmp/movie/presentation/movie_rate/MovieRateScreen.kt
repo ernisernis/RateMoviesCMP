@@ -23,6 +23,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -55,8 +56,10 @@ import ratemoviescmp.composeapp.generated.resources.rate_title
 fun MovieRateScreenRoot(
     viewModel: MovieRateViewModel = koinViewModel(),
     onBackClick: () -> Unit,
+    onRateSubmitSuccess: () -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+
     MovieRateScreen(
         state = state,
         modifier = Modifier
@@ -70,6 +73,12 @@ fun MovieRateScreenRoot(
             viewModel.onAction(action)
         }
     )
+
+    LaunchedEffect(state.popBackStackFlag) {
+        if (state.popBackStackFlag) {
+            onRateSubmitSuccess()
+        }
+    }
 }
 
 @Composable

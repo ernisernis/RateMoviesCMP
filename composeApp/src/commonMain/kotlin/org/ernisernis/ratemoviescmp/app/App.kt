@@ -206,6 +206,9 @@ fun NavGraphBuilder.MovieApp(
             viewModel = viewModel,
             onBackClick = {
                 navController.navigateUp()
+            },
+            onRateSubmitSuccess = {
+                navController.popBackStack<Route.MovieList>(inclusive = false)
             }
         )
     }
