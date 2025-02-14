@@ -71,7 +71,7 @@ class MovieRateViewModel(
         } else {
             viewModelScope.launch {
                 val rating = movie.toRating().copy(
-                    description = state.value.description.trim(),
+                    description = state.value.description.trim().ifEmpty { null },
                     userRating = state.value.selectedIndex,
                 )
                 movieRepository
