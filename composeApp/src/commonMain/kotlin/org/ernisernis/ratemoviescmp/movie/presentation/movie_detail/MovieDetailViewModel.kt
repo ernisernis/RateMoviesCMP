@@ -28,16 +28,15 @@ class MovieDetailViewModel(
 
     private val _state = MutableStateFlow(MovieDetailState())
     val state = _state
-        .onStart { getMovieRating() }
+        .onStart {
+            getMovieRating()
+            observeBookmarkStatus()
+        }
         .stateIn(
             scope = viewModelScope,
             started = OnetimeWhileSubscribed(5_000),
             initialValue = MovieDetailState()
         )
-
-    init {
-        observeBookmarkStatus()
-    }
 
     fun onAction(action: MovieDetailAction) {
         when (action) {
