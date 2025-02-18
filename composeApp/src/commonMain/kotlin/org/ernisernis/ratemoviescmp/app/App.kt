@@ -1,8 +1,6 @@
 package org.ernisernis.ratemoviescmp.app
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
@@ -11,7 +9,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -20,7 +17,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
@@ -29,6 +25,7 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
@@ -128,23 +125,34 @@ fun App(
                 }
             }
         ) { innerPadding ->
-            NavHost(
+            RmNavHost(
                 navController = navController,
                 modifier = Modifier
-                    .padding(innerPadding)
-                    .background(MaterialTheme.colorScheme.background),
-                startDestination = Route.MovieGraph
-            ) {
-                navigation<Route.MovieGraph>(
-                    startDestination = Route.MovieList
-                ) {
-                    MovieApp(
-                        navController = navController
-                    )
-                }
-            }
+                    .padding(innerPadding),
+            )
         }
 
+    }
+}
+
+@Composable
+fun RmNavHost(
+    navController: NavHostController,
+    modifier: Modifier = Modifier,
+) {
+    NavHost(
+        navController = navController,
+        modifier = modifier
+            .background(MaterialTheme.colorScheme.background),
+        startDestination = Route.MovieGraph
+    ) {
+        navigation<Route.MovieGraph>(
+            startDestination = Route.MovieList
+        ) {
+            MovieApp(
+                navController = navController
+            )
+        }
     }
 }
 
