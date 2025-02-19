@@ -3,13 +3,13 @@ package org.ernisernis.ratemoviescmp.movie.presentation.movie_profile
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.ernisernis.ratemoviescmp.core.presentation.OnetimeWhileSubscribed
 import org.ernisernis.ratemoviescmp.movie.data.mappers.toRatingUi
 import org.ernisernis.ratemoviescmp.movie.domain.ProfileRepository
 
@@ -24,7 +24,7 @@ class MovieProfileViewModel(
         }
         .stateIn(
             scope = viewModelScope,
-            started = OnetimeWhileSubscribed(5_000),
+            started = SharingStarted.WhileSubscribed(5_000),
             initialValue = MovieProfileState()
         )
 

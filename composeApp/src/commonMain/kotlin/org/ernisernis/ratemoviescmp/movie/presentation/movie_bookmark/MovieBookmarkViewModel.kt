@@ -3,13 +3,13 @@ package org.ernisernis.ratemoviescmp.movie.presentation.movie_bookmark
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.ernisernis.ratemoviescmp.core.presentation.OnetimeWhileSubscribed
 import org.ernisernis.ratemoviescmp.movie.domain.MovieRepository
 
 class MovieBookmarkViewModel(
@@ -22,7 +22,7 @@ class MovieBookmarkViewModel(
         }
         .stateIn(
             scope = viewModelScope,
-            started = OnetimeWhileSubscribed(5_000),
+            started = SharingStarted.WhileSubscribed(5_000L),
             initialValue = MovieBookmarkState()
         )
 
