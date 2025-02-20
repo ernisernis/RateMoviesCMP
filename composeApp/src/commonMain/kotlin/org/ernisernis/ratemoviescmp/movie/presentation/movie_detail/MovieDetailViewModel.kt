@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
@@ -34,7 +35,7 @@ class MovieDetailViewModel(
         }
         .stateIn(
             scope = viewModelScope,
-            started = OnetimeWhileSubscribed(5_000),
+            started = SharingStarted.WhileSubscribed(5_000),
             initialValue = MovieDetailState()
         )
 
